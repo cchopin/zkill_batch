@@ -1,0 +1,1230 @@
+2025-02-12 09:07:30,774 - INFO - === Script Starting ===
+2025-02-12 09:07:30,774 - INFO - Starting killmail processing script
+2025-02-12 09:07:30,804 - INFO - Database connection established successfully
+2025-02-12 09:07:30,804 - INFO - Successfully connected to database
+2025-02-12 09:07:30,826 - INFO - Newest kill in database: 2025-02-11 20:40:58
+2025-02-12 09:07:30,828 - INFO - Oldest kill in database: 2025-01-23 18:53:31
+2025-02-12 09:07:30,828 - INFO - Running in historical mode - loading kills until January 1st, 2025
+2025-02-12 09:07:30,828 - INFO - Processing page 1
+2025-02-12 09:07:30,828 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/1/
+2025-02-12 09:07:31,445 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:07:31,445 - INFO - Found 200 kills on page 1
+2025-02-12 09:07:31,713 - INFO - Processing kill 124721189 from 2025-02-12 01:23:09
+2025-02-12 09:07:32,319 - INFO - Successfully inserted killmail 124721189
+2025-02-12 09:07:32,319 - INFO - Successfully inserted killmail 124721189
+2025-02-12 09:07:33,509 - INFO - Processing kill 124721062 from 2025-02-12 01:12:39
+2025-02-12 09:07:34,225 - INFO - Successfully inserted killmail 124721062
+2025-02-12 09:07:34,226 - INFO - Successfully inserted killmail 124721062
+2025-02-12 09:07:35,436 - INFO - Processing kill 124721058 from 2025-02-12 01:12:30
+2025-02-12 09:07:36,161 - INFO - Successfully inserted killmail 124721058
+2025-02-12 09:07:36,161 - INFO - Successfully inserted killmail 124721058
+2025-02-12 09:07:37,351 - INFO - Processing kill 124720523 from 2025-02-12 00:45:04
+2025-02-12 09:07:38,051 - INFO - Successfully inserted killmail 124720523
+2025-02-12 09:07:38,051 - INFO - Successfully inserted killmail 124720523
+2025-02-12 09:07:39,296 - INFO - Processing kill 124720514 from 2025-02-12 00:44:23
+2025-02-12 09:07:40,070 - INFO - Successfully inserted killmail 124720514
+2025-02-12 09:07:40,070 - INFO - Successfully inserted killmail 124720514
+2025-02-12 09:07:41,252 - INFO - Processing kill 124720507 from 2025-02-12 00:43:56
+2025-02-12 09:07:41,997 - INFO - Successfully inserted killmail 124720507
+2025-02-12 09:07:41,997 - INFO - Successfully inserted killmail 124720507
+2025-02-12 09:07:43,192 - INFO - Processing kill 124720140 from 2025-02-12 00:22:05
+2025-02-12 09:07:43,931 - INFO - Successfully inserted killmail 124720140
+2025-02-12 09:07:43,932 - INFO - Successfully inserted killmail 124720140
+2025-02-12 09:07:45,128 - INFO - Processing kill 124720119 from 2025-02-12 00:20:46
+2025-02-12 09:07:45,880 - INFO - Successfully inserted killmail 124720119
+2025-02-12 09:07:45,881 - INFO - Successfully inserted killmail 124720119
+2025-02-12 09:07:47,067 - INFO - Processing kill 124720098 from 2025-02-12 00:19:30
+2025-02-12 09:07:47,811 - INFO - Successfully inserted killmail 124720098
+2025-02-12 09:07:47,811 - INFO - Successfully inserted killmail 124720098
+2025-02-12 09:07:49,001 - INFO - Processing kill 124720058 from 2025-02-12 00:17:09
+2025-02-12 09:07:49,752 - INFO - Successfully inserted killmail 124720058
+2025-02-12 09:07:49,752 - INFO - Successfully inserted killmail 124720058
+2025-02-12 09:07:50,946 - INFO - Processing kill 124719802 from 2025-02-12 00:03:19
+2025-02-12 09:07:51,689 - INFO - Successfully inserted killmail 124719802
+2025-02-12 09:07:51,690 - INFO - Successfully inserted killmail 124719802
+2025-02-12 09:07:52,873 - INFO - Processing kill 124719769 from 2025-02-12 00:01:39
+2025-02-12 09:07:53,588 - INFO - Successfully inserted killmail 124719769
+2025-02-12 09:07:53,589 - INFO - Successfully inserted killmail 124719769
+2025-02-12 09:07:54,764 - INFO - Processing kill 124719558 from 2025-02-11 23:44:39
+2025-02-12 09:07:55,495 - INFO - Successfully inserted killmail 124719558
+2025-02-12 09:07:55,495 - INFO - Successfully inserted killmail 124719558
+2025-02-12 09:07:56,678 - INFO - Processing kill 124719553 from 2025-02-11 23:44:10
+2025-02-12 09:07:57,392 - INFO - Successfully inserted killmail 124719553
+2025-02-12 09:07:57,392 - INFO - Successfully inserted killmail 124719553
+2025-02-12 09:07:58,575 - INFO - Processing kill 124718549 from 2025-02-11 22:37:36
+2025-02-12 09:07:59,353 - INFO - Successfully inserted killmail 124718549
+2025-02-12 09:07:59,353 - INFO - Successfully inserted killmail 124718549
+2025-02-12 09:08:00,570 - INFO - Processing kill 124718446 from 2025-02-11 22:32:43
+2025-02-12 09:08:01,178 - INFO - Successfully inserted killmail 124718446
+2025-02-12 09:08:01,178 - INFO - Successfully inserted killmail 124718446
+2025-02-12 09:08:02,376 - INFO - Processing kill 124718145 from 2025-02-11 22:17:55
+2025-02-12 09:08:03,143 - INFO - Successfully inserted killmail 124718145
+2025-02-12 09:08:03,144 - INFO - Successfully inserted killmail 124718145
+2025-02-12 09:08:04,343 - INFO - Processing kill 124718136 from 2025-02-11 22:17:38
+2025-02-12 09:08:05,084 - INFO - Successfully inserted killmail 124718136
+2025-02-12 09:08:05,085 - INFO - Successfully inserted killmail 124718136
+2025-02-12 09:08:06,272 - INFO - Processing kill 124717953 from 2025-02-11 22:08:28
+2025-02-12 09:08:06,984 - INFO - Successfully inserted killmail 124717953
+2025-02-12 09:08:06,985 - INFO - Successfully inserted killmail 124717953
+2025-02-12 09:08:08,022 - INFO - Processed 19 new kills on page 1
+2025-02-12 09:08:08,023 - INFO - Found 181 existing kills on page 1
+2025-02-12 09:08:10,028 - INFO - Processing page 2
+2025-02-12 09:08:10,028 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/2/
+2025-02-12 09:08:10,789 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:08:10,789 - INFO - Found 200 kills on page 2
+2025-02-12 09:08:10,825 - INFO - Processed 0 new kills on page 2
+2025-02-12 09:08:10,825 - INFO - Found 200 existing kills on page 2
+2025-02-12 09:08:12,829 - INFO - Processing page 3
+2025-02-12 09:08:12,830 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/3/
+2025-02-12 09:08:13,504 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:08:13,505 - INFO - Found 200 kills on page 3
+2025-02-12 09:08:13,552 - INFO - Processed 0 new kills on page 3
+2025-02-12 09:08:13,552 - INFO - Found 200 existing kills on page 3
+2025-02-12 09:08:15,557 - INFO - Processing page 4
+2025-02-12 09:08:15,558 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/4/
+2025-02-12 09:08:16,316 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:08:16,316 - INFO - Found 200 kills on page 4
+2025-02-12 09:08:16,529 - INFO - Processing kill 124561133 from 2025-02-05 21:39:13
+2025-02-12 09:08:17,267 - INFO - Successfully inserted killmail 124561133
+2025-02-12 09:08:17,267 - INFO - Successfully inserted killmail 124561133
+2025-02-12 09:08:18,471 - INFO - Processing kill 124561120 from 2025-02-05 21:38:41
+2025-02-12 09:08:19,232 - INFO - Successfully inserted killmail 124561120
+2025-02-12 09:08:19,232 - INFO - Successfully inserted killmail 124561120
+2025-02-12 09:08:20,447 - INFO - Processing kill 124561117 from 2025-02-05 21:38:32
+2025-02-12 09:08:21,217 - INFO - Successfully inserted killmail 124561117
+2025-02-12 09:08:21,218 - INFO - Successfully inserted killmail 124561117
+2025-02-12 09:08:22,441 - INFO - Processing kill 124561109 from 2025-02-05 21:38:12
+2025-02-12 09:08:23,190 - INFO - Successfully inserted killmail 124561109
+2025-02-12 09:08:23,191 - INFO - Successfully inserted killmail 124561109
+2025-02-12 09:08:24,383 - INFO - Processing kill 124561105 from 2025-02-05 21:38:07
+2025-02-12 09:08:25,116 - INFO - Successfully inserted killmail 124561105
+2025-02-12 09:08:25,116 - INFO - Successfully inserted killmail 124561105
+2025-02-12 09:08:26,339 - INFO - Processing kill 124561096 from 2025-02-05 21:37:50
+2025-02-12 09:08:27,071 - INFO - Successfully inserted killmail 124561096
+2025-02-12 09:08:27,071 - INFO - Successfully inserted killmail 124561096
+2025-02-12 09:08:28,287 - INFO - Processing kill 124561082 from 2025-02-05 21:37:40
+2025-02-12 09:08:29,023 - INFO - Successfully inserted killmail 124561082
+2025-02-12 09:08:29,023 - INFO - Successfully inserted killmail 124561082
+2025-02-12 09:08:30,245 - INFO - Processing kill 124561055 from 2025-02-05 21:36:59
+2025-02-12 09:08:31,123 - INFO - Successfully inserted killmail 124561055
+2025-02-12 09:08:31,123 - INFO - Successfully inserted killmail 124561055
+2025-02-12 09:08:32,338 - INFO - Processing kill 124561049 from 2025-02-05 21:36:46
+2025-02-12 09:08:33,086 - INFO - Successfully inserted killmail 124561049
+2025-02-12 09:08:33,086 - INFO - Successfully inserted killmail 124561049
+2025-02-12 09:08:34,277 - INFO - Processing kill 124561047 from 2025-02-05 21:36:41
+2025-02-12 09:08:35,046 - INFO - Successfully inserted killmail 124561047
+2025-02-12 09:08:35,046 - INFO - Successfully inserted killmail 124561047
+2025-02-12 09:08:36,263 - INFO - Processing kill 124561036 from 2025-02-05 21:36:23
+2025-02-12 09:08:37,006 - INFO - Successfully inserted killmail 124561036
+2025-02-12 09:08:37,006 - INFO - Successfully inserted killmail 124561036
+2025-02-12 09:08:38,221 - INFO - Processing kill 124561030 from 2025-02-05 21:36:07
+2025-02-12 09:08:38,936 - INFO - Successfully inserted killmail 124561030
+2025-02-12 09:08:38,937 - INFO - Successfully inserted killmail 124561030
+2025-02-12 09:08:40,137 - INFO - Processing kill 124561009 from 2025-02-05 21:35:28
+2025-02-12 09:08:40,924 - INFO - Successfully inserted killmail 124561009
+2025-02-12 09:08:40,925 - INFO - Successfully inserted killmail 124561009
+2025-02-12 09:08:42,143 - INFO - Processing kill 124561008 from 2025-02-05 21:35:20
+2025-02-12 09:08:42,897 - INFO - Successfully inserted killmail 124561008
+2025-02-12 09:08:42,897 - INFO - Successfully inserted killmail 124561008
+2025-02-12 09:08:44,082 - INFO - Processing kill 124560992 from 2025-02-05 21:34:55
+2025-02-12 09:08:44,835 - INFO - Successfully inserted killmail 124560992
+2025-02-12 09:08:44,836 - INFO - Successfully inserted killmail 124560992
+2025-02-12 09:08:46,080 - INFO - Processing kill 124560985 from 2025-02-05 21:34:39
+2025-02-12 09:08:46,870 - INFO - Successfully inserted killmail 124560985
+2025-02-12 09:08:46,870 - INFO - Successfully inserted killmail 124560985
+2025-02-12 09:08:48,064 - INFO - Processing kill 124560978 from 2025-02-05 21:34:36
+2025-02-12 09:08:48,799 - INFO - Successfully inserted killmail 124560978
+2025-02-12 09:08:48,800 - INFO - Successfully inserted killmail 124560978
+2025-02-12 09:08:50,023 - INFO - Processing kill 124560973 from 2025-02-05 21:34:26
+2025-02-12 09:08:50,774 - INFO - Successfully inserted killmail 124560973
+2025-02-12 09:08:50,774 - INFO - Successfully inserted killmail 124560973
+2025-02-12 09:08:51,967 - INFO - Processing kill 124560962 from 2025-02-05 21:33:47
+2025-02-12 09:08:52,696 - INFO - Successfully inserted killmail 124560962
+2025-02-12 09:08:52,697 - INFO - Successfully inserted killmail 124560962
+2025-02-12 09:08:53,897 - INFO - Processing kill 124560958 from 2025-02-05 21:33:37
+2025-02-12 09:08:54,628 - INFO - Successfully inserted killmail 124560958
+2025-02-12 09:08:54,629 - INFO - Successfully inserted killmail 124560958
+2025-02-12 09:08:55,820 - INFO - Processing kill 124560949 from 2025-02-05 21:33:20
+2025-02-12 09:08:56,559 - INFO - Successfully inserted killmail 124560949
+2025-02-12 09:08:56,559 - INFO - Successfully inserted killmail 124560949
+2025-02-12 09:08:57,777 - INFO - Processing kill 124560945 from 2025-02-05 21:33:15
+2025-02-12 09:08:58,525 - INFO - Successfully inserted killmail 124560945
+2025-02-12 09:08:58,525 - INFO - Successfully inserted killmail 124560945
+2025-02-12 09:08:59,724 - INFO - Processing kill 124560940 from 2025-02-05 21:32:58
+2025-02-12 09:09:00,533 - INFO - Successfully inserted killmail 124560940
+2025-02-12 09:09:00,533 - INFO - Successfully inserted killmail 124560940
+2025-02-12 09:09:01,773 - INFO - Processing kill 124560904 from 2025-02-05 21:31:31
+2025-02-12 09:09:02,517 - INFO - Successfully inserted killmail 124560904
+2025-02-12 09:09:02,518 - INFO - Successfully inserted killmail 124560904
+2025-02-12 09:09:03,753 - INFO - Processing kill 124560903 from 2025-02-05 21:31:31
+2025-02-12 09:09:04,511 - INFO - Successfully inserted killmail 124560903
+2025-02-12 09:09:04,512 - INFO - Successfully inserted killmail 124560903
+2025-02-12 09:09:05,714 - INFO - Processing kill 124560880 from 2025-02-05 21:30:54
+2025-02-12 09:09:06,494 - INFO - Successfully inserted killmail 124560880
+2025-02-12 09:09:06,494 - INFO - Successfully inserted killmail 124560880
+2025-02-12 09:09:07,703 - INFO - Processing kill 124560853 from 2025-02-05 21:30:06
+2025-02-12 09:09:09,098 - INFO - Successfully inserted killmail 124560853
+2025-02-12 09:09:09,099 - INFO - Successfully inserted killmail 124560853
+2025-02-12 09:09:10,359 - INFO - Processing kill 124560850 from 2025-02-05 21:29:53
+2025-02-12 09:09:11,112 - INFO - Successfully inserted killmail 124560850
+2025-02-12 09:09:11,113 - INFO - Successfully inserted killmail 124560850
+2025-02-12 09:09:12,315 - INFO - Processing kill 124560827 from 2025-02-05 21:29:10
+2025-02-12 09:09:13,063 - INFO - Successfully inserted killmail 124560827
+2025-02-12 09:09:13,063 - INFO - Successfully inserted killmail 124560827
+2025-02-12 09:09:14,246 - INFO - Processing kill 124560818 from 2025-02-05 21:28:50
+2025-02-12 09:09:14,991 - INFO - Successfully inserted killmail 124560818
+2025-02-12 09:09:14,991 - INFO - Successfully inserted killmail 124560818
+2025-02-12 09:09:16,225 - INFO - Processing kill 124560767 from 2025-02-05 21:27:18
+2025-02-12 09:09:16,978 - INFO - Successfully inserted killmail 124560767
+2025-02-12 09:09:16,979 - INFO - Successfully inserted killmail 124560767
+2025-02-12 09:09:18,200 - INFO - Processing kill 124560757 from 2025-02-05 21:26:54
+2025-02-12 09:09:18,927 - INFO - Successfully inserted killmail 124560757
+2025-02-12 09:09:18,927 - INFO - Successfully inserted killmail 124560757
+2025-02-12 09:09:20,117 - INFO - Processing kill 124560756 from 2025-02-05 21:26:54
+2025-02-12 09:09:20,916 - INFO - Successfully inserted killmail 124560756
+2025-02-12 09:09:20,917 - INFO - Successfully inserted killmail 124560756
+2025-02-12 09:09:22,103 - INFO - Processing kill 124560739 from 2025-02-05 21:26:20
+2025-02-12 09:09:22,872 - INFO - Successfully inserted killmail 124560739
+2025-02-12 09:09:22,873 - INFO - Successfully inserted killmail 124560739
+2025-02-12 09:09:24,070 - INFO - Processing kill 124560734 from 2025-02-05 21:26:16
+2025-02-12 09:09:24,782 - INFO - Successfully inserted killmail 124560734
+2025-02-12 09:09:24,783 - INFO - Successfully inserted killmail 124560734
+2025-02-12 09:09:25,978 - INFO - Processing kill 124560708 from 2025-02-05 21:25:28
+2025-02-12 09:09:26,708 - INFO - Successfully inserted killmail 124560708
+2025-02-12 09:09:26,708 - INFO - Successfully inserted killmail 124560708
+2025-02-12 09:09:27,923 - INFO - Processing kill 124560707 from 2025-02-05 21:25:27
+2025-02-12 09:09:28,667 - INFO - Successfully inserted killmail 124560707
+2025-02-12 09:09:28,667 - INFO - Successfully inserted killmail 124560707
+2025-02-12 09:09:29,866 - INFO - Processing kill 124560699 from 2025-02-05 21:25:16
+2025-02-12 09:09:30,733 - INFO - Successfully inserted killmail 124560699
+2025-02-12 09:09:30,734 - INFO - Successfully inserted killmail 124560699
+2025-02-12 09:09:31,935 - INFO - Processing kill 124560683 from 2025-02-05 21:24:42
+2025-02-12 09:09:32,683 - INFO - Successfully inserted killmail 124560683
+2025-02-12 09:09:32,683 - INFO - Successfully inserted killmail 124560683
+2025-02-12 09:09:33,903 - INFO - Processing kill 124560657 from 2025-02-05 21:23:34
+2025-02-12 09:09:34,654 - INFO - Successfully inserted killmail 124560657
+2025-02-12 09:09:34,654 - INFO - Successfully inserted killmail 124560657
+2025-02-12 09:09:35,825 - INFO - Processing kill 124560650 from 2025-02-05 21:23:24
+2025-02-12 09:09:36,599 - INFO - Successfully inserted killmail 124560650
+2025-02-12 09:09:36,599 - INFO - Successfully inserted killmail 124560650
+2025-02-12 09:09:37,805 - INFO - Processing kill 124560648 from 2025-02-05 21:23:17
+2025-02-12 09:09:38,546 - INFO - Successfully inserted killmail 124560648
+2025-02-12 09:09:38,546 - INFO - Successfully inserted killmail 124560648
+2025-02-12 09:09:39,733 - INFO - Processing kill 124560645 from 2025-02-05 21:23:11
+2025-02-12 09:09:40,537 - INFO - Successfully inserted killmail 124560645
+2025-02-12 09:09:40,537 - INFO - Successfully inserted killmail 124560645
+2025-02-12 09:09:41,744 - INFO - Processing kill 124560632 from 2025-02-05 21:22:52
+2025-02-12 09:09:42,499 - INFO - Successfully inserted killmail 124560632
+2025-02-12 09:09:42,499 - INFO - Successfully inserted killmail 124560632
+2025-02-12 09:09:43,713 - INFO - Processing kill 124560624 from 2025-02-05 21:22:36
+2025-02-12 09:09:44,478 - INFO - Successfully inserted killmail 124560624
+2025-02-12 09:09:44,478 - INFO - Successfully inserted killmail 124560624
+2025-02-12 09:09:45,705 - INFO - Processing kill 124560592 from 2025-02-05 21:21:43
+2025-02-12 09:09:46,440 - INFO - Successfully inserted killmail 124560592
+2025-02-12 09:09:46,440 - INFO - Successfully inserted killmail 124560592
+2025-02-12 09:09:47,656 - INFO - Processing kill 124560591 from 2025-02-05 21:21:42
+2025-02-12 09:09:48,399 - INFO - Successfully inserted killmail 124560591
+2025-02-12 09:09:48,400 - INFO - Successfully inserted killmail 124560591
+2025-02-12 09:09:49,609 - INFO - Processing kill 124560579 from 2025-02-05 21:21:25
+2025-02-12 09:09:50,374 - INFO - Successfully inserted killmail 124560579
+2025-02-12 09:09:50,375 - INFO - Successfully inserted killmail 124560579
+2025-02-12 09:09:51,604 - INFO - Processing kill 124560555 from 2025-02-05 21:21:04
+2025-02-12 09:09:52,330 - INFO - Successfully inserted killmail 124560555
+2025-02-12 09:09:52,331 - INFO - Successfully inserted killmail 124560555
+2025-02-12 09:09:53,526 - INFO - Processing kill 124560552 from 2025-02-05 21:20:58
+2025-02-12 09:09:54,295 - INFO - Successfully inserted killmail 124560552
+2025-02-12 09:09:54,295 - INFO - Successfully inserted killmail 124560552
+2025-02-12 09:09:55,495 - INFO - Processing kill 124560551 from 2025-02-05 21:20:55
+2025-02-12 09:09:56,284 - INFO - Successfully inserted killmail 124560551
+2025-02-12 09:09:56,285 - INFO - Successfully inserted killmail 124560551
+2025-02-12 09:09:57,561 - INFO - Processing kill 124560530 from 2025-02-05 21:20:20
+2025-02-12 09:09:58,276 - INFO - Successfully inserted killmail 124560530
+2025-02-12 09:09:58,276 - INFO - Successfully inserted killmail 124560530
+2025-02-12 09:09:58,322 - INFO - Database connection closed
+2025-02-12 09:22:01,870 - INFO - === Script Starting ===
+2025-02-12 09:22:01,870 - INFO - Starting killmail processing script
+2025-02-12 09:22:01,885 - INFO - Database connection established successfully
+2025-02-12 09:22:01,885 - INFO - Successfully connected to database
+2025-02-12 09:22:01,887 - INFO - Newest kill in database: 2025-02-12 01:23:09
+2025-02-12 09:22:01,887 - INFO - Oldest kill in database: 2025-01-23 18:53:31
+2025-02-12 09:22:01,888 - INFO - Running in historical mode - loading kills until January 1st, 2025
+2025-02-12 09:22:01,888 - INFO - Processing page 1
+2025-02-12 09:22:01,888 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/1/
+2025-02-12 09:22:02,028 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:22:02,028 - INFO - Found 200 kills on page 1
+2025-02-12 09:22:02,248 - INFO - Processing kill 124721189 from 2025-02-12 01:23:09
+2025-02-12 09:22:02,823 - INFO - Kill 124721189 already in database, skipping
+2025-02-12 09:22:04,007 - INFO - Processing kill 124721062 from 2025-02-12 01:12:39
+2025-02-12 09:22:04,734 - INFO - Kill 124721062 already in database, skipping
+2025-02-12 09:22:05,906 - INFO - Processing kill 124721058 from 2025-02-12 01:12:30
+2025-02-12 09:22:06,666 - INFO - Kill 124721058 already in database, skipping
+2025-02-12 09:22:07,835 - INFO - Processing kill 124720523 from 2025-02-12 00:45:04
+2025-02-12 09:22:08,581 - INFO - Kill 124720523 already in database, skipping
+2025-02-12 09:22:09,762 - INFO - Processing kill 124720514 from 2025-02-12 00:44:23
+2025-02-12 09:22:10,480 - INFO - Kill 124720514 already in database, skipping
+2025-02-12 09:22:11,715 - INFO - Processing kill 124720507 from 2025-02-12 00:43:56
+2025-02-12 09:22:12,462 - INFO - Kill 124720507 already in database, skipping
+2025-02-12 09:22:13,655 - INFO - Processing kill 124720140 from 2025-02-12 00:22:05
+2025-02-12 09:22:14,381 - INFO - Kill 124720140 already in database, skipping
+2025-02-12 09:22:15,580 - INFO - Processing kill 124720119 from 2025-02-12 00:20:46
+2025-02-12 09:22:16,292 - INFO - Kill 124720119 already in database, skipping
+2025-02-12 09:22:17,476 - INFO - Processing kill 124720098 from 2025-02-12 00:19:30
+2025-02-12 09:22:18,176 - INFO - Kill 124720098 already in database, skipping
+2025-02-12 09:22:19,364 - INFO - Processing kill 124720058 from 2025-02-12 00:17:09
+2025-02-12 09:22:20,099 - INFO - Kill 124720058 already in database, skipping
+2025-02-12 09:22:21,280 - INFO - Processing kill 124719802 from 2025-02-12 00:03:19
+2025-02-12 09:22:22,079 - INFO - Kill 124719802 already in database, skipping
+2025-02-12 09:22:23,274 - INFO - Processing kill 124719769 from 2025-02-12 00:01:39
+2025-02-12 09:22:23,981 - INFO - Kill 124719769 already in database, skipping
+2025-02-12 09:22:25,167 - INFO - Processing kill 124719558 from 2025-02-11 23:44:39
+2025-02-12 09:22:25,922 - INFO - Kill 124719558 already in database, skipping
+2025-02-12 09:22:27,113 - INFO - Processing kill 124719553 from 2025-02-11 23:44:10
+2025-02-12 09:22:27,861 - INFO - Kill 124719553 already in database, skipping
+2025-02-12 09:22:29,051 - INFO - Processing kill 124718549 from 2025-02-11 22:37:36
+2025-02-12 09:22:29,785 - INFO - Kill 124718549 already in database, skipping
+2025-02-12 09:22:30,998 - INFO - Processing kill 124718446 from 2025-02-11 22:32:43
+2025-02-12 09:22:31,586 - INFO - Kill 124718446 already in database, skipping
+2025-02-12 09:22:32,770 - INFO - Processing kill 124718145 from 2025-02-11 22:17:55
+2025-02-12 09:22:33,525 - INFO - Kill 124718145 already in database, skipping
+2025-02-12 09:22:34,706 - INFO - Processing kill 124718136 from 2025-02-11 22:17:38
+2025-02-12 09:22:35,437 - INFO - Kill 124718136 already in database, skipping
+2025-02-12 09:22:36,623 - INFO - Processing kill 124717953 from 2025-02-11 22:08:28
+2025-02-12 09:22:37,389 - INFO - Kill 124717953 already in database, skipping
+2025-02-12 09:22:38,602 - INFO - Processing kill 124715924 from 2025-02-11 20:40:58
+2025-02-12 09:22:39,335 - INFO - Kill 124715924 already in database, skipping
+2025-02-12 09:22:40,519 - INFO - Processing kill 124714633 from 2025-02-11 19:51:58
+2025-02-12 09:22:41,241 - INFO - Kill 124714633 already in database, skipping
+2025-02-12 09:22:42,452 - INFO - Processing kill 124714472 from 2025-02-11 19:43:50
+2025-02-12 09:22:43,190 - INFO - Kill 124714472 already in database, skipping
+2025-02-12 09:22:44,355 - INFO - Processing kill 124714223 from 2025-02-11 19:30:59
+2025-02-12 09:22:45,140 - INFO - Kill 124714223 already in database, skipping
+2025-02-12 09:22:46,328 - INFO - Processing kill 124714218 from 2025-02-11 19:30:35
+2025-02-12 09:22:47,048 - INFO - Kill 124714218 already in database, skipping
+2025-02-12 09:22:48,236 - INFO - Processing kill 124714205 from 2025-02-11 19:29:45
+2025-02-12 09:22:48,952 - INFO - Kill 124714205 already in database, skipping
+2025-02-12 09:22:50,152 - INFO - Processing kill 124714012 from 2025-02-11 19:21:52
+2025-02-12 09:22:50,757 - INFO - Kill 124714012 already in database, skipping
+2025-02-12 09:22:51,990 - INFO - Processing kill 124713587 from 2025-02-11 19:02:13
+2025-02-12 09:22:52,723 - INFO - Kill 124713587 already in database, skipping
+2025-02-12 09:22:53,909 - INFO - Processing kill 124711533 from 2025-02-11 17:22:29
+2025-02-12 09:22:54,680 - INFO - Kill 124711533 already in database, skipping
+2025-02-12 09:22:55,861 - INFO - Processing kill 124709842 from 2025-02-11 15:48:31
+2025-02-12 09:22:56,578 - INFO - Kill 124709842 already in database, skipping
+2025-02-12 09:22:57,769 - INFO - Processing kill 124708602 from 2025-02-11 14:45:34
+2025-02-12 09:22:58,506 - INFO - Kill 124708602 already in database, skipping
+2025-02-12 09:22:59,690 - INFO - Processing kill 124708113 from 2025-02-11 14:17:30
+2025-02-12 09:23:00,416 - INFO - Kill 124708113 already in database, skipping
+2025-02-12 09:23:01,678 - INFO - Processing kill 124708103 from 2025-02-11 14:17:06
+2025-02-12 09:23:02,463 - INFO - Kill 124708103 already in database, skipping
+2025-02-12 09:23:03,642 - INFO - Processing kill 124703869 from 2025-02-11 09:23:14
+2025-02-12 09:23:04,351 - INFO - Kill 124703869 already in database, skipping
+2025-02-12 09:23:05,526 - INFO - Processing kill 124695167 from 2025-02-10 22:30:35
+2025-02-12 09:23:06,255 - INFO - Kill 124695167 already in database, skipping
+2025-02-12 09:23:07,477 - INFO - Processing kill 124693243 from 2025-02-10 20:59:40
+2025-02-12 09:23:08,036 - INFO - Kill 124693243 already in database, skipping
+2025-02-12 09:23:09,218 - INFO - Processing kill 124692992 from 2025-02-10 20:47:16
+2025-02-12 09:23:09,929 - INFO - Kill 124692992 already in database, skipping
+2025-02-12 09:23:11,125 - INFO - Processing kill 124686640 from 2025-02-10 15:36:16
+2025-02-12 09:23:11,868 - INFO - Kill 124686640 already in database, skipping
+2025-02-12 09:23:13,056 - INFO - Processing kill 124683831 from 2025-02-10 13:23:31
+2025-02-12 09:23:13,812 - INFO - Kill 124683831 already in database, skipping
+2025-02-12 09:23:15,008 - INFO - Processing kill 124675934 from 2025-02-10 02:31:27
+2025-02-12 09:23:15,575 - INFO - Kill 124675934 already in database, skipping
+2025-02-12 09:23:16,784 - INFO - Processing kill 124675721 from 2025-02-10 02:15:34
+2025-02-12 09:23:17,348 - INFO - Kill 124675721 already in database, skipping
+2025-02-12 09:23:18,530 - INFO - Processing kill 124673183 from 2025-02-09 23:17:29
+2025-02-12 09:23:19,218 - INFO - Kill 124673183 already in database, skipping
+2025-02-12 09:23:20,406 - INFO - Processing kill 124673177 from 2025-02-09 23:17:10
+2025-02-12 09:23:21,137 - INFO - Kill 124673177 already in database, skipping
+2025-02-12 09:23:21,381 - INFO - Database connection closed
+2025-02-12 09:24:11,608 - INFO - === Script Starting ===
+2025-02-12 09:24:11,608 - INFO - Starting killmail processing script
+2025-02-12 09:24:11,623 - INFO - Database connection established successfully
+2025-02-12 09:24:11,623 - INFO - Successfully connected to database
+2025-02-12 09:24:11,625 - INFO - Newest kill in database: 2025-02-12 01:23:09
+2025-02-12 09:24:11,626 - INFO - Oldest kill in database: 2025-01-23 18:53:31
+2025-02-12 09:24:11,626 - INFO - Running in historical mode - loading kills until January 1st, 2025
+2025-02-12 09:24:11,626 - INFO - Processing page 1
+2025-02-12 09:24:11,626 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/1/
+2025-02-12 09:24:11,725 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:24:11,725 - INFO - Found 200 kills on page 1
+2025-02-12 09:24:11,763 - INFO - Processed 0 new kills on page 1
+2025-02-12 09:24:11,763 - INFO - Found 200 existing kills on page 1
+2025-02-12 09:24:13,769 - INFO - Processing page 2
+2025-02-12 09:24:13,769 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/2/
+2025-02-12 09:24:13,889 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:24:13,889 - INFO - Found 200 kills on page 2
+2025-02-12 09:24:13,925 - INFO - Processed 0 new kills on page 2
+2025-02-12 09:24:13,925 - INFO - Found 200 existing kills on page 2
+2025-02-12 09:24:15,930 - INFO - Processing page 3
+2025-02-12 09:24:15,930 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/3/
+2025-02-12 09:24:16,038 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:24:16,038 - INFO - Found 200 kills on page 3
+2025-02-12 09:24:16,069 - INFO - Processed 0 new kills on page 3
+2025-02-12 09:24:16,069 - INFO - Found 200 existing kills on page 3
+2025-02-12 09:24:18,074 - INFO - Processing page 4
+2025-02-12 09:24:18,075 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/4/
+2025-02-12 09:24:18,187 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:24:18,187 - INFO - Found 200 kills on page 4
+2025-02-12 09:24:18,463 - INFO - Processing kill 124560514 from 2025-02-05 21:20:04
+2025-02-12 09:24:19,236 - INFO - Successfully inserted killmail 124560514
+2025-02-12 09:24:19,236 - INFO - Successfully inserted killmail 124560514
+2025-02-12 09:24:20,433 - INFO - Processing kill 124560450 from 2025-02-05 21:18:25
+2025-02-12 09:24:21,171 - INFO - Successfully inserted killmail 124560450
+2025-02-12 09:24:21,171 - INFO - Successfully inserted killmail 124560450
+2025-02-12 09:24:22,372 - INFO - Processing kill 124560437 from 2025-02-05 21:17:59
+2025-02-12 09:24:23,094 - INFO - Successfully inserted killmail 124560437
+2025-02-12 09:24:23,094 - INFO - Successfully inserted killmail 124560437
+2025-02-12 09:24:24,304 - INFO - Processing kill 124560416 from 2025-02-05 21:17:23
+2025-02-12 09:24:25,017 - INFO - Successfully inserted killmail 124560416
+2025-02-12 09:24:25,017 - INFO - Successfully inserted killmail 124560416
+2025-02-12 09:24:26,187 - INFO - Processing kill 124560403 from 2025-02-05 21:17:01
+2025-02-12 09:24:26,929 - INFO - Successfully inserted killmail 124560403
+2025-02-12 09:24:26,929 - INFO - Successfully inserted killmail 124560403
+2025-02-12 09:24:28,113 - INFO - Processing kill 124560401 from 2025-02-05 21:16:57
+2025-02-12 09:24:28,876 - INFO - Successfully inserted killmail 124560401
+2025-02-12 09:24:28,877 - INFO - Successfully inserted killmail 124560401
+2025-02-12 09:24:30,050 - INFO - Processing kill 124560371 from 2025-02-05 21:15:53
+2025-02-12 09:24:30,885 - INFO - Successfully inserted killmail 124560371
+2025-02-12 09:24:30,885 - INFO - Successfully inserted killmail 124560371
+2025-02-12 09:24:32,140 - INFO - Processing kill 124560354 from 2025-02-05 21:15:31
+2025-02-12 09:24:32,914 - INFO - Successfully inserted killmail 124560354
+2025-02-12 09:24:32,914 - INFO - Successfully inserted killmail 124560354
+2025-02-12 09:24:34,104 - INFO - Processing kill 124560337 from 2025-02-05 21:15:03
+2025-02-12 09:24:34,868 - INFO - Successfully inserted killmail 124560337
+2025-02-12 09:24:34,868 - INFO - Successfully inserted killmail 124560337
+2025-02-12 09:24:36,064 - INFO - Processing kill 124560333 from 2025-02-05 21:14:55
+2025-02-12 09:24:37,172 - INFO - Successfully inserted killmail 124560333
+2025-02-12 09:24:37,173 - INFO - Successfully inserted killmail 124560333
+2025-02-12 09:24:38,383 - INFO - Processing kill 124560306 from 2025-02-05 21:13:56
+2025-02-12 09:24:39,104 - INFO - Successfully inserted killmail 124560306
+2025-02-12 09:24:39,104 - INFO - Successfully inserted killmail 124560306
+2025-02-12 09:24:40,324 - INFO - Processing kill 124560305 from 2025-02-05 21:13:55
+2025-02-12 09:24:41,051 - INFO - Successfully inserted killmail 124560305
+2025-02-12 09:24:41,051 - INFO - Successfully inserted killmail 124560305
+2025-02-12 09:24:42,277 - INFO - Processing kill 124560300 from 2025-02-05 21:13:43
+2025-02-12 09:24:43,016 - INFO - Successfully inserted killmail 124560300
+2025-02-12 09:24:43,016 - INFO - Successfully inserted killmail 124560300
+2025-02-12 09:24:44,223 - INFO - Processing kill 124560235 from 2025-02-05 21:11:51
+2025-02-12 09:24:44,982 - INFO - Successfully inserted killmail 124560235
+2025-02-12 09:24:44,982 - INFO - Successfully inserted killmail 124560235
+2025-02-12 09:24:46,168 - INFO - Processing kill 124560217 from 2025-02-05 21:11:46
+2025-02-12 09:24:46,911 - INFO - Successfully inserted killmail 124560217
+2025-02-12 09:24:46,911 - INFO - Successfully inserted killmail 124560217
+2025-02-12 09:24:48,115 - INFO - Processing kill 124560202 from 2025-02-05 21:11:20
+2025-02-12 09:24:48,833 - INFO - Successfully inserted killmail 124560202
+2025-02-12 09:24:48,834 - INFO - Successfully inserted killmail 124560202
+2025-02-12 09:24:50,027 - INFO - Processing kill 124560183 from 2025-02-05 21:10:37
+2025-02-12 09:24:50,740 - INFO - Successfully inserted killmail 124560183
+2025-02-12 09:24:50,741 - INFO - Successfully inserted killmail 124560183
+2025-02-12 09:24:51,939 - INFO - Processing kill 124560147 from 2025-02-05 21:09:52
+2025-02-12 09:24:52,739 - INFO - Successfully inserted killmail 124560147
+2025-02-12 09:24:52,739 - INFO - Successfully inserted killmail 124560147
+2025-02-12 09:24:53,934 - INFO - Processing kill 124560130 from 2025-02-05 21:09:26
+2025-02-12 09:24:54,728 - INFO - Successfully inserted killmail 124560130
+2025-02-12 09:24:54,728 - INFO - Successfully inserted killmail 124560130
+2025-02-12 09:24:55,954 - INFO - Processing kill 124560122 from 2025-02-05 21:08:59
+2025-02-12 09:24:56,682 - INFO - Successfully inserted killmail 124560122
+2025-02-12 09:24:56,682 - INFO - Successfully inserted killmail 124560122
+2025-02-12 09:24:57,881 - INFO - Processing kill 124560063 from 2025-02-05 21:07:24
+2025-02-12 09:24:58,597 - INFO - Successfully inserted killmail 124560063
+2025-02-12 09:24:58,597 - INFO - Successfully inserted killmail 124560063
+2025-02-12 09:24:59,793 - INFO - Processing kill 124560062 from 2025-02-05 21:07:23
+2025-02-12 09:25:00,536 - INFO - Successfully inserted killmail 124560062
+2025-02-12 09:25:00,536 - INFO - Successfully inserted killmail 124560062
+2025-02-12 09:25:01,766 - INFO - Processing kill 124560055 from 2025-02-05 21:07:14
+2025-02-12 09:25:02,611 - INFO - Successfully inserted killmail 124560055
+2025-02-12 09:25:02,611 - INFO - Successfully inserted killmail 124560055
+2025-02-12 09:25:03,836 - INFO - Processing kill 124560045 from 2025-02-05 21:06:50
+2025-02-12 09:25:04,613 - INFO - Successfully inserted killmail 124560045
+2025-02-12 09:25:04,613 - INFO - Successfully inserted killmail 124560045
+2025-02-12 09:25:05,817 - INFO - Processing kill 124560017 from 2025-02-05 21:06:04
+2025-02-12 09:25:06,568 - INFO - Successfully inserted killmail 124560017
+2025-02-12 09:25:06,568 - INFO - Successfully inserted killmail 124560017
+2025-02-12 09:25:07,773 - INFO - Processing kill 124560015 from 2025-02-05 21:06:02
+2025-02-12 09:25:08,486 - INFO - Successfully inserted killmail 124560015
+2025-02-12 09:25:08,486 - INFO - Successfully inserted killmail 124560015
+2025-02-12 09:25:09,700 - INFO - Processing kill 124560006 from 2025-02-05 21:05:41
+2025-02-12 09:25:10,421 - INFO - Successfully inserted killmail 124560006
+2025-02-12 09:25:10,421 - INFO - Successfully inserted killmail 124560006
+2025-02-12 09:25:11,630 - INFO - Processing kill 124559987 from 2025-02-05 21:05:19
+2025-02-12 09:25:12,491 - INFO - Successfully inserted killmail 124559987
+2025-02-12 09:25:12,491 - INFO - Successfully inserted killmail 124559987
+2025-02-12 09:25:13,723 - INFO - Processing kill 124559977 from 2025-02-05 21:04:58
+2025-02-12 09:25:14,442 - INFO - Successfully inserted killmail 124559977
+2025-02-12 09:25:14,442 - INFO - Successfully inserted killmail 124559977
+2025-02-12 09:25:15,634 - INFO - Processing kill 124559958 from 2025-02-05 21:04:28
+2025-02-12 09:25:16,377 - INFO - Successfully inserted killmail 124559958
+2025-02-12 09:25:16,377 - INFO - Successfully inserted killmail 124559958
+2025-02-12 09:25:17,571 - INFO - Processing kill 124559930 from 2025-02-05 21:03:36
+2025-02-12 09:25:18,323 - INFO - Successfully inserted killmail 124559930
+2025-02-12 09:25:18,323 - INFO - Successfully inserted killmail 124559930
+2025-02-12 09:25:19,547 - INFO - Processing kill 124559918 from 2025-02-05 21:03:10
+2025-02-12 09:25:20,570 - INFO - Successfully inserted killmail 124559918
+2025-02-12 09:25:20,570 - INFO - Successfully inserted killmail 124559918
+2025-02-12 09:25:21,784 - INFO - Processing kill 124559851 from 2025-02-05 21:01:10
+2025-02-12 09:25:22,610 - INFO - Successfully inserted killmail 124559851
+2025-02-12 09:25:22,611 - INFO - Successfully inserted killmail 124559851
+2025-02-12 09:25:23,827 - INFO - Processing kill 124559825 from 2025-02-05 21:00:20
+2025-02-12 09:25:24,545 - INFO - Successfully inserted killmail 124559825
+2025-02-12 09:25:24,545 - INFO - Successfully inserted killmail 124559825
+2025-02-12 09:25:25,744 - INFO - Processing kill 124559810 from 2025-02-05 21:00:08
+2025-02-12 09:25:26,718 - INFO - Successfully inserted killmail 124559810
+2025-02-12 09:25:26,718 - INFO - Successfully inserted killmail 124559810
+2025-02-12 09:25:27,951 - INFO - Processing kill 124559766 from 2025-02-05 20:58:53
+2025-02-12 09:25:28,669 - INFO - Successfully inserted killmail 124559766
+2025-02-12 09:25:28,670 - INFO - Successfully inserted killmail 124559766
+2025-02-12 09:25:29,885 - INFO - Processing kill 124559753 from 2025-02-05 20:58:28
+2025-02-12 09:25:30,613 - INFO - Successfully inserted killmail 124559753
+2025-02-12 09:25:30,613 - INFO - Successfully inserted killmail 124559753
+2025-02-12 09:25:31,818 - INFO - Processing kill 124559735 from 2025-02-05 20:57:59
+2025-02-12 09:25:32,598 - INFO - Successfully inserted killmail 124559735
+2025-02-12 09:25:32,599 - INFO - Successfully inserted killmail 124559735
+2025-02-12 09:25:33,839 - INFO - Processing kill 124559698 from 2025-02-05 20:56:43
+2025-02-12 09:25:34,624 - INFO - Successfully inserted killmail 124559698
+2025-02-12 09:25:34,625 - INFO - Successfully inserted killmail 124559698
+2025-02-12 09:25:35,837 - INFO - Processing kill 124559660 from 2025-02-05 20:55:35
+2025-02-12 09:25:36,584 - INFO - Successfully inserted killmail 124559660
+2025-02-12 09:25:36,585 - INFO - Successfully inserted killmail 124559660
+2025-02-12 09:25:37,764 - INFO - Processing kill 124559651 from 2025-02-05 20:55:15
+2025-02-12 09:25:38,467 - INFO - Successfully inserted killmail 124559651
+2025-02-12 09:25:38,467 - INFO - Successfully inserted killmail 124559651
+2025-02-12 09:25:39,682 - INFO - Processing kill 124559636 from 2025-02-05 20:54:57
+2025-02-12 09:25:40,425 - INFO - Successfully inserted killmail 124559636
+2025-02-12 09:25:40,425 - INFO - Successfully inserted killmail 124559636
+2025-02-12 09:25:41,623 - INFO - Processing kill 124559624 from 2025-02-05 20:54:29
+2025-02-12 09:25:42,452 - INFO - Successfully inserted killmail 124559624
+2025-02-12 09:25:42,452 - INFO - Successfully inserted killmail 124559624
+2025-02-12 09:25:43,655 - INFO - Processing kill 124559616 from 2025-02-05 20:54:10
+2025-02-12 09:25:44,371 - INFO - Successfully inserted killmail 124559616
+2025-02-12 09:25:44,371 - INFO - Successfully inserted killmail 124559616
+2025-02-12 09:25:45,584 - INFO - Processing kill 124559613 from 2025-02-05 20:54:03
+2025-02-12 09:25:46,313 - INFO - Successfully inserted killmail 124559613
+2025-02-12 09:25:46,313 - INFO - Successfully inserted killmail 124559613
+2025-02-12 09:25:47,510 - INFO - Processing kill 124559597 from 2025-02-05 20:53:43
+2025-02-12 09:25:48,217 - INFO - Successfully inserted killmail 124559597
+2025-02-12 09:25:48,217 - INFO - Successfully inserted killmail 124559597
+2025-02-12 09:25:49,455 - INFO - Processing kill 124559587 from 2025-02-05 20:53:14
+2025-02-12 09:25:50,206 - INFO - Successfully inserted killmail 124559587
+2025-02-12 09:25:50,206 - INFO - Successfully inserted killmail 124559587
+2025-02-12 09:25:51,408 - INFO - Processing kill 124559584 from 2025-02-05 20:53:07
+2025-02-12 09:25:52,144 - INFO - Successfully inserted killmail 124559584
+2025-02-12 09:25:52,144 - INFO - Successfully inserted killmail 124559584
+2025-02-12 09:25:53,042 - INFO - Database connection closed
+2025-02-12 09:26:34,486 - INFO - === Script Starting ===
+2025-02-12 09:26:34,486 - INFO - Starting killmail processing script
+2025-02-12 09:26:34,500 - INFO - Database connection established successfully
+2025-02-12 09:26:34,500 - INFO - Successfully connected to database
+2025-02-12 09:26:34,503 - INFO - Newest kill in database: 2025-02-12 01:23:09
+2025-02-12 09:26:34,503 - INFO - Oldest kill in database: 2025-01-23 18:53:31
+2025-02-12 09:26:34,503 - INFO - Running in historical mode - loading kills until January 1st, 2025
+2025-02-12 09:26:34,504 - INFO - Processing page 1
+2025-02-12 09:26:34,504 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/1/
+2025-02-12 09:26:34,598 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:26:34,598 - INFO - Found 200 kills on page 1
+2025-02-12 09:26:34,626 - INFO - Processed 0 new kills on page 1
+2025-02-12 09:26:34,626 - INFO - Found 200 existing kills on page 1
+2025-02-12 09:26:36,631 - INFO - Processing page 2
+2025-02-12 09:26:36,632 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/2/
+2025-02-12 09:26:36,739 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:26:36,739 - INFO - Found 200 kills on page 2
+2025-02-12 09:26:36,771 - INFO - Processed 0 new kills on page 2
+2025-02-12 09:26:36,771 - INFO - Found 200 existing kills on page 2
+2025-02-12 09:26:38,773 - INFO - Processing page 3
+2025-02-12 09:26:38,773 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/3/
+2025-02-12 09:26:38,868 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:26:38,868 - INFO - Found 200 kills on page 3
+2025-02-12 09:26:38,900 - INFO - Processed 0 new kills on page 3
+2025-02-12 09:26:38,900 - INFO - Found 200 existing kills on page 3
+2025-02-12 09:26:40,905 - INFO - Processing page 4
+2025-02-12 09:26:40,905 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/4/
+2025-02-12 09:26:41,025 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:26:41,025 - INFO - Found 200 kills on page 4
+2025-02-12 09:26:41,243 - INFO - Processing kill 124559577 from 2025-02-05 20:52:55
+2025-02-12 09:26:41,986 - INFO - Successfully inserted killmail 124559577
+2025-02-12 09:26:41,986 - INFO - Successfully inserted killmail 124559577
+2025-02-12 09:26:43,197 - INFO - Processing kill 124559573 from 2025-02-05 20:52:50
+2025-02-12 09:26:43,906 - INFO - Successfully inserted killmail 124559573
+2025-02-12 09:26:43,906 - INFO - Successfully inserted killmail 124559573
+2025-02-12 09:26:45,136 - INFO - Processing kill 124559553 from 2025-02-05 20:52:25
+2025-02-12 09:26:45,879 - INFO - Successfully inserted killmail 124559553
+2025-02-12 09:26:45,880 - INFO - Successfully inserted killmail 124559553
+2025-02-12 09:26:47,096 - INFO - Processing kill 124559524 from 2025-02-05 20:51:39
+2025-02-12 09:26:47,868 - INFO - Successfully inserted killmail 124559524
+2025-02-12 09:26:47,868 - INFO - Successfully inserted killmail 124559524
+2025-02-12 09:26:49,063 - INFO - Processing kill 124559510 from 2025-02-05 20:51:17
+2025-02-12 09:26:49,867 - INFO - Successfully inserted killmail 124559510
+2025-02-12 09:26:49,868 - INFO - Successfully inserted killmail 124559510
+2025-02-12 09:26:51,063 - INFO - Processing kill 124559508 from 2025-02-05 20:51:10
+2025-02-12 09:26:51,804 - INFO - Successfully inserted killmail 124559508
+2025-02-12 09:26:51,804 - INFO - Successfully inserted killmail 124559508
+2025-02-12 09:26:53,014 - INFO - Processing kill 124559483 from 2025-02-05 20:50:30
+2025-02-12 09:26:53,748 - INFO - Successfully inserted killmail 124559483
+2025-02-12 09:26:53,748 - INFO - Successfully inserted killmail 124559483
+2025-02-12 09:26:54,946 - INFO - Processing kill 124559481 from 2025-02-05 20:50:27
+2025-02-12 09:26:55,639 - INFO - Successfully inserted killmail 124559481
+2025-02-12 09:26:55,640 - INFO - Successfully inserted killmail 124559481
+2025-02-12 09:26:56,833 - INFO - Processing kill 124559436 from 2025-02-05 20:49:10
+2025-02-12 09:26:57,547 - INFO - Successfully inserted killmail 124559436
+2025-02-12 09:26:57,547 - INFO - Successfully inserted killmail 124559436
+2025-02-12 09:26:58,736 - INFO - Processing kill 124559414 from 2025-02-05 20:48:44
+2025-02-12 09:26:59,514 - INFO - Successfully inserted killmail 124559414
+2025-02-12 09:26:59,515 - INFO - Successfully inserted killmail 124559414
+2025-02-12 09:27:00,701 - INFO - Processing kill 124559386 from 2025-02-05 20:47:57
+2025-02-12 09:27:01,442 - INFO - Successfully inserted killmail 124559386
+2025-02-12 09:27:01,442 - INFO - Successfully inserted killmail 124559386
+2025-02-12 09:27:02,645 - INFO - Processing kill 124559369 from 2025-02-05 20:47:36
+2025-02-12 09:27:03,382 - INFO - Successfully inserted killmail 124559369
+2025-02-12 09:27:03,383 - INFO - Successfully inserted killmail 124559369
+2025-02-12 09:27:04,564 - INFO - Processing kill 124559356 from 2025-02-05 20:47:15
+2025-02-12 09:27:05,343 - INFO - Successfully inserted killmail 124559356
+2025-02-12 09:27:05,344 - INFO - Successfully inserted killmail 124559356
+2025-02-12 09:27:06,524 - INFO - Processing kill 124559353 from 2025-02-05 20:47:09
+2025-02-12 09:27:07,389 - INFO - Successfully inserted killmail 124559353
+2025-02-12 09:27:07,390 - INFO - Successfully inserted killmail 124559353
+2025-02-12 09:27:08,589 - INFO - Processing kill 124559332 from 2025-02-05 20:46:51
+2025-02-12 09:27:09,388 - INFO - Successfully inserted killmail 124559332
+2025-02-12 09:27:09,388 - INFO - Successfully inserted killmail 124559332
+2025-02-12 09:27:10,580 - INFO - Processing kill 124559312 from 2025-02-05 20:46:10
+2025-02-12 09:27:11,357 - INFO - Successfully inserted killmail 124559312
+2025-02-12 09:27:11,357 - INFO - Successfully inserted killmail 124559312
+2025-02-12 09:27:12,585 - INFO - Processing kill 124559301 from 2025-02-05 20:45:47
+2025-02-12 09:27:13,377 - INFO - Successfully inserted killmail 124559301
+2025-02-12 09:27:13,377 - INFO - Successfully inserted killmail 124559301
+2025-02-12 09:27:14,576 - INFO - Processing kill 124559298 from 2025-02-05 20:45:46
+2025-02-12 09:27:15,295 - INFO - Successfully inserted killmail 124559298
+2025-02-12 09:27:15,295 - INFO - Successfully inserted killmail 124559298
+2025-02-12 09:27:16,487 - INFO - Processing kill 124559283 from 2025-02-05 20:45:24
+2025-02-12 09:27:17,245 - INFO - Successfully inserted killmail 124559283
+2025-02-12 09:27:17,246 - INFO - Successfully inserted killmail 124559283
+2025-02-12 09:27:18,454 - INFO - Processing kill 124559276 from 2025-02-05 20:45:10
+2025-02-12 09:27:19,207 - INFO - Successfully inserted killmail 124559276
+2025-02-12 09:27:19,208 - INFO - Successfully inserted killmail 124559276
+2025-02-12 09:27:20,442 - INFO - Processing kill 124559272 from 2025-02-05 20:45:04
+2025-02-12 09:27:21,267 - INFO - Successfully inserted killmail 124559272
+2025-02-12 09:27:21,267 - INFO - Successfully inserted killmail 124559272
+2025-02-12 09:27:22,527 - INFO - Processing kill 124559256 from 2025-02-05 20:44:37
+2025-02-12 09:27:23,347 - INFO - Successfully inserted killmail 124559256
+2025-02-12 09:27:23,347 - INFO - Successfully inserted killmail 124559256
+2025-02-12 09:27:24,562 - INFO - Processing kill 124559251 from 2025-02-05 20:44:35
+2025-02-12 09:27:25,650 - INFO - Successfully inserted killmail 124559251
+2025-02-12 09:27:25,650 - INFO - Successfully inserted killmail 124559251
+2025-02-12 09:27:26,834 - INFO - Processing kill 124559245 from 2025-02-05 20:44:28
+2025-02-12 09:27:27,561 - INFO - Successfully inserted killmail 124559245
+2025-02-12 09:27:27,562 - INFO - Successfully inserted killmail 124559245
+2025-02-12 09:27:28,745 - INFO - Processing kill 124559234 from 2025-02-05 20:44:08
+2025-02-12 09:27:29,520 - INFO - Successfully inserted killmail 124559234
+2025-02-12 09:27:29,520 - INFO - Successfully inserted killmail 124559234
+2025-02-12 09:27:30,743 - INFO - Processing kill 124559203 from 2025-02-05 20:43:12
+2025-02-12 09:27:31,466 - INFO - Successfully inserted killmail 124559203
+2025-02-12 09:27:31,466 - INFO - Successfully inserted killmail 124559203
+2025-02-12 09:27:32,656 - INFO - Processing kill 124559194 from 2025-02-05 20:42:50
+2025-02-12 09:27:33,462 - INFO - Successfully inserted killmail 124559194
+2025-02-12 09:27:33,462 - INFO - Successfully inserted killmail 124559194
+2025-02-12 09:27:34,668 - INFO - Processing kill 124559192 from 2025-02-05 20:42:48
+2025-02-12 09:27:35,426 - INFO - Successfully inserted killmail 124559192
+2025-02-12 09:27:35,426 - INFO - Successfully inserted killmail 124559192
+2025-02-12 09:27:36,616 - INFO - Processing kill 124559191 from 2025-02-05 20:42:47
+2025-02-12 09:27:37,334 - INFO - Successfully inserted killmail 124559191
+2025-02-12 09:27:37,334 - INFO - Successfully inserted killmail 124559191
+2025-02-12 09:27:38,532 - INFO - Processing kill 124559189 from 2025-02-05 20:42:42
+2025-02-12 09:27:39,253 - INFO - Successfully inserted killmail 124559189
+2025-02-12 09:27:39,254 - INFO - Successfully inserted killmail 124559189
+2025-02-12 09:27:40,451 - INFO - Processing kill 124559166 from 2025-02-05 20:42:06
+2025-02-12 09:27:41,180 - INFO - Successfully inserted killmail 124559166
+2025-02-12 09:27:41,180 - INFO - Successfully inserted killmail 124559166
+2025-02-12 09:27:42,380 - INFO - Processing kill 124559148 from 2025-02-05 20:41:26
+2025-02-12 09:27:43,154 - INFO - Successfully inserted killmail 124559148
+2025-02-12 09:27:43,155 - INFO - Successfully inserted killmail 124559148
+2025-02-12 09:27:44,354 - INFO - Processing kill 124559135 from 2025-02-05 20:41:03
+2025-02-12 09:27:45,115 - INFO - Successfully inserted killmail 124559135
+2025-02-12 09:27:45,115 - INFO - Successfully inserted killmail 124559135
+2025-02-12 09:27:46,312 - INFO - Processing kill 124559125 from 2025-02-05 20:40:34
+2025-02-12 09:27:47,094 - INFO - Successfully inserted killmail 124559125
+2025-02-12 09:27:47,094 - INFO - Successfully inserted killmail 124559125
+2025-02-12 09:27:48,311 - INFO - Processing kill 124559115 from 2025-02-05 20:40:24
+2025-02-12 09:27:49,065 - INFO - Successfully inserted killmail 124559115
+2025-02-12 09:27:49,065 - INFO - Successfully inserted killmail 124559115
+2025-02-12 09:27:50,253 - INFO - Processing kill 124559107 from 2025-02-05 20:40:12
+2025-02-12 09:27:50,990 - INFO - Successfully inserted killmail 124559107
+2025-02-12 09:27:50,990 - INFO - Successfully inserted killmail 124559107
+2025-02-12 09:27:52,196 - INFO - Processing kill 124559106 from 2025-02-05 20:40:12
+2025-02-12 09:27:53,025 - INFO - Successfully inserted killmail 124559106
+2025-02-12 09:27:53,026 - INFO - Successfully inserted killmail 124559106
+2025-02-12 09:27:54,209 - INFO - Processing kill 124559100 from 2025-02-05 20:40:07
+2025-02-12 09:27:54,962 - INFO - Successfully inserted killmail 124559100
+2025-02-12 09:27:54,963 - INFO - Successfully inserted killmail 124559100
+2025-02-12 09:27:56,184 - INFO - Processing kill 124559089 from 2025-02-05 20:39:27
+2025-02-12 09:27:56,931 - INFO - Successfully inserted killmail 124559089
+2025-02-12 09:27:56,931 - INFO - Successfully inserted killmail 124559089
+2025-02-12 09:27:58,131 - INFO - Processing kill 124559077 from 2025-02-05 20:39:13
+2025-02-12 09:27:58,907 - INFO - Successfully inserted killmail 124559077
+2025-02-12 09:27:58,908 - INFO - Successfully inserted killmail 124559077
+2025-02-12 09:28:00,105 - INFO - Processing kill 124559072 from 2025-02-05 20:39:05
+2025-02-12 09:28:00,815 - INFO - Successfully inserted killmail 124559072
+2025-02-12 09:28:00,815 - INFO - Successfully inserted killmail 124559072
+2025-02-12 09:28:02,037 - INFO - Processing kill 124559038 from 2025-02-05 20:38:21
+2025-02-12 09:28:02,764 - INFO - Successfully inserted killmail 124559038
+2025-02-12 09:28:02,764 - INFO - Successfully inserted killmail 124559038
+2025-02-12 09:28:03,963 - INFO - Processing kill 124559036 from 2025-02-05 20:38:14
+2025-02-12 09:28:04,662 - INFO - Successfully inserted killmail 124559036
+2025-02-12 09:28:04,662 - INFO - Successfully inserted killmail 124559036
+2025-02-12 09:28:05,862 - INFO - Processing kill 124559035 from 2025-02-05 20:38:13
+2025-02-12 09:28:06,555 - INFO - Successfully inserted killmail 124559035
+2025-02-12 09:28:06,556 - INFO - Successfully inserted killmail 124559035
+2025-02-12 09:28:07,728 - INFO - Processing kill 124559034 from 2025-02-05 20:38:07
+2025-02-12 09:28:08,414 - INFO - Successfully inserted killmail 124559034
+2025-02-12 09:28:08,414 - INFO - Successfully inserted killmail 124559034
+2025-02-12 09:28:09,646 - INFO - Processing kill 124559024 from 2025-02-05 20:37:49
+2025-02-12 09:28:10,343 - INFO - Successfully inserted killmail 124559024
+2025-02-12 09:28:10,343 - INFO - Successfully inserted killmail 124559024
+2025-02-12 09:28:11,547 - INFO - Processing kill 124559021 from 2025-02-05 20:37:45
+2025-02-12 09:28:12,518 - INFO - Successfully inserted killmail 124559021
+2025-02-12 09:28:12,518 - INFO - Successfully inserted killmail 124559021
+2025-02-12 09:28:13,738 - INFO - Processing kill 124559004 from 2025-02-05 20:37:18
+2025-02-12 09:28:14,435 - INFO - Successfully inserted killmail 124559004
+2025-02-12 09:28:14,436 - INFO - Successfully inserted killmail 124559004
+2025-02-12 09:28:15,623 - INFO - Processing kill 124558997 from 2025-02-05 20:37:04
+2025-02-12 09:28:16,402 - INFO - Successfully inserted killmail 124558997
+2025-02-12 09:28:16,403 - INFO - Successfully inserted killmail 124558997
+2025-02-12 09:28:17,713 - INFO - Processing kill 124558989 from 2025-02-05 20:36:44
+2025-02-12 09:28:18,463 - INFO - Successfully inserted killmail 124558989
+2025-02-12 09:28:18,463 - INFO - Successfully inserted killmail 124558989
+2025-02-12 09:28:19,661 - INFO - Processing kill 124558956 from 2025-02-05 20:36:23
+2025-02-12 09:28:20,406 - INFO - Successfully inserted killmail 124558956
+2025-02-12 09:28:20,407 - INFO - Successfully inserted killmail 124558956
+2025-02-12 09:28:21,607 - INFO - Processing kill 124558916 from 2025-02-05 20:35:17
+2025-02-12 09:28:22,327 - INFO - Successfully inserted killmail 124558916
+2025-02-12 09:28:22,327 - INFO - Successfully inserted killmail 124558916
+2025-02-12 09:28:23,515 - INFO - Processing kill 124558842 from 2025-02-05 20:32:28
+2025-02-12 09:28:24,247 - INFO - Successfully inserted killmail 124558842
+2025-02-12 09:28:24,248 - INFO - Successfully inserted killmail 124558842
+2025-02-12 09:28:25,468 - INFO - Processing kill 124558825 from 2025-02-05 20:31:53
+2025-02-12 09:28:26,222 - INFO - Successfully inserted killmail 124558825
+2025-02-12 09:28:26,222 - INFO - Successfully inserted killmail 124558825
+2025-02-12 09:28:27,224 - INFO - Processed 54 new kills on page 4
+2025-02-12 09:28:27,225 - INFO - Found 146 existing kills on page 4
+2025-02-12 09:28:29,225 - INFO - Processing page 5
+2025-02-12 09:28:29,226 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/5/
+2025-02-12 09:28:29,374 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:28:29,374 - INFO - Found 200 kills on page 5
+2025-02-12 09:28:29,550 - INFO - Processing kill 124558780 from 2025-02-05 20:30:54
+2025-02-12 09:28:30,297 - INFO - Successfully inserted killmail 124558780
+2025-02-12 09:28:30,297 - INFO - Successfully inserted killmail 124558780
+2025-02-12 09:28:31,483 - INFO - Processing kill 124558777 from 2025-02-05 20:30:49
+2025-02-12 09:28:32,213 - INFO - Successfully inserted killmail 124558777
+2025-02-12 09:28:32,213 - INFO - Successfully inserted killmail 124558777
+2025-02-12 09:28:33,415 - INFO - Processing kill 124558768 from 2025-02-05 20:30:26
+2025-02-12 09:28:34,195 - INFO - Successfully inserted killmail 124558768
+2025-02-12 09:28:34,195 - INFO - Successfully inserted killmail 124558768
+2025-02-12 09:28:35,467 - INFO - Processing kill 124558765 from 2025-02-05 20:30:21
+2025-02-12 09:28:36,199 - INFO - Successfully inserted killmail 124558765
+2025-02-12 09:28:36,199 - INFO - Successfully inserted killmail 124558765
+2025-02-12 09:28:37,399 - INFO - Processing kill 124558764 from 2025-02-05 20:30:18
+2025-02-12 09:28:38,196 - INFO - Successfully inserted killmail 124558764
+2025-02-12 09:28:38,196 - INFO - Successfully inserted killmail 124558764
+2025-02-12 09:28:39,371 - INFO - Processing kill 124558719 from 2025-02-05 20:29:10
+2025-02-12 09:28:40,112 - INFO - Successfully inserted killmail 124558719
+2025-02-12 09:28:40,112 - INFO - Successfully inserted killmail 124558719
+2025-02-12 09:28:41,307 - INFO - Processing kill 124558716 from 2025-02-05 20:29:02
+2025-02-12 09:28:42,021 - INFO - Successfully inserted killmail 124558716
+2025-02-12 09:28:42,021 - INFO - Successfully inserted killmail 124558716
+2025-02-12 09:28:43,236 - INFO - Processing kill 124558709 from 2025-02-05 20:28:30
+2025-02-12 09:28:44,070 - INFO - Successfully inserted killmail 124558709
+2025-02-12 09:28:44,071 - INFO - Successfully inserted killmail 124558709
+2025-02-12 09:28:44,297 - INFO - Database connection closed
+2025-02-12 09:30:12,341 - INFO - === Script Starting ===
+2025-02-12 09:30:12,341 - INFO - Starting killmail processing script
+2025-02-12 09:30:12,355 - INFO - Database connection established successfully
+2025-02-12 09:30:12,355 - INFO - Successfully connected to database
+2025-02-12 09:30:12,357 - INFO - Newest kill in database: 2025-02-12 01:23:09
+2025-02-12 09:30:12,357 - INFO - Oldest kill in database: 2025-01-23 18:53:31
+2025-02-12 09:30:12,357 - INFO - Running in historical mode - loading kills until January 1st, 2025
+2025-02-12 09:30:12,357 - INFO - Processing page 1
+2025-02-12 09:30:12,357 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/1/
+2025-02-12 09:30:12,454 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:30:12,454 - INFO - Found 200 kills on page 1
+2025-02-12 09:30:12,486 - INFO - Processed 0 new kills on page 1
+2025-02-12 09:30:12,486 - INFO - Found 200 existing kills on page 1
+2025-02-12 09:30:14,490 - INFO - Processing page 2
+2025-02-12 09:30:14,490 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/2/
+2025-02-12 09:30:14,602 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:30:14,602 - INFO - Found 200 kills on page 2
+2025-02-12 09:30:14,631 - INFO - Processed 0 new kills on page 2
+2025-02-12 09:30:14,631 - INFO - Found 200 existing kills on page 2
+2025-02-12 09:30:16,636 - INFO - Processing page 3
+2025-02-12 09:30:16,636 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/3/
+2025-02-12 09:30:16,731 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:30:16,731 - INFO - Found 200 kills on page 3
+2025-02-12 09:30:16,764 - INFO - Processed 0 new kills on page 3
+2025-02-12 09:30:16,764 - INFO - Found 200 existing kills on page 3
+2025-02-12 09:30:18,769 - INFO - Processing page 4
+2025-02-12 09:30:18,770 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/4/
+2025-02-12 09:30:18,885 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:30:18,886 - INFO - Found 200 kills on page 4
+2025-02-12 09:30:18,926 - INFO - Processed 0 new kills on page 4
+2025-02-12 09:30:18,926 - INFO - Found 200 existing kills on page 4
+2025-02-12 09:30:20,931 - INFO - Processing page 5
+2025-02-12 09:30:20,932 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/5/
+2025-02-12 09:30:21,043 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:30:21,043 - INFO - Found 200 kills on page 5
+2025-02-12 09:30:21,277 - INFO - Processing kill 124558691 from 2025-02-05 20:27:54
+2025-02-12 09:30:22,013 - INFO - Successfully inserted killmail 124558691
+2025-02-12 09:30:22,014 - INFO - Successfully inserted killmail 124558691
+2025-02-12 09:30:23,219 - INFO - Processing kill 124558660 from 2025-02-05 20:26:37
+2025-02-12 09:30:23,959 - INFO - Successfully inserted killmail 124558660
+2025-02-12 09:30:23,959 - INFO - Successfully inserted killmail 124558660
+2025-02-12 09:30:25,169 - INFO - Processing kill 124558644 from 2025-02-05 20:26:10
+2025-02-12 09:30:25,908 - INFO - Successfully inserted killmail 124558644
+2025-02-12 09:30:25,908 - INFO - Successfully inserted killmail 124558644
+2025-02-12 09:30:27,154 - INFO - Processing kill 124558630 from 2025-02-05 20:26:03
+2025-02-12 09:30:27,896 - INFO - Successfully inserted killmail 124558630
+2025-02-12 09:30:27,897 - INFO - Successfully inserted killmail 124558630
+2025-02-12 09:30:29,075 - INFO - Processing kill 124558620 from 2025-02-05 20:25:48
+2025-02-12 09:30:29,771 - INFO - Successfully inserted killmail 124558620
+2025-02-12 09:30:29,771 - INFO - Successfully inserted killmail 124558620
+2025-02-12 09:30:30,976 - INFO - Processing kill 124558609 from 2025-02-05 20:25:28
+2025-02-12 09:30:31,728 - INFO - Successfully inserted killmail 124558609
+2025-02-12 09:30:31,728 - INFO - Successfully inserted killmail 124558609
+2025-02-12 09:30:33,010 - INFO - Processing kill 124558595 from 2025-02-05 20:25:01
+2025-02-12 09:30:33,718 - INFO - Successfully inserted killmail 124558595
+2025-02-12 09:30:33,718 - INFO - Successfully inserted killmail 124558595
+2025-02-12 09:30:34,935 - INFO - Processing kill 124558589 from 2025-02-05 20:24:59
+2025-02-12 09:30:35,673 - INFO - Successfully inserted killmail 124558589
+2025-02-12 09:30:35,673 - INFO - Successfully inserted killmail 124558589
+2025-02-12 09:30:36,842 - INFO - Processing kill 124558566 from 2025-02-05 20:24:12
+2025-02-12 09:30:37,570 - INFO - Successfully inserted killmail 124558566
+2025-02-12 09:30:37,570 - INFO - Successfully inserted killmail 124558566
+2025-02-12 09:30:38,775 - INFO - Processing kill 124558559 from 2025-02-05 20:24:05
+2025-02-12 09:30:39,495 - INFO - Successfully inserted killmail 124558559
+2025-02-12 09:30:39,495 - INFO - Successfully inserted killmail 124558559
+2025-02-12 09:30:40,693 - INFO - Processing kill 124558558 from 2025-02-05 20:24:04
+2025-02-12 09:30:41,407 - INFO - Successfully inserted killmail 124558558
+2025-02-12 09:30:41,407 - INFO - Successfully inserted killmail 124558558
+2025-02-12 09:30:42,588 - INFO - Processing kill 124558551 from 2025-02-05 20:23:56
+2025-02-12 09:30:43,477 - INFO - Successfully inserted killmail 124558551
+2025-02-12 09:30:43,477 - INFO - Successfully inserted killmail 124558551
+2025-02-12 09:30:44,705 - INFO - Processing kill 124558530 from 2025-02-05 20:23:16
+2025-02-12 09:30:45,437 - INFO - Successfully inserted killmail 124558530
+2025-02-12 09:30:45,437 - INFO - Successfully inserted killmail 124558530
+2025-02-12 09:30:46,605 - INFO - Processing kill 124558527 from 2025-02-05 20:22:57
+2025-02-12 09:30:47,344 - INFO - Successfully inserted killmail 124558527
+2025-02-12 09:30:47,345 - INFO - Successfully inserted killmail 124558527
+2025-02-12 09:30:48,550 - INFO - Processing kill 124558518 from 2025-02-05 20:22:55
+2025-02-12 09:30:49,269 - INFO - Successfully inserted killmail 124558518
+2025-02-12 09:30:49,269 - INFO - Successfully inserted killmail 124558518
+2025-02-12 09:30:50,500 - INFO - Processing kill 124558510 from 2025-02-05 20:22:34
+2025-02-12 09:30:51,223 - INFO - Successfully inserted killmail 124558510
+2025-02-12 09:30:51,223 - INFO - Successfully inserted killmail 124558510
+2025-02-12 09:30:52,404 - INFO - Processing kill 124558483 from 2025-02-05 20:21:50
+2025-02-12 09:30:53,209 - INFO - Successfully inserted killmail 124558483
+2025-02-12 09:30:53,209 - INFO - Successfully inserted killmail 124558483
+2025-02-12 09:30:54,395 - INFO - Processing kill 124558444 from 2025-02-05 20:20:50
+2025-02-12 09:30:55,125 - INFO - Successfully inserted killmail 124558444
+2025-02-12 09:30:55,125 - INFO - Successfully inserted killmail 124558444
+2025-02-12 09:30:56,321 - INFO - Processing kill 124558423 from 2025-02-05 20:20:31
+2025-02-12 09:30:57,299 - INFO - Successfully inserted killmail 124558423
+2025-02-12 09:30:57,299 - INFO - Successfully inserted killmail 124558423
+2025-02-12 09:30:58,516 - INFO - Processing kill 124558415 from 2025-02-05 20:20:19
+2025-02-12 09:30:59,239 - INFO - Successfully inserted killmail 124558415
+2025-02-12 09:30:59,239 - INFO - Successfully inserted killmail 124558415
+2025-02-12 09:31:00,440 - INFO - Processing kill 124558404 from 2025-02-05 20:19:58
+2025-02-12 09:31:01,173 - INFO - Successfully inserted killmail 124558404
+2025-02-12 09:31:01,174 - INFO - Successfully inserted killmail 124558404
+2025-02-12 09:31:02,376 - INFO - Processing kill 124558398 from 2025-02-05 20:19:50
+2025-02-12 09:31:03,189 - INFO - Successfully inserted killmail 124558398
+2025-02-12 09:31:03,189 - INFO - Successfully inserted killmail 124558398
+2025-02-12 09:31:04,397 - INFO - Processing kill 124558397 from 2025-02-05 20:19:46
+2025-02-12 09:31:05,391 - INFO - Successfully inserted killmail 124558397
+2025-02-12 09:31:05,392 - INFO - Successfully inserted killmail 124558397
+2025-02-12 09:31:06,590 - INFO - Processing kill 124558380 from 2025-02-05 20:19:19
+2025-02-12 09:31:07,327 - INFO - Successfully inserted killmail 124558380
+2025-02-12 09:31:07,328 - INFO - Successfully inserted killmail 124558380
+2025-02-12 09:31:08,570 - INFO - Processing kill 124558361 from 2025-02-05 20:18:54
+2025-02-12 09:31:09,310 - INFO - Successfully inserted killmail 124558361
+2025-02-12 09:31:09,310 - INFO - Successfully inserted killmail 124558361
+2025-02-12 09:31:10,493 - INFO - Processing kill 124558357 from 2025-02-05 20:18:48
+2025-02-12 09:31:11,268 - INFO - Successfully inserted killmail 124558357
+2025-02-12 09:31:11,268 - INFO - Successfully inserted killmail 124558357
+2025-02-12 09:31:12,468 - INFO - Processing kill 124558332 from 2025-02-05 20:18:19
+2025-02-12 09:31:13,283 - INFO - Successfully inserted killmail 124558332
+2025-02-12 09:31:13,284 - INFO - Successfully inserted killmail 124558332
+2025-02-12 09:31:14,475 - INFO - Processing kill 124558327 from 2025-02-05 20:18:16
+2025-02-12 09:31:15,201 - INFO - Successfully inserted killmail 124558327
+2025-02-12 09:31:15,202 - INFO - Successfully inserted killmail 124558327
+2025-02-12 09:31:16,414 - INFO - Processing kill 124558326 from 2025-02-05 20:18:15
+2025-02-12 09:31:17,131 - INFO - Successfully inserted killmail 124558326
+2025-02-12 09:31:17,131 - INFO - Successfully inserted killmail 124558326
+2025-02-12 09:31:18,342 - INFO - Processing kill 124558266 from 2025-02-05 20:16:27
+2025-02-12 09:31:19,089 - INFO - Successfully inserted killmail 124558266
+2025-02-12 09:31:19,089 - INFO - Successfully inserted killmail 124558266
+2025-02-12 09:31:20,318 - INFO - Processing kill 124558256 from 2025-02-05 20:16:19
+2025-02-12 09:31:21,066 - INFO - Successfully inserted killmail 124558256
+2025-02-12 09:31:21,066 - INFO - Successfully inserted killmail 124558256
+2025-02-12 09:31:22,260 - INFO - Processing kill 124558246 from 2025-02-05 20:15:56
+2025-02-12 09:31:23,080 - INFO - Successfully inserted killmail 124558246
+2025-02-12 09:31:23,080 - INFO - Successfully inserted killmail 124558246
+2025-02-12 09:31:24,284 - INFO - Processing kill 124558236 from 2025-02-05 20:15:37
+2025-02-12 09:31:24,979 - INFO - Successfully inserted killmail 124558236
+2025-02-12 09:31:24,979 - INFO - Successfully inserted killmail 124558236
+2025-02-12 09:31:26,189 - INFO - Processing kill 124558233 from 2025-02-05 20:15:34
+2025-02-12 09:31:26,903 - INFO - Successfully inserted killmail 124558233
+2025-02-12 09:31:26,904 - INFO - Successfully inserted killmail 124558233
+2025-02-12 09:31:28,106 - INFO - Processing kill 124558217 from 2025-02-05 20:15:02
+2025-02-12 09:31:28,868 - INFO - Successfully inserted killmail 124558217
+2025-02-12 09:31:28,868 - INFO - Successfully inserted killmail 124558217
+2025-02-12 09:31:30,080 - INFO - Processing kill 124558213 from 2025-02-05 20:14:54
+2025-02-12 09:31:30,800 - INFO - Successfully inserted killmail 124558213
+2025-02-12 09:31:30,800 - INFO - Successfully inserted killmail 124558213
+2025-02-12 09:31:32,018 - INFO - Processing kill 124558211 from 2025-02-05 20:14:49
+2025-02-12 09:31:32,706 - INFO - Successfully inserted killmail 124558211
+2025-02-12 09:31:32,707 - INFO - Successfully inserted killmail 124558211
+2025-02-12 09:31:33,927 - INFO - Processing kill 124558179 from 2025-02-05 20:13:27
+2025-02-12 09:31:34,653 - INFO - Successfully inserted killmail 124558179
+2025-02-12 09:31:34,654 - INFO - Successfully inserted killmail 124558179
+2025-02-12 09:31:35,840 - INFO - Processing kill 124558175 from 2025-02-05 20:13:27
+2025-02-12 09:31:36,635 - INFO - Successfully inserted killmail 124558175
+2025-02-12 09:31:36,635 - INFO - Successfully inserted killmail 124558175
+2025-02-12 09:31:37,836 - INFO - Processing kill 124558158 from 2025-02-05 20:12:56
+2025-02-12 09:31:38,542 - INFO - Successfully inserted killmail 124558158
+2025-02-12 09:31:38,542 - INFO - Successfully inserted killmail 124558158
+2025-02-12 09:31:39,761 - INFO - Processing kill 124558157 from 2025-02-05 20:12:56
+2025-02-12 09:31:40,505 - INFO - Successfully inserted killmail 124558157
+2025-02-12 09:31:40,506 - INFO - Successfully inserted killmail 124558157
+2025-02-12 09:31:41,692 - INFO - Processing kill 124558144 from 2025-02-05 20:12:32
+2025-02-12 09:31:42,440 - INFO - Successfully inserted killmail 124558144
+2025-02-12 09:31:42,441 - INFO - Successfully inserted killmail 124558144
+2025-02-12 09:31:43,631 - INFO - Processing kill 124558140 from 2025-02-05 20:12:25
+2025-02-12 09:31:44,368 - INFO - Successfully inserted killmail 124558140
+2025-02-12 09:31:44,369 - INFO - Successfully inserted killmail 124558140
+2025-02-12 09:31:45,575 - INFO - Processing kill 124558124 from 2025-02-05 20:12:13
+2025-02-12 09:31:46,311 - INFO - Successfully inserted killmail 124558124
+2025-02-12 09:31:46,311 - INFO - Successfully inserted killmail 124558124
+2025-02-12 09:31:47,520 - INFO - Processing kill 124558113 from 2025-02-05 20:11:56
+2025-02-12 09:31:48,262 - INFO - Successfully inserted killmail 124558113
+2025-02-12 09:31:48,263 - INFO - Successfully inserted killmail 124558113
+2025-02-12 09:31:49,471 - INFO - Processing kill 124558088 from 2025-02-05 20:11:13
+2025-02-12 09:31:50,231 - INFO - Successfully inserted killmail 124558088
+2025-02-12 09:31:50,231 - INFO - Successfully inserted killmail 124558088
+2025-02-12 09:31:51,444 - INFO - Processing kill 124558087 from 2025-02-05 20:11:13
+2025-02-12 09:31:52,195 - INFO - Successfully inserted killmail 124558087
+2025-02-12 09:31:52,196 - INFO - Successfully inserted killmail 124558087
+2025-02-12 09:31:53,411 - INFO - Processing kill 124558026 from 2025-02-05 20:10:11
+2025-02-12 09:31:54,153 - INFO - Successfully inserted killmail 124558026
+2025-02-12 09:31:54,153 - INFO - Successfully inserted killmail 124558026
+2025-02-12 09:31:55,335 - INFO - Processing kill 124557950 from 2025-02-05 20:08:55
+2025-02-12 09:31:56,064 - INFO - Successfully inserted killmail 124557950
+2025-02-12 09:31:56,064 - INFO - Successfully inserted killmail 124557950
+2025-02-12 09:31:57,275 - INFO - Processing kill 124557889 from 2025-02-05 20:07:41
+2025-02-12 09:31:58,022 - INFO - Successfully inserted killmail 124557889
+2025-02-12 09:31:58,022 - INFO - Successfully inserted killmail 124557889
+2025-02-12 09:31:59,251 - INFO - Processing kill 124557880 from 2025-02-05 20:07:24
+2025-02-12 09:31:59,968 - INFO - Successfully inserted killmail 124557880
+2025-02-12 09:31:59,968 - INFO - Successfully inserted killmail 124557880
+2025-02-12 09:32:01,155 - INFO - Processing kill 124557869 from 2025-02-05 20:07:14
+2025-02-12 09:32:01,921 - INFO - Successfully inserted killmail 124557869
+2025-02-12 09:32:01,922 - INFO - Successfully inserted killmail 124557869
+2025-02-12 09:32:03,173 - INFO - Processing kill 124557867 from 2025-02-05 20:07:10
+2025-02-12 09:32:03,894 - INFO - Successfully inserted killmail 124557867
+2025-02-12 09:32:03,894 - INFO - Successfully inserted killmail 124557867
+2025-02-12 09:32:05,097 - INFO - Processing kill 124557853 from 2025-02-05 20:06:43
+2025-02-12 09:32:05,804 - INFO - Successfully inserted killmail 124557853
+2025-02-12 09:32:05,804 - INFO - Successfully inserted killmail 124557853
+2025-02-12 09:32:07,015 - INFO - Processing kill 124557846 from 2025-02-05 20:06:25
+2025-02-12 09:32:07,742 - INFO - Successfully inserted killmail 124557846
+2025-02-12 09:32:07,742 - INFO - Successfully inserted killmail 124557846
+2025-02-12 09:32:08,950 - INFO - Processing kill 124557824 from 2025-02-05 20:05:59
+2025-02-12 09:32:09,687 - INFO - Successfully inserted killmail 124557824
+2025-02-12 09:32:09,687 - INFO - Successfully inserted killmail 124557824
+2025-02-12 09:32:10,886 - INFO - Processing kill 124557822 from 2025-02-05 20:05:53
+2025-02-12 09:32:11,610 - INFO - Successfully inserted killmail 124557822
+2025-02-12 09:32:11,610 - INFO - Successfully inserted killmail 124557822
+2025-02-12 09:32:12,802 - INFO - Processing kill 124557811 from 2025-02-05 20:05:34
+2025-02-12 09:32:13,627 - INFO - Successfully inserted killmail 124557811
+2025-02-12 09:32:13,627 - INFO - Successfully inserted killmail 124557811
+2025-02-12 09:32:14,841 - INFO - Processing kill 124557809 from 2025-02-05 20:05:28
+2025-02-12 09:32:15,574 - INFO - Successfully inserted killmail 124557809
+2025-02-12 09:32:15,575 - INFO - Successfully inserted killmail 124557809
+2025-02-12 09:32:16,776 - INFO - Processing kill 124557797 from 2025-02-05 20:05:08
+2025-02-12 09:32:17,494 - INFO - Successfully inserted killmail 124557797
+2025-02-12 09:32:17,495 - INFO - Successfully inserted killmail 124557797
+2025-02-12 09:32:18,715 - INFO - Processing kill 124557788 from 2025-02-05 20:05:01
+2025-02-12 09:32:19,463 - INFO - Successfully inserted killmail 124557788
+2025-02-12 09:32:19,463 - INFO - Successfully inserted killmail 124557788
+2025-02-12 09:32:20,650 - INFO - Processing kill 124557752 from 2025-02-05 20:03:49
+2025-02-12 09:32:21,399 - INFO - Successfully inserted killmail 124557752
+2025-02-12 09:32:21,399 - INFO - Successfully inserted killmail 124557752
+2025-02-12 09:32:22,580 - INFO - Processing kill 124557745 from 2025-02-05 20:03:36
+2025-02-12 09:32:23,351 - INFO - Successfully inserted killmail 124557745
+2025-02-12 09:32:23,351 - INFO - Successfully inserted killmail 124557745
+2025-02-12 09:32:24,611 - INFO - Processing kill 124557730 from 2025-02-05 20:03:08
+2025-02-12 09:32:25,324 - INFO - Successfully inserted killmail 124557730
+2025-02-12 09:32:25,324 - INFO - Successfully inserted killmail 124557730
+2025-02-12 09:32:26,528 - INFO - Processing kill 124557700 from 2025-02-05 20:02:10
+2025-02-12 09:32:27,220 - INFO - Successfully inserted killmail 124557700
+2025-02-12 09:32:27,220 - INFO - Successfully inserted killmail 124557700
+2025-02-12 09:32:28,448 - INFO - Processing kill 124557684 from 2025-02-05 20:01:42
+2025-02-12 09:32:29,185 - INFO - Successfully inserted killmail 124557684
+2025-02-12 09:32:29,185 - INFO - Successfully inserted killmail 124557684
+2025-02-12 09:32:30,391 - INFO - Processing kill 124557671 from 2025-02-05 20:01:23
+2025-02-12 09:32:31,116 - INFO - Successfully inserted killmail 124557671
+2025-02-12 09:32:31,116 - INFO - Successfully inserted killmail 124557671
+2025-02-12 09:32:32,309 - INFO - Processing kill 124557670 from 2025-02-05 20:01:22
+2025-02-12 09:32:33,112 - INFO - Successfully inserted killmail 124557670
+2025-02-12 09:32:33,112 - INFO - Successfully inserted killmail 124557670
+2025-02-12 09:32:34,313 - INFO - Processing kill 124557655 from 2025-02-05 20:00:47
+2025-02-12 09:32:35,091 - INFO - Successfully inserted killmail 124557655
+2025-02-12 09:32:35,091 - INFO - Successfully inserted killmail 124557655
+2025-02-12 09:32:35,819 - INFO - Database connection closed
+2025-02-12 09:36:27,351 - INFO - === Script Starting ===
+2025-02-12 09:36:27,351 - INFO - Starting killmail processing script
+2025-02-12 09:36:27,351 - ERROR - Error in main execution: DatabaseConnection.__init__() got an unexpected keyword argument 'dbname'
+2025-02-12 09:36:27,351 - ERROR - === Script Failed: DatabaseConnection.__init__() got an unexpected keyword argument 'dbname' ===
+2025-02-12 09:38:06,699 - INFO - === Script Starting ===
+2025-02-12 09:38:06,700 - INFO - Starting killmail processing script
+2025-02-12 09:38:06,713 - INFO - Database connection established successfully
+2025-02-12 09:38:06,713 - INFO - Successfully connected to database
+2025-02-12 09:38:06,715 - INFO - Newest kill in database: 2025-02-12 01:23:09
+2025-02-12 09:38:06,715 - INFO - Oldest kill in database: 2025-01-23 18:53:31
+2025-02-12 09:38:06,715 - INFO - Running in historical mode - loading kills until January 1st, 2025
+2025-02-12 09:38:06,715 - INFO - Processing page 1
+2025-02-12 09:38:06,715 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/1/
+2025-02-12 09:38:06,861 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:38:06,861 - INFO - Found 200 kills on page 1
+2025-02-12 09:38:06,889 - INFO - Processed 0 new kills on page 1
+2025-02-12 09:38:06,889 - INFO - Found 200 existing kills on page 1
+2025-02-12 09:38:08,894 - INFO - Processing page 2
+2025-02-12 09:38:08,895 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/2/
+2025-02-12 09:38:09,002 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:38:09,003 - INFO - Found 200 kills on page 2
+2025-02-12 09:38:09,037 - INFO - Processed 0 new kills on page 2
+2025-02-12 09:38:09,037 - INFO - Found 200 existing kills on page 2
+2025-02-12 09:38:11,043 - INFO - Processing page 3
+2025-02-12 09:38:11,043 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/3/
+2025-02-12 09:38:11,145 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:38:11,146 - INFO - Found 200 kills on page 3
+2025-02-12 09:38:11,179 - INFO - Processed 0 new kills on page 3
+2025-02-12 09:38:11,179 - INFO - Found 200 existing kills on page 3
+2025-02-12 09:38:13,183 - INFO - Processing page 4
+2025-02-12 09:38:13,183 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/4/
+2025-02-12 09:38:13,296 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:38:13,297 - INFO - Found 200 kills on page 4
+2025-02-12 09:38:13,340 - INFO - Processed 0 new kills on page 4
+2025-02-12 09:38:13,341 - INFO - Found 200 existing kills on page 4
+2025-02-12 09:38:15,343 - INFO - Processing page 5
+2025-02-12 09:38:15,344 - INFO - Requesting kills from URL: https://zkillboard.com/api/corporationID/98730717/page/5/
+2025-02-12 09:38:15,455 - INFO - Received 200 kills from zKillboard
+2025-02-12 09:38:15,456 - INFO - Found 200 kills on page 5
+2025-02-12 09:38:15,752 - INFO - Processing kill 124557646 from 2025-02-05 20:00:33
+2025-02-12 09:38:16,482 - INFO - Successfully inserted killmail 124557646
+2025-02-12 09:38:16,483 - INFO - Successfully inserted killmail 124557646
+2025-02-12 09:38:17,676 - INFO - Processing kill 124557635 from 2025-02-05 20:00:07
+2025-02-12 09:38:18,424 - INFO - Successfully inserted killmail 124557635
+2025-02-12 09:38:18,424 - INFO - Successfully inserted killmail 124557635
+2025-02-12 09:38:19,664 - INFO - Processing kill 124557633 from 2025-02-05 19:59:58
+2025-02-12 09:38:20,379 - INFO - Successfully inserted killmail 124557633
+2025-02-12 09:38:20,381 - INFO - Successfully inserted killmail 124557633
+2025-02-12 09:38:21,575 - INFO - Processing kill 124557626 from 2025-02-05 19:59:42
+2025-02-12 09:38:22,298 - INFO - Successfully inserted killmail 124557626
+2025-02-12 09:38:22,298 - INFO - Successfully inserted killmail 124557626
+2025-02-12 09:38:23,475 - INFO - Processing kill 124557613 from 2025-02-05 19:59:19
+2025-02-12 09:38:23,983 - INFO - Successfully inserted killmail 124557613
+2025-02-12 09:38:23,983 - INFO - Successfully inserted killmail 124557613
+2025-02-12 09:38:25,229 - INFO - Processing kill 124557604 from 2025-02-05 19:59:07
+2025-02-12 09:38:25,963 - INFO - Successfully inserted killmail 124557604
+2025-02-12 09:38:25,964 - INFO - Successfully inserted killmail 124557604
+2025-02-12 09:38:27,183 - INFO - Processing kill 124557599 from 2025-02-05 19:58:51
+2025-02-12 09:38:27,910 - INFO - Successfully inserted killmail 124557599
+2025-02-12 09:38:27,910 - INFO - Successfully inserted killmail 124557599
+2025-02-12 09:38:29,138 - INFO - Processing kill 124557598 from 2025-02-05 19:58:51
+2025-02-12 09:38:30,018 - INFO - Successfully inserted killmail 124557598
+2025-02-12 09:38:30,018 - INFO - Successfully inserted killmail 124557598
+2025-02-12 09:38:31,223 - INFO - Processing kill 124557591 from 2025-02-05 19:58:43
+2025-02-12 09:38:31,929 - INFO - Successfully inserted killmail 124557591
+2025-02-12 09:38:31,929 - INFO - Successfully inserted killmail 124557591
+2025-02-12 09:38:33,112 - INFO - Processing kill 124557582 from 2025-02-05 19:58:23
+2025-02-12 09:38:33,825 - INFO - Successfully inserted killmail 124557582
+2025-02-12 09:38:33,825 - INFO - Successfully inserted killmail 124557582
+2025-02-12 09:38:35,011 - INFO - Processing kill 124557576 from 2025-02-05 19:58:02
+2025-02-12 09:38:35,712 - INFO - Successfully inserted killmail 124557576
+2025-02-12 09:38:35,712 - INFO - Successfully inserted killmail 124557576
+2025-02-12 09:38:36,918 - INFO - Processing kill 124557573 from 2025-02-05 19:57:48
+2025-02-12 09:38:37,686 - INFO - Successfully inserted killmail 124557573
+2025-02-12 09:38:37,686 - INFO - Successfully inserted killmail 124557573
+2025-02-12 09:38:38,903 - INFO - Processing kill 124557553 from 2025-02-05 19:57:26
+2025-02-12 09:38:39,903 - INFO - Successfully inserted killmail 124557553
+2025-02-12 09:38:39,903 - INFO - Successfully inserted killmail 124557553
+2025-02-12 09:38:41,118 - INFO - Processing kill 124557543 from 2025-02-05 19:57:09
+2025-02-12 09:38:41,850 - INFO - Successfully inserted killmail 124557543
+2025-02-12 09:38:41,850 - INFO - Successfully inserted killmail 124557543
+2025-02-12 09:38:43,050 - INFO - Processing kill 124557522 from 2025-02-05 19:56:29
+2025-02-12 09:38:43,821 - INFO - Successfully inserted killmail 124557522
+2025-02-12 09:38:43,821 - INFO - Successfully inserted killmail 124557522
+2025-02-12 09:38:45,030 - INFO - Processing kill 124557521 from 2025-02-05 19:56:23
+2025-02-12 09:38:45,757 - INFO - Successfully inserted killmail 124557521
+2025-02-12 09:38:45,758 - INFO - Successfully inserted killmail 124557521
+2025-02-12 09:38:46,983 - INFO - Processing kill 124557512 from 2025-02-05 19:56:05
+2025-02-12 09:38:47,723 - INFO - Successfully inserted killmail 124557512
+2025-02-12 09:38:47,724 - INFO - Successfully inserted killmail 124557512
+2025-02-12 09:38:48,917 - INFO - Processing kill 124557484 from 2025-02-05 19:55:05
+2025-02-12 09:38:49,682 - INFO - Successfully inserted killmail 124557484
+2025-02-12 09:38:49,682 - INFO - Successfully inserted killmail 124557484
+2025-02-12 09:38:50,903 - INFO - Processing kill 124557482 from 2025-02-05 19:55:02
+2025-02-12 09:38:51,674 - INFO - Successfully inserted killmail 124557482
+2025-02-12 09:38:51,675 - INFO - Successfully inserted killmail 124557482
+2025-02-12 09:38:52,885 - INFO - Processing kill 124557481 from 2025-02-05 19:55:01
+2025-02-12 09:38:53,615 - INFO - Successfully inserted killmail 124557481
+2025-02-12 09:38:53,615 - INFO - Successfully inserted killmail 124557481
+2025-02-12 09:38:54,808 - INFO - Processing kill 124557476 from 2025-02-05 19:54:48
+2025-02-12 09:38:55,512 - INFO - Successfully inserted killmail 124557476
+2025-02-12 09:38:55,513 - INFO - Successfully inserted killmail 124557476
+2025-02-12 09:38:56,693 - INFO - Processing kill 124557452 from 2025-02-05 19:54:24
+2025-02-12 09:38:57,402 - INFO - Successfully inserted killmail 124557452
+2025-02-12 09:38:57,402 - INFO - Successfully inserted killmail 124557452
+2025-02-12 09:38:58,594 - INFO - Processing kill 124557448 from 2025-02-05 19:54:18
+2025-02-12 09:38:59,365 - INFO - Successfully inserted killmail 124557448
+2025-02-12 09:38:59,365 - INFO - Successfully inserted killmail 124557448
+2025-02-12 09:39:00,565 - INFO - Processing kill 124557445 from 2025-02-05 19:54:11
+2025-02-12 09:39:01,316 - INFO - Successfully inserted killmail 124557445
+2025-02-12 09:39:01,316 - INFO - Successfully inserted killmail 124557445
+2025-02-12 09:39:02,518 - INFO - Processing kill 124557443 from 2025-02-05 19:54:05
+2025-02-12 09:39:03,234 - INFO - Successfully inserted killmail 124557443
+2025-02-12 09:39:03,234 - INFO - Successfully inserted killmail 124557443
+2025-02-12 09:39:04,452 - INFO - Processing kill 124557429 from 2025-02-05 19:53:40
+2025-02-12 09:39:05,183 - INFO - Successfully inserted killmail 124557429
+2025-02-12 09:39:05,184 - INFO - Successfully inserted killmail 124557429
+2025-02-12 09:39:06,363 - INFO - Processing kill 124557423 from 2025-02-05 19:53:34
+2025-02-12 09:39:07,078 - INFO - Successfully inserted killmail 124557423
+2025-02-12 09:39:07,078 - INFO - Successfully inserted killmail 124557423
+2025-02-12 09:39:08,273 - INFO - Processing kill 124557421 from 2025-02-05 19:53:31
+2025-02-12 09:39:08,996 - INFO - Successfully inserted killmail 124557421
+2025-02-12 09:39:08,996 - INFO - Successfully inserted killmail 124557421
+2025-02-12 09:39:10,192 - INFO - Processing kill 124557386 from 2025-02-05 19:52:41
+2025-02-12 09:39:10,955 - INFO - Successfully inserted killmail 124557386
+2025-02-12 09:39:10,955 - INFO - Successfully inserted killmail 124557386
+2025-02-12 09:39:12,159 - INFO - Processing kill 124557381 from 2025-02-05 19:52:27
+2025-02-12 09:39:12,878 - INFO - Successfully inserted killmail 124557381
+2025-02-12 09:39:12,878 - INFO - Successfully inserted killmail 124557381
+2025-02-12 09:39:14,127 - INFO - Processing kill 124557360 from 2025-02-05 19:51:40
+2025-02-12 09:39:14,854 - INFO - Successfully inserted killmail 124557360
+2025-02-12 09:39:14,854 - INFO - Successfully inserted killmail 124557360
+2025-02-12 09:39:16,078 - INFO - Processing kill 124557342 from 2025-02-05 19:51:23
+2025-02-12 09:39:16,824 - INFO - Successfully inserted killmail 124557342
+2025-02-12 09:39:16,824 - INFO - Successfully inserted killmail 124557342
+2025-02-12 09:39:18,044 - INFO - Processing kill 124557335 from 2025-02-05 19:51:14
+2025-02-12 09:39:18,806 - INFO - Successfully inserted killmail 124557335
+2025-02-12 09:39:18,806 - INFO - Successfully inserted killmail 124557335
+2025-02-12 09:39:20,005 - INFO - Processing kill 124557332 from 2025-02-05 19:51:11
+2025-02-12 09:39:20,753 - INFO - Successfully inserted killmail 124557332
+2025-02-12 09:39:20,753 - INFO - Successfully inserted killmail 124557332
+2025-02-12 09:39:21,957 - INFO - Processing kill 124557279 from 2025-02-05 19:49:19
+2025-02-12 09:39:22,696 - INFO - Successfully inserted killmail 124557279
+2025-02-12 09:39:22,696 - INFO - Successfully inserted killmail 124557279
+2025-02-12 09:39:23,968 - INFO - Processing kill 124557276 from 2025-02-05 19:49:16
+2025-02-12 09:39:24,690 - INFO - Successfully inserted killmail 124557276
+2025-02-12 09:39:24,690 - INFO - Successfully inserted killmail 124557276
+2025-02-12 09:39:25,900 - INFO - Processing kill 124557232 from 2025-02-05 19:48:29
+2025-02-12 09:39:26,624 - INFO - Successfully inserted killmail 124557232
+2025-02-12 09:39:26,624 - INFO - Successfully inserted killmail 124557232
+2025-02-12 09:39:27,828 - INFO - Processing kill 124557207 from 2025-02-05 19:47:57
+2025-02-12 09:39:28,569 - INFO - Successfully inserted killmail 124557207
+2025-02-12 09:39:28,570 - INFO - Successfully inserted killmail 124557207
+2025-02-12 09:39:29,770 - INFO - Processing kill 124557195 from 2025-02-05 19:47:38
+2025-02-12 09:39:30,542 - INFO - Successfully inserted killmail 124557195
+2025-02-12 09:39:30,543 - INFO - Successfully inserted killmail 124557195
+2025-02-12 09:39:31,743 - INFO - Processing kill 124557148 from 2025-02-05 19:46:50
+2025-02-12 09:39:32,496 - INFO - Successfully inserted killmail 124557148
+2025-02-12 09:39:32,496 - INFO - Successfully inserted killmail 124557148
+2025-02-12 09:39:33,714 - INFO - Processing kill 124557128 from 2025-02-05 19:46:10
+2025-02-12 09:39:34,473 - INFO - Successfully inserted killmail 124557128
+2025-02-12 09:39:34,473 - INFO - Successfully inserted killmail 124557128
+2025-02-12 09:39:35,701 - INFO - Processing kill 124557126 from 2025-02-05 19:46:08
+2025-02-12 09:39:36,416 - INFO - Successfully inserted killmail 124557126
+2025-02-12 09:39:36,416 - INFO - Successfully inserted killmail 124557126
+2025-02-12 09:39:37,600 - INFO - Processing kill 124557120 from 2025-02-05 19:46:00
+2025-02-12 09:39:38,358 - INFO - Successfully inserted killmail 124557120
+2025-02-12 09:39:38,359 - INFO - Successfully inserted killmail 124557120
+2025-02-12 09:39:39,571 - INFO - Processing kill 124557109 from 2025-02-05 19:45:45
+2025-02-12 09:39:40,310 - INFO - Successfully inserted killmail 124557109
+2025-02-12 09:39:40,310 - INFO - Successfully inserted killmail 124557109
+2025-02-12 09:39:41,494 - INFO - Processing kill 124557091 from 2025-02-05 19:45:03
+2025-02-12 09:39:42,228 - INFO - Successfully inserted killmail 124557091
+2025-02-12 09:39:42,229 - INFO - Successfully inserted killmail 124557091
+2025-02-12 09:39:43,419 - INFO - Processing kill 124557067 from 2025-02-05 19:44:49
+2025-02-12 09:39:44,184 - INFO - Successfully inserted killmail 124557067
+2025-02-12 09:39:44,184 - INFO - Successfully inserted killmail 124557067
+2025-02-12 09:39:45,420 - INFO - Processing kill 124557032 from 2025-02-05 19:44:02
+2025-02-12 09:39:46,136 - INFO - Successfully inserted killmail 124557032
+2025-02-12 09:39:46,137 - INFO - Successfully inserted killmail 124557032
+2025-02-12 09:39:47,325 - INFO - Processing kill 124556994 from 2025-02-05 19:42:53
+2025-02-12 09:39:48,063 - INFO - Successfully inserted killmail 124556994
+2025-02-12 09:39:48,063 - INFO - Successfully inserted killmail 124556994
+2025-02-12 09:39:49,281 - INFO - Processing kill 124556938 from 2025-02-05 19:40:49
+2025-02-12 09:39:49,997 - INFO - Successfully inserted killmail 124556938
+2025-02-12 09:39:49,997 - INFO - Successfully inserted killmail 124556938
+2025-02-12 09:39:51,242 - INFO - Processing kill 124556931 from 2025-02-05 19:40:44
+2025-02-12 09:39:51,966 - INFO - Successfully inserted killmail 124556931
+2025-02-12 09:39:51,966 - INFO - Successfully inserted killmail 124556931
+2025-02-12 09:39:53,174 - INFO - Processing kill 124556918 from 2025-02-05 19:40:04
+2025-02-12 09:39:53,897 - INFO - Successfully inserted killmail 124556918
+2025-02-12 09:39:53,897 - INFO - Successfully inserted killmail 124556918
+2025-02-12 09:39:55,111 - INFO - Processing kill 124556906 from 2025-02-05 19:39:41
+2025-02-12 09:39:55,812 - INFO - Successfully inserted killmail 124556906
+2025-02-12 09:39:55,813 - INFO - Successfully inserted killmail 124556906
+2025-02-12 09:39:57,005 - INFO - Processing kill 124556885 from 2025-02-05 19:39:13
+2025-02-12 09:39:57,737 - INFO - Successfully inserted killmail 124556885
+2025-02-12 09:39:57,737 - INFO - Successfully inserted killmail 124556885
+2025-02-12 09:39:58,950 - INFO - Processing kill 124556865 from 2025-02-05 19:38:33
+2025-02-12 09:39:59,665 - INFO - Successfully inserted killmail 124556865
+2025-02-12 09:39:59,665 - INFO - Successfully inserted killmail 124556865
+2025-02-12 09:40:00,836 - INFO - Processing kill 124556858 from 2025-02-05 19:38:20
+2025-02-12 09:40:01,583 - INFO - Successfully inserted killmail 124556858
+2025-02-12 09:40:01,583 - INFO - Successfully inserted killmail 124556858
+2025-02-12 09:40:02,795 - INFO - Processing kill 124556855 from 2025-02-05 19:38:05
+2025-02-12 09:40:03,522 - INFO - Successfully inserted killmail 124556855
+2025-02-12 09:40:03,522 - INFO - Successfully inserted killmail 124556855
+2025-02-12 09:40:04,736 - INFO - Processing kill 124556835 from 2025-02-05 19:37:33
+2025-02-12 09:40:05,474 - INFO - Successfully inserted killmail 124556835
+2025-02-12 09:40:05,474 - INFO - Successfully inserted killmail 124556835
+2025-02-12 09:40:06,691 - INFO - Processing kill 124556812 from 2025-02-05 19:37:10
+2025-02-12 09:40:07,403 - INFO - Successfully inserted killmail 124556812
+2025-02-12 09:40:07,403 - INFO - Successfully inserted killmail 124556812
+2025-02-12 09:40:08,591 - INFO - Processing kill 124556807 from 2025-02-05 19:36:54
+2025-02-12 09:40:09,340 - INFO - Successfully inserted killmail 124556807
+2025-02-12 09:40:09,340 - INFO - Successfully inserted killmail 124556807
+2025-02-12 09:40:10,547 - INFO - Processing kill 124556804 from 2025-02-05 19:36:45
+2025-02-12 09:40:11,364 - INFO - Successfully inserted killmail 124556804
+2025-02-12 09:40:11,364 - INFO - Successfully inserted killmail 124556804
+2025-02-12 09:40:12,605 - INFO - Processing kill 124556798 from 2025-02-05 19:36:33
+2025-02-12 09:40:13,384 - INFO - Successfully inserted killmail 124556798
+2025-02-12 09:40:13,385 - INFO - Successfully inserted killmail 124556798
+2025-02-12 09:40:14,653 - INFO - Processing kill 124556780 from 2025-02-05 19:35:50
+2025-02-12 09:40:15,393 - INFO - Successfully inserted killmail 124556780
+2025-02-12 09:40:15,393 - INFO - Successfully inserted killmail 124556780
+2025-02-12 09:40:16,608 - INFO - Processing kill 124556761 from 2025-02-05 19:35:26
+2025-02-12 09:40:17,365 - INFO - Successfully inserted killmail 124556761
+2025-02-12 09:40:17,365 - INFO - Successfully inserted killmail 124556761
+2025-02-12 09:40:18,611 - INFO - Processing kill 124556729 from 2025-02-05 19:33:58
+2025-02-12 09:40:19,340 - INFO - Successfully inserted killmail 124556729
+2025-02-12 09:40:19,341 - INFO - Successfully inserted killmail 124556729
+2025-02-12 09:40:20,549 - INFO - Processing kill 124556704 from 2025-02-05 19:33:29
+2025-02-12 09:40:21,275 - INFO - Successfully inserted killmail 124556704
+2025-02-12 09:40:21,276 - INFO - Successfully inserted killmail 124556704
+2025-02-12 09:40:22,477 - INFO - Processing kill 124556612 from 2025-02-05 19:30:49
+2025-02-12 09:40:23,236 - INFO - Successfully inserted killmail 124556612
+2025-02-12 09:40:23,236 - INFO - Successfully inserted killmail 124556612
+2025-02-12 09:40:24,441 - INFO - Processing kill 124556592 from 2025-02-05 19:29:46
+2025-02-12 09:40:25,206 - INFO - Successfully inserted killmail 124556592
+2025-02-12 09:40:25,207 - INFO - Successfully inserted killmail 124556592
+2025-02-12 09:40:26,433 - INFO - Processing kill 124556572 from 2025-02-05 19:28:54
+2025-02-12 09:40:27,263 - INFO - Successfully inserted killmail 124556572
+2025-02-12 09:40:27,263 - INFO - Successfully inserted killmail 124556572
+2025-02-12 09:40:28,455 - INFO - Processing kill 124556542 from 2025-02-05 19:28:25
+2025-02-12 09:40:29,198 - INFO - Successfully inserted killmail 124556542
+2025-02-12 09:40:29,198 - INFO - Successfully inserted killmail 124556542
+2025-02-12 09:40:30,439 - INFO - Processing kill 124556533 from 2025-02-05 19:28:13
+2025-02-12 09:40:31,201 - INFO - Successfully inserted killmail 124556533
+2025-02-12 09:40:31,201 - INFO - Successfully inserted killmail 124556533
+2025-02-12 09:40:32,408 - INFO - Processing kill 124556285 from 2025-02-05 19:17:40
+2025-02-12 09:40:33,119 - INFO - Successfully inserted killmail 124556285
+2025-02-12 09:40:33,120 - INFO - Successfully inserted killmail 124556285

@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corp News - January 2025</title>
+    <style>
+        :root {
+            --eve-primary: #1b1b1b;
+            --eve-secondary: #252525;
+            --eve-accent: #00b4ff;
+            --eve-text: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--eve-primary);
+            color: var(--eve-text);
+            font-family: 'Segoe UI', sans-serif;
+            line-height: 1.6;
+        }
+
+        nav {
+            background-color: var(--eve-secondary);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h2 {
+            color: var(--eve-accent);
+            border-bottom: 2px solid var(--eve-accent);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background-color: var(--eve-secondary);
+            padding: 1.5rem;
+            border: 1px solid var(--eve-accent);
+            border-radius: 4px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            color: var(--eve-accent);
+            margin: 0.5rem 0;
+        }
+
+        .detailed-stats table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0 2rem 0;
+        }
+
+        .detailed-stats th,
+        .detailed-stats td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--eve-accent);
+        }
+
+        .detailed-stats th {
+            color: var(--eve-accent);
+        }
+
+        .ratting-stats {
+            margin: 2rem 0;
+        }
+
+        .ratting-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .ratting-table th,
+        .ratting-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--eve-accent);
+        }
+
+        .ratting-table th {
+            color: var(--eve-accent);
+            background-color: var(--eve-secondary);
+        }
+
+        .ratting-table tr:hover {
+            background-color: var(--eve-secondary);
+        }
+
+        .isk-amount {
+            font-family: monospace;
+            color: var(--eve-accent);
+        }
+
+        .kill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .kill-card {
+            background-color: var(--eve-secondary);
+            border: 1px solid var(--eve-accent);
+            padding: 1rem;
+            border-radius: 4px;
+            transition: transform 0.2s;
+        }
+
+        .kill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 180, 255, 0.2);
+        }
+
+        .kill-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            background-color: var(--eve-primary);
+            border: 1px solid var(--eve-accent);
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        .kill-info {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0.5rem;
+        }
+
+        .kill-info span:nth-child(odd) {
+            color: var(--eve-accent);
+        }
+
+        .kill-link {
+            color: var(--eve-accent);
+            text-decoration: none;
+            display: block;
+            margin-top: 0.5rem;
+            transition: color 0.2s;
+            grid-column: span 2;
+            text-align: center;
+        }
+
+        .kill-link:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .isk-value {
+            font-family: monospace;
+            color: var(--eve-accent);
+        }
+
+        .battle-reports {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .battle-report {
+            background-color: var(--eve-secondary);
+            padding: 1.5rem;
+            border-left: 4px solid var(--eve-accent);
+            transition: transform 0.2s, background-color 0.2s;
+            margin-bottom: 1rem;
+        }
+
+        .battle-report:hover {
+            transform: translateX(10px);
+            background-color: #2a2a2a;
+        }
+
+        .battle-report h3 {
+            color: var(--eve-accent);
+            margin: 0 0 0.5rem 0;
+        }
+
+        .battle-report p {
+            margin: 0 0 1rem 0;
+        }
+
+        .battle-report a {
+            color: var(--eve-accent);
+            text-decoration: none;
+        }
+
+        .battle-report a:hover {
+            text-decoration: underline;
+        }
+
+        .news-section {
+            margin-bottom: 3rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Statistics Section -->
+    <div class="news-section">
+        <h2>January 2025 Statistics</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Kills</h3>
+                <div class="stat-value">3,368</div>
+                <p>Average: 108.6 kills/day</p>
+            </div>
+            <div class="stat-card">
+                <h3>ISK Destroyed</h3>
+                <div class="stat-value">1.07T ISK</div>
+                <p>Average: 34.5B/day</p>
+            </div>
+            <div class="stat-card">
+                <h3>Combat Efficiency</h3>
+                <div class="stat-value">92.3%</div>
+                <p>3,368 kills vs 280 losses</p>
+            </div>
+            <div class="stat-card">
+                <h3>ISK Efficiency</h3>
+                <div class="stat-value">96.6%</div>
+                <p>37.39B ISK lost</p>
+            </div>
+        </div>
+
+        <div class="detailed-stats">
+            <h3>Top Pilots</h3>
+            <table>
+                <tr>
+                    <th>Pilot</th>
+                    <th>Kills</th>
+                </tr>
+                <tr>
+                    <td>thoaupe</td>
+                    <td>900</td>
+                </tr>
+                <tr>
+                    <td>Tely Merlyn</td>
+                    <td>414</td>
+                </tr>
+                <tr>
+                    <td>Christopher Loclanne</td>
+                    <td>268</td>
+                </tr>
+                <tr>
+                    <td>Mardwen Gry</td>
+                    <td>252</td>
+                </tr>
+                <tr>
+                    <td>Arthorondor</td>
+                    <td>230</td>
+                </tr>
+                <tr>
+                    <td>Fourassa</td>
+                    <td>196</td>
+                </tr>
+                <tr>
+                    <td>Destro Rage</td>
+                    <td>189</td>
+                </tr>
+                <tr>
+                    <td>Oli Grys</td>
+                    <td>92</td>
+                </tr>
+                <tr>
+                    <td>Tylie Smouk</td>
+                    <td>89</td>
+                </tr>
+                <tr>
+                    <td>Haykura</td>
+                    <td>70</td>
+                </tr>
+            </table>
+
+            <h3>Top Ships Used</h3>
+            <table>
+                <tr>
+                    <th>Ship</th>
+                    <th>Kills</th>
+                </tr>
+                <tr>
+                    <td>Retribution</td>
+                    <td>236</td>
+                </tr>
+                <tr>
+                    <td>Eagle</td>
+                    <td>170</td>
+                </tr>
+                <tr>
+                    <td>Svipul</td>
+                    <td>167</td>
+                </tr>
+                <tr>
+                    <td>Apocalypse Navy Issue</td>
+                    <td>157</td>
+                </tr>
+                <tr>
+                    <td>Zealot</td>
+                    <td>152</td>
+                </tr>
+                <tr>
+                    <td>Maller</td>
+                    <td>141</td>
+                </tr>
+                <tr>
+                    <td>Kikimora</td>
+                    <td>123</td>
+                </tr>
+                <tr>
+                    <td>Muninn</td>
+                    <td>108</td>
+                </tr>
+                <tr>
+                    <td>Deimos</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>Purifier</td>
+                    <td>80</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Rorquals Section -->
+    <div class="news-section">
+        <h2>Rorqual Regulation</h2>
+        <div class="kill-grid">
+            <div class="kill-card">
+                <img src="https://images.evetech.net/types/28352/render?size=128" alt="Rorqual">
+                <div class="kill-info">
+                    <span>System:</span><span>4-HWWF</span>
+                    <span>Value:</span><span class="isk-value">13.7B ISK</span>
+                    <a href="https://zkillboard.com/kill/123666805/" target="_blank" class="kill-link">View Kill →</a>
+                </div>
+            </div>
+            <div class="kill-card">
+                <img src="https://images.evetech.net/types/28352/render?size=128" alt="Rorqual">
+                <div class="kill-info">
+                    <span>System:</span><span>JK-Q77</span>
+                    <span>Value:</span><span class="isk-value">8.3B ISK</span>
+                    <a href="https://zkillboard.com/kill/123668191/" target="_blank" class="kill-link">View Kill →</a>
+                </div>
+            </div>
+            <div class="kill-card">
+                <img src="https://images.evetech.net/types/28352/render?size=128" alt="Rorqual">
+                <div class="kill-info">
+                    <span>System:</span><span>S-KU8B</span>
+                    <span>Value:</span><span class="isk-value">12.2B ISK</span>
+                    <a href="https://zkillboard.com/kill/123711033/" target="_blank" class="kill-link">View Kill →</a>
+                </div>
+            </div>
+            <div class="kill-card">
+                <img src="https://images.evetech.net/types/28352/render?size=128" alt="Rorqual">
+                <div class="kill-info">
+                    <span>System:</span><span>AA-YRK</span>
+                    <span>Value:</span><span class="isk-value">17.5B ISK</span>
+                    <a href="https://zkillboard.com/kill/123738388/" target="_blank" class="kill-link">View Kill →</a>
+                </div>
+            </div>
+            <div class="kill-card">
+                <img src="https://images.evetech.net/types/28352/render?size=128" alt="Rorqual">
+                <div class="kill-info">
+                    <span>System:</span><span>AGG-NR</span>
+                    <span>Value:</span><span class="isk-value">10.4B ISK</span>
+                    <a href="https://zkillboard.com/kill/123913341/" target="_blank" class="kill-link">View Kill →</a>
+                </div>
+            </div>
+            <div class="kill-card">
+                <img src="https://images.evetech.net/types/28352/render?size=128" alt="Rorqual">
+                <div class="kill-info">
+                    <span>System:</span><span>ZD1-Z2</span>
+                    <span>Value:</span><span class="isk-value">10.2B ISK</span>
+                    <a href="https://zkillboard.com/kill/123866620/" target="_blank" class="kill-link">View Kill →</a>
+                </div>
+            </div>
+            <div class="kill-card">
+                <img src="https://images.evetech.net/types/28352/render?size=128" alt="Rorqual">
+                <div class="kill-info">
+                    <span>System:</span><span>XSQ-TF</span>
+                    <span>Value:</span><span class="isk-value">7.4B ISK</span>
+                    <a href="https://zkillboard.com/kill/123980183/" target="_blank" class="kill-link">View Kill →</a>
+                </div>
+            </div>
+            <div class="kill-card">
+                <img src="https://images.evetech.net/types/28352/render?size=128" alt="Rorqual">
+                <div class="kill-info">
+                    <span>System:</span><span>MGAM-4</span>
+                    <span>Value:</span><span class="isk-value">11.3B ISK</span>
+                    <a href="https://zkillboard.com/kill/124158000/" target="_blank" class="kill-link">View Kill →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Battle Reports Section -->
+    <div class="news-section">
+        <h2>Battle Reports</h2>
+        <div class="battle-reports">
+            <div class="battle-report">
+                <h3>First Brawl of the Year</h3>
+                <a href="https://br.evetools.org/br/67754671b8e3ec0012a8e3bf" target="_blank" class="br-link">View Battle Report →</a>
+            </div>
+
+            <div class="battle-report">
+                <h3>Second Brawl</h3>
+                <a href="https://br.evetools.org/br/6775a00358b975001172db03" target="_blank" class="br-link">View Battle Report →</a>
+            </div>
+
+            <div class="battle-report">
+                <h3>Third Brawl</h3>
+                <a href="https://br.evetools.org/br/677709e3b8e3ec0012a8e609" target="_blank" class="br-link">View Battle Report →</a>
+            </div>
+
+            <div class="battle-report">
+                <h3>ESS Defense</h3>
+                <a href="https://br.evetools.org/br/6779a40d58b975001172e04b" target="_blank" class="br-link">View Battle Report →</a>
+            </div>
+
+            <div class="battle-report">
+                <h3>Lowsec Brawl</h3>
+                <a href="https://br.evetools.org/br/6783cbdcb7925b00120d353d" target="_blank" class="br-link">View Battle Report →</a>
+            </div>
+        </div>
+    </div>
+    <div class="news-section">
+        <h2>Ratting Statistics - January 2025</h2>
+        <div class="ratting-stats">
+            <table class="ratting-table">
+                <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Character</th>
+                    <th>Corp Tax (10%)</th>
+                    <th>Character Revenue</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Alf Life</td>
+                    <td class="isk-amount">1,172,978,639 ISK</td>
+                    <td class="isk-amount">10,556,807,753 ISK</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Boutdechoux Malhorne</td>
+                    <td class="isk-amount">1,052,606,801 ISK</td>
+                    <td class="isk-amount">9,473,461,209 ISK</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Tely Merlyn</td>
+                    <td class="isk-amount">758,405,534 ISK</td>
+                    <td class="isk-amount">6,825,649,807 ISK</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>thoaupe</td>
+                    <td class="isk-amount">738,210,031 ISK</td>
+                    <td class="isk-amount">6,643,890,285 ISK</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Shikaa</td>
+                    <td class="isk-amount">672,941,376 ISK</td>
+                    <td class="isk-amount">6,056,472,388 ISK</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Florban</td>
+                    <td class="isk-amount">642,129,081 ISK</td>
+                    <td class="isk-amount">5,779,161,732 ISK</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Fourassa</td>
+                    <td class="isk-amount">583,846,451 ISK</td>
+                    <td class="isk-amount">5,254,618,059 ISK</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Gaetaneos</td>
+                    <td class="isk-amount">203,633,418 ISK</td>
+                    <td class="isk-amount">1,832,700,766 ISK</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Lexx Starlighter</td>
+                    <td class="isk-amount">178,646,611 ISK</td>
+                    <td class="isk-amount">1,607,819,503 ISK</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Nado Tsutola</td>
+                    <td class="isk-amount">162,364,530 ISK</td>
+                    <td class="isk-amount">1,461,280,777 ISK</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Xaintailles Orland</td>
+                    <td class="isk-amount">153,792,741 ISK</td>
+                    <td class="isk-amount">1,384,134,674 ISK</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>Brice GOAZIOU</td>
+                    <td class="isk-amount">146,560,425 ISK</td>
+                    <td class="isk-amount">1,319,043,825 ISK</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>Oli Grys</td>
+                    <td class="isk-amount">144,911,255 ISK</td>
+                    <td class="isk-amount">1,304,201,297 ISK</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>Yeka DelaVega</td>
+                    <td class="isk-amount">122,257,383 ISK</td>
+                    <td class="isk-amount">1,100,316,452 ISK</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>Darth Sunny2</td>
+                    <td class="isk-amount">121,066,863 ISK</td>
+                    <td class="isk-amount">1,089,601,773 ISK</td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td>Haykura</td>
+                    <td class="isk-amount">109,656,932 ISK</td>
+                    <td class="isk-amount">986,912,395 ISK</td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td>Arthorondor</td>
+                    <td class="isk-amount">109,635,018 ISK</td>
+                    <td class="isk-amount">986,715,162 ISK</td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td>belenos</td>
+                    <td class="isk-amount">75,498,423 ISK</td>
+                    <td class="isk-amount">679,485,815 ISK</td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td>Rafouil</td>
+                    <td class="isk-amount">28,877,704 ISK</td>
+                    <td class="isk-amount">259,899,338 ISK</td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td>Sidius Oramara</td>
+                    <td class="isk-amount">22,895,774 ISK</td>
+                    <td class="isk-amount">206,061,967 ISK</td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                    <td>Alkor Denozor</td>
+                    <td class="isk-amount">21,429,510 ISK</td>
+                    <td class="isk-amount">192,865,595 ISK</td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                    <td>BobLove1978</td>
+                    <td class="isk-amount">19,793,036 ISK</td>
+                    <td class="isk-amount">178,137,329 ISK</td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                    <td>Tsushi Bewal</td>
+                    <td class="isk-amount">16,476,479 ISK</td>
+                    <td class="isk-amount">148,288,315 ISK</td>
+                </tr>
+                <tr>
+                    <td>24</td>
+                    <td>Rellic</td>
+                    <td class="isk-amount">16,364,589 ISK</td>
+                    <td class="isk-amount">147,281,301 ISK</td>
+                </tr>
+                <tr>
+                    <td>25</td>
+                    <td>Christopher Loclanne</td>
+                    <td class="isk-amount">11,096,576 ISK</td>
+                    <td class="isk-amount">99,869,186 ISK</td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td>Merk Ataru</td>
+                    <td class="isk-amount">10,924,332 ISK</td>
+                    <td class="isk-amount">98,318,991 ISK</td>
+                </tr>
+                <tr>
+                    <td>27</td>
+                    <td>ehnola</td>
+                    <td class="isk-amount">8,011,957 ISK</td>
+                    <td class="isk-amount">72,107,617 ISK</td>
+                </tr>
+                <tr>
+                    <td>28</td>
+                    <td>Darius la crevette</td>
+                    <td class="isk-amount">4,576,098 ISK</td>
+                    <td class="isk-amount">41,184,884 ISK</td>
+                </tr>
+                <tr>
+                    <td>29</td>
+                    <td>bernard-henry Levis</td>
+                    <td class="isk-amount">4,361,700 ISK</td>
+                    <td class="isk-amount">39,255,300 ISK</td>
+                </tr>
+                <tr>
+                    <td>30</td>
+                    <td>Dal Ius</td>
+                    <td class="isk-amount">2,705,055 ISK</td>
+                    <td class="isk-amount">24,345,503 ISK</td>
+                </tr>
+                <tr>
+                    <td>31</td>
+                    <td>Destro Rage</td>
+                    <td class="isk-amount">2,258,570 ISK</td>
+                    <td class="isk-amount">20,327,131 ISK</td>
+                </tr>
+                <tr>
+                    <td>32</td>
+                    <td>Garek</td>
+                    <td class="isk-amount">1,421,100 ISK</td>
+                    <td class="isk-amount">12,789,903 ISK</td>
+                </tr>
+                <tr>
+                    <td>33</td>
+                    <td>Tylie Smouk</td>
+                    <td class="isk-amount">139,204 ISK</td>
+                    <td class="isk-amount">1,252,841 ISK</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
