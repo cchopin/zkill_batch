@@ -1,0 +1,58 @@
+erDiagram
+    SYSTEMS {
+        int system_id PK
+        varchar system_name
+    }
+
+    SHIP_TYPES {
+        int ship_type_id PK
+        varchar type_name
+    }
+
+    SHIPS {
+        int ship_id PK
+        varchar ship_name
+        int ship_type_id FK
+    }
+
+    PILOTS {
+        int pilot_id PK
+        varchar pilot_name
+    }
+
+    CORPORATIONS {
+        int corporation_id PK
+        varchar corporation_name
+    }
+
+    KILLMAILS {
+        bigint killmail_id PK
+        varchar kill_hash
+        timestamp kill_datetime
+        int system_id FK
+        int pilot_id FK
+        int ship_id FK
+        decimal value
+        enum kill_type
+        timestamp created_at
+        int victim_corporation_id FK
+    }
+
+    KILLMAIL_ATTACKERS {
+        int killmail_attacker_id PK
+        bigint killmail_id FK
+        int pilot_id
+        varchar pilot_name
+        int attacker_corporation_id FK
+        boolean final_blow
+        decimal damage_done
+    }
+
+    %% Relations
+    SYSTEMS ||--o{ KILLMAILS : "belongs to"
+    PILOTS ||--o{ KILLMAILS : "died"
+    SHIPS ||--o{ KILLMAILS : "is used in"
+    SHIP_TYPES ||--o{ SHIPS : "defines type of"
+    CORPORATIONS ||--o{ KILLMAILS : "represents victim"
+    KILLMAILS ||--o{ KILLMAIL_ATTACKERS : "is attacked by"
+    CORPORATIONS ||--o{ KILLMAIL_ATTACKERS : "belongs to (attacker)"

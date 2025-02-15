@@ -11,8 +11,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
-
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -103,6 +101,21 @@ class DatabaseConnection:
             logging.error(f"Error in get_or_create_pilot: {e}")
             raise
 
+    def get_or_create_corporation(self, corp_name):
+        try:
+            self.cur.execute("""
+                INSERT INTO corporations (corporation_name)
+                VALUES (%s)
+                ON CONFLICT (corporation_name) DO UPDATE SET corporation_name = EXCLUDED.corporation_name
+                RETURNING corporation_id;
+            """, (corp_name,))
+            self.conn.commit()
+            return self.cur.fetchone()[0]
+        except Exception as e:
+            self.conn.rollback()
+            logging.error(f"Error in get_or_create_corporation: {e}")
+            raise
+
     def kill_exists(self, killmail_id, kill_hash):
         try:
             self.cur.execute("""
@@ -115,7 +128,6 @@ class DatabaseConnection:
             logging.error(f"Error checking kill existence: {e}")
             raise
 
-
     def insert_killmail(self, killmail_data):
         try:
             if self.kill_exists(killmail_data['killmail_id'], killmail_data['kill_hash']):
@@ -125,9 +137,9 @@ class DatabaseConnection:
             self.cur.execute("""
                 INSERT INTO killmails (
                     killmail_id, kill_hash, kill_datetime, system_id, 
-                    pilot_id, ship_id, value, kill_type
+                    pilot_id, ship_id, value, kill_type, victim_corporation_id
                 )
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
                 ON CONFLICT (killmail_id) DO NOTHING
                 RETURNING killmail_id;
             """, (
@@ -138,17 +150,33 @@ class DatabaseConnection:
                 killmail_data['pilot_id'],
                 killmail_data['ship_id'],
                 killmail_data['value'],
-                killmail_data['kill_type']
+                killmail_data['kill_type'],
+                killmail_data['victim_corporation_id']
             ))
             self.conn.commit()
             result = self.cur.fetchone()
             if result:
                 logging.info(f"Successfully inserted killmail {killmail_data['killmail_id']}")
                 return result
-            return None  # Si pas d'insertion (conflit)
+            return None  # No insertion due to conflict
         except Exception as e:
             self.conn.rollback()
             logging.error(f"Error inserting killmail: {e}")
+            raise
+
+    def insert_killmail_attacker(self, killmail_id, pilot_id, pilot_name, attacker_corporation_id, final_blow, damage_done):
+        try:
+            self.cur.execute("""
+                INSERT INTO killmail_attackers (
+                    killmail_id, pilot_id, pilot_name, attacker_corporation_id, final_blow, damage_done
+                )
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, (killmail_id, pilot_id, pilot_name, attacker_corporation_id, final_blow, damage_done))
+            self.conn.commit()
+            logging.info(f"Successfully inserted attacker '{pilot_name}' for killmail {killmail_id}")
+        except Exception as e:
+            self.conn.rollback()
+            logging.error(f"Error inserting killmail attacker for killmail {killmail_id}: {e}")
             raise
 
 
@@ -164,34 +192,33 @@ def get_url(url: str, headers: dict, max_retries: int = 3, timeout: int = 30) ->
 
             # Si on approche de la limite, on fait une pause
             if esi_remain < 20:  # Seuil de sécurité
-                wait_time = min(esi_reset + 1, 30)  # On attend un peu plus que le reset
+                wait_time = min(esi_reset + 1, 30)
                 logging.warning(f"ESI error limit low ({esi_remain}), waiting {wait_time} seconds")
                 time.sleep(wait_time)
 
             if response.status_code == 200:
                 return response.json()
-            elif response.status_code == 429:  # Rate limit
+            elif response.status_code == 429:
                 wait_time = int(response.headers.get('Retry-After', 60))
-                wait_time = min(wait_time, 300)  # Maximum 5 minutes d'attente
+                wait_time = min(wait_time, 300)
                 logging.warning(f"Rate limited on URL: {url}")
                 logging.warning(f"Response headers: {dict(response.headers)}")
                 logging.warning(f"Waiting {wait_time} seconds...")
                 time.sleep(wait_time)
                 continue
-
             elif response.status_code == 404:
                 logging.warning(f"Resource not found at URL: {url}")
                 logging.warning(f"Response status: {response.status_code}")
                 logging.warning(f"Response headers: {dict(response.headers)}")
-                logging.warning(f"Response content: {response.text[:500]}")  # Premiers 500 caractères
+                logging.warning(f"Response content: {response.text[:500]}")
                 return None
             else:
                 logging.error(f"API request failed for URL: {url}")
                 logging.error(f"Response status: {response.status_code}")
                 logging.error(f"Response headers: {dict(response.headers)}")
-                logging.error(f"Response content: {response.text[:500]}")  # Premiers 500 caractères
+                logging.error(f"Response content: {response.text[:500]}")
                 if attempt < max_retries - 1:
-                    wait_time = 5 * (attempt + 1)  # Backoff exponentiel
+                    wait_time = 5 * (attempt + 1)
                     logging.info(f"Retrying in {wait_time} seconds...")
                     time.sleep(wait_time)
                     continue
@@ -245,7 +272,6 @@ def get_ship_type(ship_type_id, headers):
         return "Unknown"
 
 def get_latest_killmail_date(db: DatabaseConnection) -> datetime:
-    """Récupère la date du dernier killmail en base"""
     try:
         db.cur.execute("""
             SELECT kill_datetime 
@@ -259,7 +285,7 @@ def get_latest_killmail_date(db: DatabaseConnection) -> datetime:
             logging.info(f"Latest kill in database: {latest_date}")
             return latest_date
         else:
-            default_date = datetime(2025, 1, 1, 0, 0, 0)  # Précision jusqu'aux secondes
+            default_date = datetime(2025, 1, 1, 0, 0, 0)
             logging.info(f"No kills in database, starting from {default_date}")
             return default_date
     except Exception as e:
@@ -267,7 +293,6 @@ def get_latest_killmail_date(db: DatabaseConnection) -> datetime:
         raise
 
 def get_all_kills_for_page(corporation_id: str, page: int, headers: dict) -> Optional[List[Dict]]:
-    """Récupère les kills pour une page donnée"""
     url = f"https://zkillboard.com/api/corporationID/{corporation_id}/page/{page}/"
     logging.info(f"Requesting kills from URL: {url}")
 
@@ -281,7 +306,6 @@ def get_all_kills_for_page(corporation_id: str, page: int, headers: dict) -> Opt
         return None
 
 def process_single_kill(kill, kill_detail, corporation_id, db: DatabaseConnection, headers: dict):
-    """Process a single kill with its own transaction"""
     try:
         kill_date = datetime.strptime(kill_detail['killmail_time'], "%Y-%m-%dT%H:%M:%SZ")
         logging.info(f"Processing kill {kill['killmail_id']} from {kill_date}")
@@ -290,8 +314,9 @@ def process_single_kill(kill, kill_detail, corporation_id, db: DatabaseConnectio
         ship_type_id = kill_detail['victim']['ship_type_id']
         system_id = kill_detail['solar_system_id']
         victim_id = kill_detail['victim'].get('character_id')
-        victim_corp_id = str(kill_detail['victim'].get('corporation_id', ''))
-        is_kill = 'KILL' if victim_corp_id != corporation_id else 'LOSS'
+        victim_corp_raw = kill_detail['victim'].get('corporation_id')
+        # On compare en string car corporation_id de l'API et la variable corporation_id (paramètre)
+        is_kill = 'KILL' if str(victim_corp_raw) != corporation_id else 'LOSS'
 
         # Get and insert reference data
         system_name = get_entity_info(system_id, 'universe/systems', headers)
@@ -305,7 +330,11 @@ def process_single_kill(kill, kill_detail, corporation_id, db: DatabaseConnectio
         victim_name = get_entity_info(victim_id, 'characters', headers) if victim_id else "Unknown"
         pilot_db_id = db.get_or_create_pilot(victim_name)
 
-        # Insert killmail
+        # Récupération et insertion de la corporation de la victime
+        victim_corp_name = get_entity_info(victim_corp_raw, 'corporations', headers) if victim_corp_raw else "Unknown"
+        victim_corp_db_id = db.get_or_create_corporation(victim_corp_name)
+
+        # Insert killmail with victim's corporation
         killmail_data = {
             'killmail_id': kill['killmail_id'],
             'kill_hash': kill['zkb']['hash'],
@@ -314,21 +343,54 @@ def process_single_kill(kill, kill_detail, corporation_id, db: DatabaseConnectio
             'pilot_id': pilot_db_id,
             'ship_id': ship_db_id,
             'value': kill['zkb']['totalValue'],
-            'kill_type': is_kill
+            'kill_type': is_kill,
+            'victim_corporation_id': victim_corp_db_id
         }
 
         result = db.insert_killmail(killmail_data)
-        if result:
-            logging.info(f"Successfully inserted killmail {kill['killmail_id']}")
-            return True
-        return False
+        if not result:
+            logging.info(f"Killmail {kill['killmail_id']} already exists, skipping attackers processing")
+            return False
+
+        # Process attackers for this killmail
+        attackers = kill_detail.get('attackers', [])
+        for attacker in attackers:
+            attacker_character_id = attacker.get('character_id')
+            if attacker_character_id:
+                attacker_name = get_entity_info(attacker_character_id, 'characters', headers)
+                attacker_pilot_id = db.get_or_create_pilot(attacker_name)
+            else:
+                attacker_name = "Unknown"
+                attacker_pilot_id = None
+
+            attacker_corp_raw = attacker.get('corporation_id')
+            if attacker_corp_raw:
+                attacker_corp_name = get_entity_info(attacker_corp_raw, 'corporations', headers)
+            else:
+                attacker_corp_name = "Unknown"
+            attacker_corp_db_id = db.get_or_create_corporation(attacker_corp_name)
+
+            final_blow = attacker.get('final_blow', False)
+            damage_done = attacker.get('damage_done', 0)
+
+            db.insert_killmail_attacker(
+                killmail_id=kill['killmail_id'],
+                pilot_id=attacker_pilot_id,
+                pilot_name=attacker_name,
+                attacker_corporation_id=attacker_corp_db_id,
+                final_blow=final_blow,
+                damage_done=damage_done
+            )
+            time.sleep(0.5)  # Petite pause pour respecter l'API
+
+        logging.info(f"Successfully processed killmail {kill['killmail_id']}")
+        return True
 
     except Exception as e:
         logging.error(f"Error processing kill {kill.get('killmail_id')}: {str(e)}")
         return False
 
 def get_oldest_kill_date(db: DatabaseConnection) -> Optional[datetime]:
-    """Récupère la date du kill le plus ancien en base"""
     try:
         db.cur.execute("""
             SELECT kill_datetime 
@@ -346,7 +408,6 @@ def get_oldest_kill_date(db: DatabaseConnection) -> Optional[datetime]:
         raise
 
 def get_newest_kill_date(db: DatabaseConnection) -> Optional[datetime]:
-    """Récupère la date du kill le plus récent en base"""
     try:
         db.cur.execute("""
             SELECT kill_datetime 
@@ -364,16 +425,13 @@ def get_newest_kill_date(db: DatabaseConnection) -> Optional[datetime]:
         raise
 
 def process_killmails_batch(db: DatabaseConnection, headers: dict, corporation_id: str):
-    """Process killmails in batches with pagination"""
     newest_kill_date = get_newest_kill_date(db)
     oldest_kill_date = get_oldest_kill_date(db)
     target_date = datetime(2025, 1, 1)
 
-    # Convertir les dates en date sans heure pour la comparaison
     target_date_only = target_date.date()
     oldest_date_only = oldest_kill_date.date() if oldest_kill_date else None
 
-    # Mode historique UNIQUEMENT si on n'a pas de kills avant janvier 2025
     historical_mode = oldest_date_only is None or oldest_date_only > target_date_only
 
     if historical_mode:
@@ -400,7 +458,6 @@ def process_killmails_batch(db: DatabaseConnection, headers: dict, corporation_i
 
         for kill in kills:
             try:
-                # Vérification d'existence AVANT tout appel API
                 if db.kill_exists(kill['killmail_id'], kill['zkb']['hash']):
                     existing_kills_this_page += 1
                     consecutive_existing_kills += 1
@@ -425,17 +482,14 @@ def process_killmails_batch(db: DatabaseConnection, headers: dict, corporation_i
                 kill_date = datetime.strptime(kill_detail['killmail_time'], "%Y-%m-%dT%H:%M:%SZ")
                 kill_date_only = kill_date.date()
 
-                # En mode historique, on s'arrête à la date cible
                 if historical_mode and kill_date_only <= target_date_only:
                     logging.info(f"Reached target date {target_date} with kill from {kill_date}")
                     return total_processed
 
-                # En mode mise à jour, on s'arrête si le kill est plus ancien
                 if not historical_mode and kill_date <= newest_kill_date:
                     logging.info(f"Found kill ({kill_date}) older than newest in database ({newest_kill_date})")
                     return total_processed
 
-                # Process le kill uniquement s'il est plus récent que newest_kill_date
                 if process_single_kill(kill, kill_detail, corporation_id, db, headers):
                     total_processed += 1
                     kills_processed_this_page += 1
@@ -449,7 +503,6 @@ def process_killmails_batch(db: DatabaseConnection, headers: dict, corporation_i
         logging.info(f"Processed {kills_processed_this_page} new kills on page {current_page}")
         logging.info(f"Found {existing_kills_this_page} existing kills on page {current_page}")
 
-        # En mode mise à jour, on s'arrête si on ne trouve que des kills existants
         if not historical_mode and kills_processed_this_page == 0 and existing_kills_this_page > 0:
             logging.info("No new kills found on this page and all kills were existing, stopping update")
             break
@@ -471,7 +524,7 @@ def main():
     corporation_id = os.getenv('CORPORATION_ID', "98730717")
 
     try:
-        with DatabaseConnection() as db:  # Plus besoin de passer les paramètres ici
+        with DatabaseConnection() as db:
             logging.info("Successfully connected to database")
             process_killmails_batch(db, headers, corporation_id)
             logging.info("Killmail processing completed successfully")

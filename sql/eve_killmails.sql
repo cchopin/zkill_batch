@@ -74,8 +74,34 @@ JOIN pilots p ON k.pilot_id = p.pilot_id
 JOIN ships sh ON k.ship_id = sh.ship_id
 JOIN ship_types st ON sh.ship_type_id = st.ship_type_id;
 
+-- Création de la table corporations
+CREATE TABLE corporations (
+    corporation_id SERIAL PRIMARY KEY,
+    corporation_name VARCHAR(100) NOT NULL,
+    UNIQUE(corporation_name)
+);
+
+-- Ajout de la colonne pour la corporation de la victime dans killmails
+ALTER TABLE killmails
+ADD COLUMN victim_corporation_id INTEGER REFERENCES corporations(corporation_id);
+
+
+-- Création de la table killmail_attackers
+CREATE TABLE killmail_attackers (
+    killmail_attacker_id SERIAL PRIMARY KEY,
+    killmail_id BIGINT REFERENCES killmails(killmail_id) ON DELETE CASCADE,
+    pilot_id INTEGER,  -- Optionnel : référence vers la table pilots (pour les données globales du pilote)
+    pilot_name VARCHAR(100) NOT NULL,
+    attacker_corporation_id INTEGER REFERENCES corporations(corporation_id),
+    final_blow BOOLEAN,
+    damage_done DECIMAL(20,2)
+);
+
 -- Create user with environment variables
 CREATE USER ${DB_USER} WITH PASSWORD '${DB_PASSWORD}';
 GRANT ALL PRIVILEGES ON DATABASE ${DB_NAME} TO ${DB_USER};
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO ${DB_USER};
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO ${DB_USER};
+GRANT ALL PRIVILEGES ON TABLE killmail_attackers TO ${DB_USER};
+GRANT ALL PRIVILEGES ON TABLE corporations TO ${DB_USER};
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO ${DB_USER};
