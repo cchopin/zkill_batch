@@ -6,8 +6,8 @@ A Python tool to fetch and store EVE Online corporation killmails using zKillboa
 
 - Automatic killmail retrieval for a specific corporation
 - Support for both historical and update modes:
-    - Historical mode: Fetches kills up to January 1st, 2025
-    - Update mode: Fetches only new kills since last update
+  - Historical mode: Fetches kills up to January 1st, 2025
+  - Update mode: Fetches only new kills since last update
 - PostgreSQL database storage with enhanced schema
 - Detailed attacker information tracking
 - Corporation tracking for both victims and attackers
@@ -15,6 +15,7 @@ A Python tool to fetch and store EVE Online corporation killmails using zKillboa
 - Robust error handling and detailed logging
 - Data backfill utilities for database schema updates
 - HTML report generation capabilities (in development)
+- Automated backup and execution scripts
 
 ## Prerequisites
 
@@ -50,6 +51,11 @@ CORPORATION_ID=your_corp_id
 psql -U postgres -f sql/eve_killmails.sql
 ```
 
+5. Make automation scripts executable
+```bash
+chmod +x backup.sh run.sh
+```
+
 ## Database Structure
 
 The database schema has been enhanced to include:
@@ -81,6 +87,37 @@ The script will:
 3. Fetch killmails from zKillboard
 4. Enrich data through the ESI API
 5. Store results in the PostgreSQL database
+
+### Automation Scripts
+
+The project includes two automation scripts:
+
+#### Backup Script
+```bash
+./backup.sh
+```
+This script performs:
+- Creates a temporary backup directory
+- Dumps and compresses the PostgreSQL database
+- Archives the project scripts
+- Transfers backups to a specified Mac host (if accessible)
+- Cleans up temporary files
+
+To configure the backup destination, update the following variables in `backup.sh`:
+```plaintext
+MAC_USER="your_mac_username"
+MAC_HOST="your_mac_hostname"
+```
+
+#### Execution Script
+```bash
+./run.sh
+```
+This script automates the execution process by:
+- Setting the correct working directory
+- Activating the Python virtual environment
+- Running the main script
+- Deactivating the virtual environment
 
 ### Historical Migration Scripts
 
@@ -146,4 +183,3 @@ For questions or suggestions, please open an issue on GitHub.
 - EVE Online for providing the ESI API
 - zKillboard for their public API
 - The EVE Online development community
-

@@ -1,6 +1,11 @@
 # CHANGELOG
 
-## [1.1.0] - 2025-02-15
+## [1.1.1] - 2025-02-15
+
+### Added
+- New automation shell scripts:
+  - `backup.sh` for automated database and script backups with remote transfer capabilities
+  - `run.sh` for automated script execution in virtual environment
 
 ### Added
 - New database tables for enhanced data tracking:
