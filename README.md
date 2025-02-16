@@ -4,129 +4,146 @@ A Python tool to fetch and store EVE Online corporation killmails using zKillboa
 
 ## Features
 
-- Automatic killmail retrieval for a specific corporation
-- Support for both historical and update modes:
-  - Historical mode: Fetches kills up to January 1st, 2025
-  - Update mode: Fetches only new kills since last update
-- PostgreSQL database storage with enhanced schema
-- Detailed attacker information tracking
-- Corporation tracking for both victims and attackers
-- API rate limit handling with intelligent backoff
-- Robust error handling and detailed logging
-- Data backfill utilities for database schema updates
-- HTML report generation capabilities (in development)
-- Automated backup and execution scripts
+- **Automatic Killmail Retrieval**  
+  Fetches killmails for a specific corporation using both historical and update modes:
+  - *Historical mode*: Fetches kills up to January 1st, 2025
+  - *Update mode*: Fetches only new kills since the last update
+
+- **Database Storage**  
+  Uses PostgreSQL for storing detailed killmail data including:
+  - Solar systems
+  - Ship types and specific ships
+  - Pilots and corporations (for both victims and attackers)
+  - Detailed attacker information
+
+- **Robust API Handling**  
+  Implements intelligent backoff to handle API rate limits, with robust error handling and detailed logging.
+
+- **HTML Report Generation**  
+  Generates monthly HTML reports with various statistical views:
+  - **Daily Statistics:** Displays destroyed value and kill count per day.
+  - **Kills vs Losses Trend:** Shows the trend of destroyed vs lost ISK (values are shown in billions).
+  - **Top 20 Ship Types:** KPI boxes with dynamic mouse-over effects.
+  - **Top Corporation Pilots:** Displays the top pilots with scales in billions.
+  - **Additional Statistics:** Includes Global K/D Ratio, ISK Efficiency, and Peak Hour.
+
+![1.png](assets/1.png)
+
+![2.png](assets/2.png)
+
+![3.png](assets/3.png)
+
+![5.png](assets/5.png)
+
+![4.png](assets/4.png)
+
+
+- **Automation and Backup**  
+  Provides shell scripts for automated execution:
+  - `run_killmail.sh`: Runs the main killmail fetching script.
+  - `run_report.sh`: Generates the monthly HTML report, updates an index page, and copies the files to a web directory.
+  - `backups.sh`: Creates backups of the database and scripts, transfers them to a remote host, and cleans up old backups.
 
 ## Prerequisites
 
 - Python 3.8+
 - PostgreSQL 14+
-- Python packages listed in `requirements.txt`
+- Python packages as listed in `requirements.txt`
 
 ## Installation
 
-1. Clone the repository
-```bash
-git clone git@github.com:cchopin/zkill_batch.git
-cd zkill_batch
-```
+1. **Clone the repository:**
+   ```bash
+   git clone git@github.com:cchopin/zkill_batch.git
+   cd zkill_batch
+   ```
 
-2. Install Python dependencies
-```bash
-pip install -r requirements.txt
-```
+2. **Install Python dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-3. Create a `.env` file in the project root with the following variables:
-```plaintext
-DB_NAME=eve_killmails
-DB_USER=your_user
-DB_PASSWORD=your_password
-DB_HOST=localhost
-DB_PORT=5432
-CORPORATION_ID=your_corp_id
-```
+3. **Create a .env file in the project root with the following variables:**
+   ```
+   DB_NAME=eve_killmails
+   DB_USER=your_user
+   DB_PASSWORD=your_password
+   DB_HOST=localhost
+   DB_PORT=5432
+   CORPORATION_ID=your_corp_id
+   ```
 
-4. Initialize the database
-```bash
-psql -U postgres -f sql/eve_killmails.sql
-```
+4. **Initialize the database:**
+   ```bash
+   psql -U postgres -f sql/eve_killmails.sql
+   ```
 
-5. Make automation scripts executable
-```bash
-chmod +x backup.sh run.sh
-```
+5. **Make automation scripts executable:**
+   ```bash
+   chmod +x backups.sh run_killmail.sh run_report.sh
+   ```
 
 ## Database Structure
 
-The database schema has been enhanced to include:
+The enhanced database schema includes the following tables:
+- systems: Solar system information
+- ship_types: Ship type classifications
+- ships: Specific ship information
+- pilots: Pilot data
+- corporations: Corporation information
+- killmails: Main killmail data
+- killmail_attackers: Detailed attacker information
 
-- `systems`: Solar system information
-- `ship_types`: Ship type classifications
-- `ships`: Specific ship information
-- `pilots`: Pilot data
-- `corporations`: Corporation information
-- `killmails`: Main killmail data
-- `killmail_attackers`: Detailed attacker information
-
-See `sql/schema.mmd` for the complete entity relationship diagram.
-
-![model.png](sql/model.png)
+See sql/schema.mmd for the complete entity relationship diagram.
 
 ## Usage
 
 ### Main Script
 
-Run the main script to fetch and process killmails:
+To fetch and process killmails, run:
 ```bash
 python main.py
 ```
 
-The script will:
-1. Connect to the database
-2. Determine the appropriate mode (historical or update)
-3. Fetch killmails from zKillboard
-4. Enrich data through the ESI API
-5. Store results in the PostgreSQL database
+This script will:
+- Connect to the database.
+- Determine the correct mode (historical or update).
+- Fetch killmails from zKillboard.
+- Enrich data via the ESI API.
+- Store results in the PostgreSQL database.
+
+### HTML Report Generation
+
+The report generator produces monthly HTML reports stored in the html/ directory (e.g. 202501.html for January 2025) and an index.html page listing all reports since January 2025. Each report page includes a "Back to Index" link.
 
 ### Automation Scripts
 
-The project includes two automation scripts:
-
-#### Backup Script
+**Backup Script:**
 ```bash
-./backup.sh
+./backups.sh
 ```
-This script performs:
-- Creates a temporary backup directory
-- Dumps and compresses the PostgreSQL database
-- Archives the project scripts
-- Transfers backups to a specified Mac host (if accessible)
-- Cleans up temporary files
+Performs:
+- Database dump with gzip compression.
+- Script directory archiving.
+- Remote backup transfer and cleanup.
 
-To configure the backup destination, update the following variables in `backup.sh`:
-```plaintext
-MAC_USER="your_mac_username"
-MAC_HOST="your_mac_hostname"
-```
-
-#### Execution Script
+**Killmail Fetch Script:**
 ```bash
-./run.sh
+./run_killmail.sh
 ```
-This script automates the execution process by:
-- Setting the correct working directory
-- Activating the Python virtual environment
-- Running the main script
-- Deactivating the virtual environment
+Runs the main killmail fetching process within a virtual environment.
+
+**Report Generation Script:**
+```bash
+./run_report.sh
+```
+Executes the report generator for the previous month, copies the generated report and index to /var/www/news.eve-goats.fr/, and logs the execution.
 
 ### Historical Migration Scripts
 
-The repository includes two historical migration scripts that were used during the database schema update:
-
-1. `backfill_attackers.py`: Script used to populate the killmail_attackers table when it was first introduced
-2. `backfill_corporations.py`: Script used to add corporation information to existing killmails
-
-Note: These scripts are kept for historical reference and documentation purposes. They are not needed for new installations as the current database schema already includes all necessary tables and relationships.
+The repository also includes historical migration scripts (for reference only):
+- backfill_attackers.py: Populates the killmail_attackers table.
+- backfill_corporations.py: Updates corporation information in existing killmails.
 
 ```bash
 python backfill_attackers.py
@@ -135,32 +152,29 @@ python backfill_corporations.py
 
 ## Development Mode
 
-To set up a development environment:
-
-1. Create a virtual environment:
+Create a virtual environment:
 ```bash
 python -m venv venv
 source venv/bin/activate  # On Unix/macOS
 venv\Scripts\activate     # On Windows
 ```
 
-2. Install development dependencies:
+Install development dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
 ## Error Handling
 
-The application includes comprehensive error handling for:
-- API connection issues
-- Rate limiting with intelligent backoff
+Comprehensive error handling is implemented for:
+- API connection issues and rate limiting (with intelligent backoff)
 - Database connection problems
 - Data parsing errors
 - Missing or invalid data
 
 ## Logging
 
-Logs are stored in the `logs/` directory and contain detailed information about:
+Logs are stored in the logs/ directory with a unique log file for each execution. These logs contain detailed information about:
 - Script execution status
 - API requests and responses
 - Database operations
@@ -168,11 +182,11 @@ Logs are stored in the `logs/` directory and contain detailed information about:
 
 ## Contributing
 
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -am 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+1. Fork the project.
+2. Create your feature branch (git checkout -b feature/amazing-feature).
+3. Commit your changes (git commit -am 'Add amazing feature').
+4. Push to the branch (git push origin feature/amazing-feature).
+5. Open a Pull Request.
 
 ## Contact
 
@@ -180,6 +194,36 @@ For questions or suggestions, please open an issue on GitHub.
 
 ## Acknowledgments
 
-- EVE Online for providing the ESI API
-- zKillboard for their public API
-- The EVE Online development community
+- EVE Online for providing the ESI API.
+- zKillboard for their public API.
+- The EVE Online development community.
+
+---
+
+# CHANGELOG
+
+## [1.1.2] - 2025-02-16
+### Added
+- **HTML Report Generation:**
+  - Monthly HTML reports are now generated with the following components:
+    - Daily Statistics (destroyed value and kill count)
+    - Kills vs Losses Trend (values in billions)
+    - Top 20 Ship Types (with dynamic mouse-over effects)
+    - Top Corporation Pilots (with values displayed in billions)
+    - Additional Statistics (Global K/D Ratio, ISK Efficiency, and Peak Hour)
+  - An index page (`index.html`) is automatically generated listing all reports since January 2025.
+- **Automation Enhancements:**
+  - `run_report.sh` now activates a virtual environment, generates reports, updates the index, and copies the files to `/var/www/news.eve-goats.fr/`.
+  - Per-execution log files are generated for the report generator and killmail batch scripts.
+- **Log Rotation Setup:**
+  - A logrotate configuration has been provided to manage logs in `/scripts/eve_killmails/logs`.
+
+### Changed
+- Updated database schema and entity relationships to support detailed killmail tracking.
+- Enhanced error handling with intelligent backoff for API rate limits.
+- Improved logging for all scripts.
+- Updated automation scripts for backups and killmail fetching.
+
+### Fixed
+- Resolved issues with copying generated reports to the web directory.
+- Improved handling of API errors and missing data.

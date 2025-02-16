@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import requests
 import json
 import time
@@ -11,15 +12,19 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Configure logging
+# Create a log filename based on the current date and time
+log_filename = os.path.join("logs", f"killmail_batch_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log")
+
+# Configure logging with a file handler (per execution) and a stream handler
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('logs/killmail_batch.log'),
+        logging.FileHandler(log_filename),
         logging.StreamHandler()
     ]
 )
+logging.info(f"Script started. Logging to {log_filename}")
 
 class DatabaseConnection:
     def __init__(self):
@@ -179,19 +184,17 @@ class DatabaseConnection:
             logging.error(f"Error inserting killmail attacker for killmail {killmail_id}: {e}")
             raise
 
-
 def get_url(url: str, headers: dict, max_retries: int = 3, timeout: int = 30) -> Optional[dict]:
     for attempt in range(max_retries):
         try:
             logging.debug(f"Attempting request to {url} (attempt {attempt + 1}/{max_retries})")
             response = requests.get(url, headers=headers, timeout=timeout)
 
-            # Récupération des limites ESI
+            # Get ESI limits
             esi_remain = int(response.headers.get('X-Esi-Error-Limit-Remain', 100))
             esi_reset = int(response.headers.get('X-Esi-Error-Limit-Reset', 0))
 
-            # Si on approche de la limite, on fait une pause
-            if esi_remain < 20:  # Seuil de sécurité
+            if esi_remain < 20:  # Safety threshold
                 wait_time = min(esi_reset + 1, 30)
                 logging.warning(f"ESI error limit low ({esi_remain}), waiting {wait_time} seconds")
                 time.sleep(wait_time)
@@ -315,7 +318,7 @@ def process_single_kill(kill, kill_detail, corporation_id, db: DatabaseConnectio
         system_id = kill_detail['solar_system_id']
         victim_id = kill_detail['victim'].get('character_id')
         victim_corp_raw = kill_detail['victim'].get('corporation_id')
-        # On compare en string car corporation_id de l'API et la variable corporation_id (paramètre)
+        # Compare as string because API corporation_id and the provided corporation_id might differ in type
         is_kill = 'KILL' if str(victim_corp_raw) != corporation_id else 'LOSS'
 
         # Get and insert reference data
@@ -330,7 +333,7 @@ def process_single_kill(kill, kill_detail, corporation_id, db: DatabaseConnectio
         victim_name = get_entity_info(victim_id, 'characters', headers) if victim_id else "Unknown"
         pilot_db_id = db.get_or_create_pilot(victim_name)
 
-        # Récupération et insertion de la corporation de la victime
+        # Retrieve and insert the victim corporation
         victim_corp_name = get_entity_info(victim_corp_raw, 'corporations', headers) if victim_corp_raw else "Unknown"
         victim_corp_db_id = db.get_or_create_corporation(victim_corp_name)
 
@@ -381,7 +384,7 @@ def process_single_kill(kill, kill_detail, corporation_id, db: DatabaseConnectio
                 final_blow=final_blow,
                 damage_done=damage_done
             )
-            time.sleep(0.5)  # Petite pause pour respecter l'API
+            time.sleep(0.5)  # Small pause to respect API limits
 
         logging.info(f"Successfully processed killmail {kill['killmail_id']}")
         return True
