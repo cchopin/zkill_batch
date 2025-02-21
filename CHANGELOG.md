@@ -1,6 +1,38 @@
 # CHANGELOG
 
+# EVE Killmail Tracker - Version 1.2.1
 
+## Changelog
+
+## [1.2.1] - 2025-02-21
+### Changed
+- Optimized recent killmail loading strategy
+- Reduced maximum page depth from unlimited to 10 pages
+- Decreased consecutive existing kills threshold from 5 to 3
+- Added 7-day lookback limit for empty databases
+- Enhanced API error handling for zKillboard responses
+- Improved progressive delay between API requests
+
+### Fixed
+- Fixed string indices error in kill processing loop
+- Added proper handling for zKillboard error messages
+- Improved handling of invalid kill data formats
+- Better error logging for API response debugging
+
+### Added
+- New debug logging for API response structures
+- Progressive delay system for API requests
+- Kill date validation against newest database entry
+- Early exit conditions for older killmails
+
+### Security
+- Updated User-Agent string for better API tracking
+- Added rate limiting safeguards for zKillboard API
+
+### Dependencies
+No changes to dependencies.
+
+---
 
 ## [1.2.0] - 2025-02-16
 ### Added

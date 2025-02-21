@@ -429,67 +429,83 @@ def get_newest_kill_date(db: DatabaseConnection) -> Optional[datetime]:
 
 def process_killmails_batch(db: DatabaseConnection, headers: dict, corporation_id: str):
     newest_kill_date = get_newest_kill_date(db)
-    oldest_kill_date = get_oldest_kill_date(db)
-    target_date = datetime(2025, 1, 1)
 
-    target_date_only = target_date.date()
-    oldest_date_only = oldest_kill_date.date() if oldest_kill_date else None
-
-    historical_mode = oldest_date_only is None or oldest_date_only > target_date_only
-
-    if historical_mode:
-        logging.info("Running in historical mode - loading kills until January 1st, 2025")
+    if not newest_kill_date:
+        # Si pas de kill en base, on commence à partir d'aujourd'hui - 7 jours
+        newest_kill_date = datetime.now() - timedelta(days=7)
+        logging.info(f"No kills in database, starting from {newest_kill_date}")
     else:
-        logging.info(f"Running in update mode - loading only kills newer than {newest_kill_date}")
+        logging.info(f"Loading kills newer than {newest_kill_date}")
 
     current_page = 1
     total_processed = 0
+    max_pages = 10  # Limiter à 10 pages maximum
     consecutive_existing_kills = 0
-    max_consecutive_existing = 5
+    max_consecutive_existing = 3  # Arrêter après 3 kills existants consécutifs
 
-    while True:
+    # Délai entre les requêtes
+    base_delay = 2
+
+    while current_page <= max_pages:
         logging.info(f"Processing page {current_page}")
 
+        # Délai progressif
+        current_delay = base_delay + (current_page % 3)
+        time.sleep(current_delay)
+
         kills = get_all_kills_for_page(corporation_id, current_page, headers)
-        if not kills:
-            logging.warning(f"No data received for page {current_page}")
+
+        if not kills or kills is None:
+            logging.info("No more kills available")
             break
 
-        logging.info(f"Found {len(kills)} kills on page {current_page}")
         kills_processed_this_page = 0
         existing_kills_this_page = 0
 
         for kill in kills:
             try:
-                if db.kill_exists(kill['killmail_id'], kill['zkb']['hash']):
+                if not isinstance(kill, dict):
+                    logging.warning(f"Invalid kill data format: {kill}")
+                    continue
+
+                if 'error' in kill:
+                    logging.warning(f"Error in kill data: {kill['error']}")
+                    continue
+
+                killmail_id = kill.get('killmail_id')
+                kill_hash = kill.get('zkb', {}).get('hash')
+
+                if not killmail_id or not kill_hash:
+                    logging.warning("Missing killmail_id or hash")
+                    continue
+
+                if db.kill_exists(killmail_id, kill_hash):
                     existing_kills_this_page += 1
                     consecutive_existing_kills += 1
 
-                    if not historical_mode and consecutive_existing_kills >= max_consecutive_existing:
+                    if consecutive_existing_kills >= max_consecutive_existing:
                         logging.info(f"Found {max_consecutive_existing} consecutive existing kills, stopping update")
                         return total_processed
 
-                    logging.debug(f"Kill {kill['killmail_id']} already exists, skipping")
                     continue
 
                 consecutive_existing_kills = 0
 
+                # Récupérer les détails du kill
                 kill_detail = get_url(
-                    f"https://esi.evetech.net/latest/killmails/{kill['killmail_id']}/{kill['zkb']['hash']}/?datasource=tranquility",
+                    f"https://esi.evetech.net/latest/killmails/{killmail_id}/{kill_hash}/?datasource=tranquility",
                     headers
                 )
+
                 if not kill_detail:
-                    logging.warning(f"Could not get details for kill {kill['killmail_id']}")
+                    logging.warning(f"Could not get details for kill {killmail_id}")
                     continue
 
+                # Vérifier la date du kill
                 kill_date = datetime.strptime(kill_detail['killmail_time'], "%Y-%m-%dT%H:%M:%SZ")
-                kill_date_only = kill_date.date()
 
-                if historical_mode and kill_date_only <= target_date_only:
-                    logging.info(f"Reached target date {target_date} with kill from {kill_date}")
-                    return total_processed
-
-                if not historical_mode and kill_date <= newest_kill_date:
+                # Si le kill est plus ancien que le plus récent en base, on arrête
+                if kill_date <= newest_kill_date:
                     logging.info(f"Found kill ({kill_date}) older than newest in database ({newest_kill_date})")
                     return total_processed
 
@@ -500,18 +516,20 @@ def process_killmails_batch(db: DatabaseConnection, headers: dict, corporation_i
                 time.sleep(1)  # Respect API rate limits
 
             except Exception as e:
-                logging.error(f"Error in main kill processing loop: {str(e)}")
+                logging.error(f"Error processing kill: {str(e)}")
+                logging.error(f"Kill data: {json.dumps(kill, indent=2)}")
                 continue
 
         logging.info(f"Processed {kills_processed_this_page} new kills on page {current_page}")
         logging.info(f"Found {existing_kills_this_page} existing kills on page {current_page}")
 
-        if not historical_mode and kills_processed_this_page == 0 and existing_kills_this_page > 0:
-            logging.info("No new kills found on this page and all kills were existing, stopping update")
+        # Si on n'a traité aucun kill sur cette page et qu'on a trouvé des kills existants
+        if kills_processed_this_page == 0 and existing_kills_this_page > 0:
+            logging.info("No new kills found on this page and found existing kills, stopping update")
             break
 
         current_page += 1
-        time.sleep(2)  # Pause between pages
+        time.sleep(base_delay)
 
     logging.info(f"Batch processing complete. Total new kills processed: {total_processed}")
     return total_processed
@@ -520,8 +538,9 @@ def main():
     logging.info("Starting killmail processing script")
 
     headers = {
-        'User-Agent': 'EVE Application telynor@gmail.com',
-        'Accept': 'application/json'
+        'User-Agent': 'EVE Corp Killmail Tracker - telynor@gmail.com',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
     }
 
     corporation_id = os.getenv('CORPORATION_ID', "98730717")
