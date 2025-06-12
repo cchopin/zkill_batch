@@ -1,676 +1,361 @@
 #!/usr/bin/env python3
-import os
+import requests
+import json
+import time
+from datetime import datetime, timedelta
 import psycopg2
 from psycopg2 import extras
-import json
 import logging
-import argparse
-import calendar
-from datetime import datetime
+from typing import Optional, List, Dict
+import os
 from dotenv import load_dotenv
-import glob
 
-# Load environment variables
 load_dotenv()
 
 # Create a log filename based on the current date and time
-log_filename = os.path.join("logs", f"killmail_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log")
+log_filename = os.path.join("logs", f"killmail_batch_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log")
 
 # Configure logging with a file handler (per execution) and a stream handler
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
+    format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
         logging.FileHandler(log_filename),
         logging.StreamHandler()
     ]
 )
-
-logging.info(f"Execution started. Logging to {log_filename}")
-
-# Ensure the "html" directory exists
-OUTPUT_DIR = "html"
-if not os.path.exists(OUTPUT_DIR):
-    os.makedirs(OUTPUT_DIR)
+logging.info(f"Script started. Logging to {log_filename}")
 
 class DatabaseConnection:
     def __init__(self):
-        try:
-            self.conn = psycopg2.connect(
-                dbname=os.getenv('DB_NAME'),
-                user=os.getenv('DB_USER'),
-                password=os.getenv('DB_PASSWORD'),
-                host=os.getenv('DB_HOST'),
-                port=os.getenv('DB_PORT')
-            )
-            self.cur = self.conn.cursor(cursor_factory=extras.DictCursor)
-            logging.info("Database connection established successfully")
-        except Exception as e:
-            logging.error(f"Error connecting to database: {e}")
-            raise
+        self.conn = psycopg2.connect(
+            dbname=os.getenv('DB_NAME'),
+            user=os.getenv('DB_USER'),
+            password=os.getenv('DB_PASSWORD'),
+            host=os.getenv('DB_HOST'),
+            port=os.getenv('DB_PORT')
+        )
+        self.cur = self.conn.cursor(cursor_factory=extras.DictCursor)
+        logging.info("Database connection established successfully")
 
     def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        try:
-            self.cur.close()
-            self.conn.close()
-            logging.info("Database connection closed")
-        except Exception as e:
-            logging.error(f"Error closing database connection: {e}")
+        self.cur.close()
+        self.conn.close()
+        logging.info("Database connection closed")
 
-    def execute_query(self, query, params=None):
+    def get_or_create_system(self, system_name):
         try:
-            self.cur.execute(query, params)
-            return self.cur.fetchall()
+            self.cur.execute("""
+                INSERT INTO systems (system_name)
+                VALUES (%s)
+                ON CONFLICT (system_name) DO UPDATE SET system_name = EXCLUDED.system_name
+                RETURNING system_id;
+            """, (system_name,))
+            self.conn.commit()
+            return self.cur.fetchone()[0]
         except Exception as e:
             self.conn.rollback()
-            logging.error(f"Error executing query: {e}")
+            logging.error(f"Error in get_or_create_system: {e}")
             raise
 
-# All queries are filtered by the report month
+    def get_or_create_ship_type(self, type_name):
+        try:
+            self.cur.execute("""
+                INSERT INTO ship_types (type_name)
+                VALUES (%s)
+                ON CONFLICT (type_name) DO UPDATE SET type_name = EXCLUDED.type_name
+                RETURNING ship_type_id;
+            """, (type_name,))
+            self.conn.commit()
+            return self.cur.fetchone()[0]
+        except Exception as e:
+            self.conn.rollback()
+            logging.error(f"Error in get_or_create_ship_type: {e}")
+            raise
 
-def get_daily_stats(db, start_date, end_date):
-    query = """
-    SELECT 
-        DATE(kill_datetime) AS day,
-        COUNT(*) AS kill_count,
-        SUM(CASE WHEN kill_type = 'KILL' THEN value ELSE 0 END) AS value_destroyed,
-        SUM(CASE WHEN kill_type = 'LOSS' THEN value ELSE 0 END) AS value_lost
-    FROM killmails
-    WHERE kill_datetime >= %s 
-      AND kill_datetime < %s::date + interval '1 day'
-    GROUP BY day
-    ORDER BY day;
-    """
-    return db.execute_query(query, (start_date, end_date))
+    def get_or_create_ship(self, ship_name, ship_type_id):
+        try:
+            self.cur.execute("""
+                INSERT INTO ships (ship_name, ship_type_id)
+                VALUES (%s, %s)
+                ON CONFLICT (ship_name) DO UPDATE SET ship_type_id = EXCLUDED.ship_type_id
+                RETURNING ship_id;
+            """, (ship_name, ship_type_id))
+            self.conn.commit()
+            return self.cur.fetchone()[0]
+        except Exception as e:
+            self.conn.rollback()
+            logging.error(f"Error in get_or_create_ship: {e}")
+            raise
 
-def get_ship_types(db, start_date, end_date):
-    query = """
-    SELECT 
-        st.type_name,
-        COUNT(*) AS kill_count,
-        SUM(k.value) AS total_isk
-    FROM killmails k
-    JOIN ships s ON k.ship_id = s.ship_id
-    JOIN ship_types st ON s.ship_type_id = st.ship_type_id
-    WHERE k.kill_datetime >= %s 
-      AND k.kill_datetime < %s::date + interval '1 day'
-      AND k.kill_type = 'KILL'
-    GROUP BY st.type_name
-    ORDER BY total_isk DESC
-    LIMIT 20;
-    """
-    return db.execute_query(query, (start_date, end_date))
+    def get_or_create_pilot(self, pilot_name):
+        try:
+            self.cur.execute("""
+                INSERT INTO pilots (pilot_name)
+                VALUES (%s)
+                ON CONFLICT (pilot_name) DO UPDATE SET pilot_name = EXCLUDED.pilot_name
+                RETURNING pilot_id;
+            """, (pilot_name,))
+            self.conn.commit()
+            return self.cur.fetchone()[0]
+        except Exception as e:
+            self.conn.rollback()
+            logging.error(f"Error in get_or_create_pilot: {e}")
+            raise
 
-def get_top_corp_pilots(db, start_date, end_date, corporation_name):
-    query = """
-    SELECT COUNT(*) AS nb_kills, SUM(k.value) AS isk_destroyed, KA.pilot_name
-    FROM corporations C
-    INNER JOIN killmail_attackers KA ON KA.attacker_corporation_id = C.corporation_id
-    INNER JOIN killmails k ON k.killmail_id = KA.killmail_id
-    WHERE C.corporation_name = %s
-      AND k.kill_datetime >= %s 
-      AND k.kill_datetime < %s::date + interval '1 day'
-    GROUP BY KA.pilot_name
-    ORDER BY nb_kills DESC, isk_destroyed DESC
-    LIMIT 10;
-    """
-    return db.execute_query(query, (corporation_name, start_date, end_date))
+    def get_or_create_corporation(self, corp_name):
+        try:
+            self.cur.execute("""
+                INSERT INTO corporations (corporation_name)
+                VALUES (%s)
+                ON CONFLICT (corporation_name) DO UPDATE SET corporation_name = EXCLUDED.corporation_name
+                RETURNING corporation_id;
+            """, (corp_name,))
+            self.conn.commit()
+            return self.cur.fetchone()[0]
+        except Exception as e:
+            self.conn.rollback()
+            logging.error(f"Error in get_or_create_corporation: {e}")
+            raise
 
-def get_additional_stats(db, start_date, end_date, corp_name):
-    query = """
-    WITH params AS (
-        SELECT %s::date AS start_date,
-               %s::date AS end_date,
-               %s AS corp_name
-    ),
-    kills AS (
-        SELECT COUNT(CASE WHEN kill_type = 'KILL' THEN 1 END) AS total_kills,
-               SUM(CASE WHEN kill_type = 'KILL' THEN value ELSE 0 END) AS total_isk_destroyed
-        FROM corporations C
-        INNER JOIN killmail_attackers KA ON KA.attacker_corporation_id = C.corporation_id
-        INNER JOIN killmails k ON k.killmail_id = KA.killmail_id
-        CROSS JOIN params p
-        WHERE k.kill_datetime >= p.start_date
-          AND k.kill_datetime < p.end_date
-          AND C.corporation_name = p.corp_name
-    ),
-    losses AS (
-        SELECT COUNT(CASE WHEN kill_type = 'LOSS' THEN 1 END) AS total_losses,
-               SUM(CASE WHEN kill_type = 'LOSS' THEN value ELSE 0 END) AS total_isk_lost
-        FROM killmails k
-        INNER JOIN corporations C ON k.victim_corporation_id = C.corporation_id
-        CROSS JOIN params p
-        WHERE k.kill_datetime >= p.start_date
-          AND k.kill_datetime < p.end_date
-          AND C.corporation_name = p.corp_name
-    )
-    SELECT kills.total_kills, kills.total_isk_destroyed, losses.total_losses, losses.total_isk_lost
-    FROM kills, losses;
-    """
-    return db.execute_query(query, (start_date, end_date, corp_name))
+    def kill_exists(self, killmail_id, kill_hash):
+        try:
+            self.cur.execute("""
+                SELECT 1 FROM killmails
+                WHERE killmail_id = %s OR kill_hash = %s
+            """, (killmail_id, kill_hash))
+            return self.cur.fetchone() is not None
+        except Exception as e:
+            self.conn.rollback()
+            logging.error(f"Error checking kill existence: {e}")
+            raise
 
-def get_peak_hour(db, start_date, end_date):
-    query = """
-    SELECT EXTRACT(HOUR FROM kill_datetime) AS peak_hour
-    FROM killmails
-    WHERE kill_datetime >= %s
-      AND kill_datetime < %s::date + interval '1 day'
-    GROUP BY peak_hour
-    ORDER BY COUNT(*) DESC
-    LIMIT 1;
-    """
-    result = db.execute_query(query, (start_date, end_date))
-    if result and result[0]['peak_hour'] is not None:
-        return int(result[0]['peak_hour'])
+    def insert_killmail(self, killmail_data):
+        try:
+            if self.kill_exists(killmail_data['killmail_id'], killmail_data['kill_hash']):
+                logging.info(f"Kill {killmail_data['killmail_id']} already in database, skipping")
+                return None
+
+            self.cur.execute("""
+                INSERT INTO killmails (
+                    killmail_id, kill_hash, kill_datetime, system_id,
+                    pilot_id, ship_id, value, kill_type, victim_corporation_id
+                )
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                ON CONFLICT (killmail_id) DO NOTHING
+                RETURNING killmail_id;
+            """, (
+                killmail_data['killmail_id'],
+                killmail_data['kill_hash'],
+                killmail_data['datetime'],
+                killmail_data['system_id'],
+                killmail_data['pilot_id'],
+                killmail_data['ship_id'],
+                killmail_data['value'],
+                killmail_data['kill_type'],
+                killmail_data['victim_corporation_id']
+            ))
+            self.conn.commit()
+            result = self.cur.fetchone()
+            if result:
+                logging.info(f"Successfully inserted killmail {killmail_data['killmail_id']}")
+                return result
+            return None  # No insertion due to conflict
+        except Exception as e:
+            self.conn.rollback()
+            logging.error(f"Error inserting killmail: {e}")
+            raise
+
+    def insert_killmail_attacker(self, killmail_id, pilot_id, pilot_name, attacker_corporation_id, final_blow, damage_done):
+        try:
+            self.cur.execute("""
+                INSERT INTO killmail_attackers (
+                    killmail_id, pilot_id, pilot_name, attacker_corporation_id, final_blow, damage_done
+                )
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, (killmail_id, pilot_id, pilot_name, attacker_corporation_id, final_blow, damage_done))
+            self.conn.commit()
+            logging.info(f"Successfully inserted attacker '{pilot_name}' for killmail {killmail_id}")
+        except Exception as e:
+            self.conn.rollback()
+            logging.error(f"Error inserting killmail attacker for killmail {killmail_id}: {e}")
+            raise
+
+def get_url(url: str, headers: dict, max_retries: int = 3, timeout: int = 30) -> Optional[dict]:
+    for attempt in range(max_retries):
+        try:
+            logging.debug(f"Attempting request to {url} (attempt {attempt + 1}/{max_retries})")
+            response = requests.get(url, headers=headers, timeout=timeout)
+
+            # Get ESI limits
+            esi_remain = int(response.headers.get('X-Esi-Error-Limit-Remain', 100))
+            esi_reset = int(response.headers.get('X-Esi-Error-Limit-Reset', 0))
+
+            if esi_remain < 20:  # Safety threshold
+                wait_time = min(esi_reset + 1, 30)
+                logging.warning(f"ESI error limit low ({esi_remain}), waiting {wait_time} seconds")
+                time.sleep(wait_time)
+
+            if response.status_code == 200:
+                return response.json()
+            elif response.status_code == 429:
+                wait_time = int(response.headers.get('Retry-After', 60))
+                wait_time = min(wait_time, 300)
+                logging.warning(f"Rate limited on URL: {url}")
+                logging.warning(f"Response headers: {dict(response.headers)}")
+                logging.warning(f"Waiting {wait_time} seconds...")
+                time.sleep(wait_time)
+                continue
+            elif response.status_code == 404:
+                logging.warning(f"Resource not found at URL: {url}")
+                logging.warning(f"Response status: {response.status_code}")
+                logging.warning(f"Response headers: {dict(response.headers)}")
+                logging.warning(f"Response content: {response.text[:500]}")
+                return None
+            else:
+                logging.error(f"API request failed for URL: {url}")
+                logging.error(f"Response status: {response.status_code}")
+                logging.error(f"Response headers: {dict(response.headers)}")
+                logging.error(f"Response content: {response.text[:500]}")
+                if attempt < max_retries - 1:
+                    wait_time = 5 * (attempt + 1)
+                    logging.info(f"Retrying in {wait_time} seconds...")
+                    time.sleep(wait_time)
+                    continue
+                return None
+        except requests.exceptions.RequestException as e:
+            logging.error(f"Request failed for URL: {url}")
+            logging.error(f"Exception type: {type(e).__name__}")
+            logging.error(f"Exception details: {str(e)}")
+            if attempt < max_retries - 1:
+                wait_time = 5 * (attempt + 1)
+                logging.info(f"Retrying in {wait_time} seconds...")
+                time.sleep(wait_time)
+                continue
+            return None
+        except Exception as e:
+            logging.error(f"Unexpected error for URL: {url}")
+            logging.error(f"Exception type: {type(e).__name__}")
+            logging.error(f"Exception details: {str(e)}")
+            if attempt < max_retries - 1:
+                wait_time = 5 * (attempt + 1)
+                logging.info(f"Retrying in {wait_time} seconds...")
+                time.sleep(wait_time)
+                continue
+            return None
+
+    logging.error(f"All {max_retries} attempts failed for URL: {url}")
+    return None
+
+def get_entity_info(entity_id, entity_type, headers):
+    if not entity_id:
+        return "Unknown"
+    try:
+        url = f"https://esi.evetech.net/latest/{entity_type}/{entity_id}/?datasource=tranquility"
+        response = get_url(url, headers)
+        return response.get('name', 'Unknown') if response else "Unknown"
+    except:
+        return "Unknown"
+
+def get_ship_type(ship_type_id, headers):
+    try:
+        url = f"https://esi.evetech.net/latest/universe/types/{ship_type_id}/?datasource=tranquility"
+        response = get_url(url, headers)
+        group_id = response.get('group_id') if response else None
+
+        if group_id:
+            group_url = f"https://esi.evetech.net/latest/universe/groups/{group_id}/?datasource=tranquility"
+            group_response = get_url(group_url, headers)
+            return group_response.get('name', 'Unknown') if group_response else "Unknown"
+        return "Unknown"
+    except:
+        return "Unknown"
+
+def get_latest_killmail_date(db: DatabaseConnection) -> datetime:
+    try:
+        db.cur.execute("""
+            SELECT kill_datetime
+            FROM killmails
+            ORDER BY kill_datetime DESC
+            LIMIT 1
+        """)
+        result = db.cur.fetchone()
+        if result:
+            latest_date = result[0]
+            logging.info(f"Latest kill in database: {latest_date}")
+            return latest_date
+        else:
+            default_date = datetime(2025, 1, 1, 0, 0, 0)
+            logging.info(f"No kills in database, starting from {default_date}")
+            return default_date
+    except Exception as e:
+        logging.error(f"Error getting latest killmail date: {e}")
+        raise
+
+def get_all_kills_for_page(corporation_id: str, page: int, headers: dict) -> Optional[List[Dict]]:
+    url = f"https://zkillboard.com/api/corporationID/{corporation_id}/page/{page}/"
+    logging.info(f"Requesting kills from URL: {url}")
+
+    response = get_url(url, headers)
+
+    if response:
+        logging.info(f"Received {len(response)} kills from zKillboard")
+        return response
     else:
-        return 0
+        logging.warning(f"No response received from zKillboard for page {page}")
+        return None
 
-def get_kills_distribution_by_hour(db, start_date, end_date):
-    query = """
-    SELECT EXTRACT(HOUR FROM kill_datetime) AS hour, COUNT(*) AS kill_count
-    FROM killmails
-    WHERE kill_datetime >= %s
-      AND kill_datetime < %s::date + interval '1 day'
-    GROUP BY hour
-    ORDER BY hour;
-    """
-    return db.execute_query(query, (start_date, end_date))
+def process_single_kill(kill, kill_detail, corporation_id, db: DatabaseConnection, headers: dict):
+    try:
+        kill_date = datetime.strptime(kill_detail['killmail_time'], "%Y-%m-%dT%H:%M:%SZ")
+        logging.info(f"Processing kill {kill['killmail_id']} from {kill_date}")
 
-def format_isk(value):
-    if value >= 1e12:
-        return f"{value/1e12:.2f}T"
-    elif value >= 1e9:
-        return f"{value/1e9:.2f}B"
-    elif value >= 1e6:
-        return f"{value/1e6:.2f}M"
-    else:
-        return f"{value:,.0f}"
+        # Process kill information
+        ship_type_id = kill_detail['victim']['ship_type_id']
+        system_id = kill_detail['solar_system_id']
+        victim_id = kill_detail['victim'].get('character_id')
+        victim_corp_raw = kill_detail['victim'].get('corporation_id')
+        # Compare as string because API corporation_id and the provided corporation_id might differ in type
+        is_kill = 'KILL' if str(victim_corp_raw) != corporation_id else 'LOSS'
 
-def generate_shiptype_html(shiptype_data):
-    """Generate HTML for Top 20 Ship Types KPI with enhanced mouse-over effect"""
-    html = ""
-    max_isk = max(float(row['total_isk']) for row in shiptype_data) if shiptype_data else 1.0
-    for row in shiptype_data:
-        ship_type = row['type_name']
-        kills = row['kill_count']
-        total_val = float(row['total_isk'])
-        perc = (total_val / max_isk) * 100
-        html += f"""
-        <div class="kpi-box">
-            <h3>{ship_type}</h3>
-            <p>{format_isk(total_val)} ISK</p>
-            <p>{kills} kills</p>
-            <div class="bar-container">
-                <div class="bar-fill" style="width: {perc:.0f}%"></div>
-            </div>
-        </div>
-        """
-    return html
+        # Get and insert reference data
+        system_name = get_entity_info(system_id, 'universe/systems', headers)
+        system_db_id = db.get_or_create_system(system_name)
 
-def generate_additional_stats_html(stats, peak_hour):
-    """Generate HTML for Additional Statistics with 3 stat cards: Global K/D Ratio, ISK Efficiency, Peak Hour"""
-    if not stats or len(stats) == 0:
-        return ""
-    total_kills = stats[0]['total_kills'] or 0
-    total_losses = stats[0]['total_losses'] or 0
-    kd_ratio = total_kills / total_losses if total_losses > 0 else total_kills
-    total_isk_destroyed = float(stats[0]['total_isk_destroyed'] or 0)
-    total_isk_lost = float(stats[0]['total_isk_lost'] or 0)
-    isk_efficiency = (total_isk_destroyed / (total_isk_destroyed + total_isk_lost)) * 100 if (total_isk_destroyed + total_isk_lost) > 0 else 100
+        ship_name = get_entity_info(ship_type_id, 'universe/types', headers)
+        ship_type_name = get_ship_type(ship_type_id, headers)
+        ship_type_db_id = db.get_or_create_ship_type(ship_type_name)
+        ship_db_id = db.get_or_create_ship(ship_name, ship_type_db_id)
 
-    return f"""
-        <div class="stat-card">
-            <h3>Global K/D Ratio</h3>
-            <div class="stat-value">{kd_ratio:.2f}</div>
-            <div class="stat-details">{total_kills} kills / {total_losses} losses</div>
-        </div>
-        <div class="stat-card">
-            <h3>ISK Efficiency</h3>
-            <div class="stat-value">{isk_efficiency:.1f}%</div>
-            <div class="stat-details">
-                +{format_isk(total_isk_destroyed)} / -{format_isk(total_isk_lost)}
-            </div>
-        </div>
-        <div class="stat-card">
-            <h3>Peak Hour (EVE Time)</h3>
-            <div class="stat-value">{peak_hour:02d}:00</div>
-        </div>
-    """
+        victim_name = get_entity_info(victim_id, 'characters', headers) if victim_id else "Unknown"
+        pilot_db_id = db.get_or_create_pilot(victim_name)
 
-def get_css_styles():
-    return """
-    <style>
-        :root {
-            --primary: #1b1b1b;
-            --secondary: #252525;
-            --accent: #00b4ff;
-            --text: #ffffff;
-            --blue-light: #4682B4;
-            --blue-mid:   #6495ED;
-            --grey-light: #808080;
-            --grey-dark:  #696969;
-        }
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--primary);
-            color: var(--text);
-            font-family: 'Segoe UI', sans-serif;
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        h2 {
-            color: var(--accent);
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 0.5rem;
-            margin-top: 2rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.5s ease forwards;
-        }
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes slideIn {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(0); }
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
-        }
-        /* Chart container for all charts */
-        .chart-container {
-            position: relative;
-            margin: auto;
-            height: 400px;
-            width: 80%;
-            opacity: 0;
-            animation: fadeInUp 0.5s ease forwards 0.3s;
-            background-color: var(--secondary);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-        }
-        /* Hover effect for Chart 3: Top Corporation Pilots */
-        .chart-container.pilot-chart-container {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .chart-container.pilot-chart-container:hover {
-            transform: scale(1.05) translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,180,255,0.5);
-        }
-        /* KPI: Top 20 Ship Types - enhanced mouse-over effect */
-        .kpi-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-        .kpi-box {
-            background: linear-gradient(135deg, var(--secondary), #2a2a2a);
-            border: 1px solid var(--accent);
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            opacity: 0;
-            animation: fadeInUp 0.5s ease forwards;
-        }
-        .kpi-box:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 12px 30px rgba(0,180,255,0.6);
-        }
-        .kpi-box h3 {
-            margin: 0.5rem 0;
-            font-size: 1rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .kpi-box p {
-            margin: 0.2rem 0;
-            font-size: 0.9rem;
-        }
-        .bar-container {
-            background-color: #333;
-            height: 8px;
-            margin-top: 0.5rem;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .bar-fill {
-            background-color: var(--accent);
-            height: 100%;
-            transform: translateX(-100%);
-            animation: slideIn 1s ease forwards;
-        }
-        /* Grid for Additional Statistics: 3 equally-sized cards */
-        .stats-summary {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-        .stat-card {
-            background: var(--secondary);
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-            animation: pulse 2s infinite;
-            border: 1px solid var(--accent);
-            min-height: 120px;
-        }
-        .stat-value {
-            font-size: 1.25rem;
-            color: var(--accent);
-            margin: 0.5rem 0;
-        }
-        .stat-details {
-            font-size: 0.8rem;
-            color: #888;
-        }
-        @media (max-width: 768px) {
-            .container { padding: 1rem; }
-            .chart-container { width: 95%; height: 300px; }
-            .kpi-container { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
-            .stats-summary { grid-template-columns: 1fr; }
-        }
-    </style>
-    """
+        # Retrieve and insert the victim corporation
+        victim_corp_name = get_entity_info(victim_corp_raw, 'corporations', headers) if victim_corp_raw else "Unknown"
+        victim_corp_db_id = db.get_or_create_corporation(victim_corp_name)
 
-def generate_javascript(days, kills_value, losses_value, kill_count, pilot_names, pilot_ships, pilot_isk, hours, kills_per_hour):
-    return f"""
-    // Chart 1: Daily Statistics (ISK Destroyed and Kill Count)
-    const dailyCtx = document.getElementById('dailyChart').getContext('2d');
-    new Chart(dailyCtx, {{
-        type: 'bar',
-        data: {{
-            labels: {json.dumps(days)},
-            datasets: [
-                {{
-                    label: 'Destroyed Value',
-                    data: {json.dumps(kills_value)},
-                    backgroundColor: 'rgba(70, 130, 180, 0.7)',
-                    borderColor: 'rgba(70, 130, 180, 1)',
-                    borderWidth: 1,
-                    yAxisID: 'y'
-                }},
-                {{
-                    label: 'Kill Count',
-                    data: {json.dumps(kill_count)},
-                    type: 'line',
-                    borderColor: 'rgba(128, 128, 128, 1)',
-                    backgroundColor: 'rgba(128, 128, 128, 0.3)',
-                    borderWidth: 2,
-                    fill: false,
-                    tension: 0.4,
-                    yAxisID: 'y1'
-                }}
-            ]
-        }},
-        options: {{
-            responsive: true,
-            plugins: {{
-                title: {{
-                    display: true,
-                    text: 'Daily Destroyed Value and Kill Count',
-                    color: '#ffffff'
-                }},
-                legend: {{
-                    position: 'top'
-                }}
-            }},
-            scales: {{
-                y: {{
-                    beginAtZero: true,
-                    title: {{
-                        display: true,
-                        text: 'ISK (in Billions)',
-                        color: '#ffffff'
-                    }},
-                    ticks: {{
-                        callback: function(value) {{
-                            return (value / 1e9).toFixed(2) + 'B';
-                        }}
-                    }}
-                }},
-                y1: {{
-                    beginAtZero: true,
-                    position: 'right',
-                    title: {{
-                        display: true,
-                        text: 'Kill Count',
-                        color: '#ffffff'
-                    }},
-                    grid: {{
-                        drawOnChartArea: false
-                    }}
-                }}
-            }}
-        }}
-    }});
-    
-    // Chart 2: Kills vs Losses Value
-    const valueCtx = document.getElementById('valueChart').getContext('2d');
-    new Chart(valueCtx, {{
-        type: 'line',
-        data: {{
-            labels: {json.dumps(days)},
-            datasets: [
-                {{
-                    label: 'Destroyed Value',
-                    data: {json.dumps(kills_value)},
-                    borderColor: 'rgba(70, 130, 180, 1)',
-                    backgroundColor: 'rgba(70, 130, 180, 0.1)',
-                    fill: true
-                }},
-                {{
-                    label: 'Lost Value',
-                    data: {json.dumps(losses_value)},
-                    borderColor: 'rgba(119, 136, 153, 1)',
-                    backgroundColor: 'rgba(119, 136, 153, 0.1)',
-                    fill: true
-                }}
-            ]
-        }},
-        options: {{
-            responsive: true,
-            plugins: {{
-                title: {{
-                    display: true,
-                    text: 'Kills vs Losses Trend',
-                    color: '#ffffff'
-                }}
-            }},
-            scales: {{
-                y: {{
-                    beginAtZero: true,
-                    title: {{
-                        display: true,
-                        text: 'ISK (in Billions)',
-                        color: '#ffffff'
-                    }},
-                    ticks: {{
-                        callback: function(value) {{
-                            return (value / 1e9).toFixed(2) + 'B';
-                        }}
-                    }}
-                }}
-            }}
-        }}
-    }});
-    
-    // Chart 3: Top Corporation Pilots
-    const pilotCtx = document.getElementById('pilotChart').getContext('2d');
-    new Chart(pilotCtx, {{
-        type: 'bar',
-        data: {{
-            labels: {json.dumps(pilot_names)},
-            datasets: [
-                {{
-                    label: 'Kill Count',
-                    data: {json.dumps(pilot_ships)},
-                    backgroundColor: 'rgba(100, 149, 237, 0.7)',
-                    borderColor: 'rgba(100, 149, 237, 1)',
-                    borderWidth: 1,
-                    order: 2,
-                    yAxisID: 'y'
-                }},
-                {{
-                    label: 'ISK Destroyed',
-                    data: {json.dumps(pilot_isk)},
-                    type: 'line',
-                    borderColor: 'rgba(112, 128, 144, 1)',
-                    backgroundColor: 'rgba(112, 128, 144, 0.1)',
-                    borderWidth: 2,
-                    fill: false,
-                    tension: 0.4,
-                    order: 1,
-                    yAxisID: 'y1',
-                    pointRadius: 5
-                }}
-            ]
-        }},
-        options: {{
-            responsive: true,
-            plugins: {{
-                title: {{
-                    display: true,
-                    text: 'Top Corporation Pilots',
-                    color: '#ffffff'
-                }}
-            }},
-            scales: {{
-                y: {{
-                    beginAtZero: true,
-                    position: 'left',
-                    title: {{
-                        display: true,
-                        text: 'Kill Count',
-                        color: '#ffffff'
-                    }}
-                }},
-                y1: {{
-                    beginAtZero: true,
-                    position: 'right',
-                    grid: {{
-                        drawOnChartArea: false
-                    }},
-                    title: {{
-                        display: true,
-                        text: 'ISK Destroyed (in Billions)',
-                        color: '#ffffff'
-                    }},
-                    ticks: {{
-                        callback: function(value) {{
-                            return (value / 1e9).toFixed(2) + 'B';
-                        }}
-                    }}
-                }}
-            }},
-            animation: {{
-                duration: 1500,
-                easing: 'easeOutBounce'
-            }},
-            hover: {{
-                mode: 'nearest',
-                intersect: true
-            }}
-        }}
-    }});
-    
-    // Chart 4: Kill Distribution by Hour
-    const hourlyCtx = document.getElementById('hourlyChart').getContext('2d');
-    new Chart(hourlyCtx, {{
-        type: 'bar',
-        data: {{
-            labels: {json.dumps(hours)},
-            datasets: [{{
-                label: 'Kills per Hour',
-                data: {json.dumps(kills_per_hour)},
-                backgroundColor: 'rgba(119, 136, 153, 0.7)',
-                borderColor: 'rgba(119, 136, 153, 1)',
-                borderWidth: 1
-            }}]
-        }},
-        options: {{
-            responsive: true,
-            plugins: {{
-                title: {{
-                    display: true,
-                    text: 'Kill Distribution by Hour',
-                    color: '#ffffff'
-                }}
-            }},
-            scales: {{
-                y: {{
-                    beginAtZero: true,
-                    title: {{
-                        display: true,
-                        text: 'Kill Count',
-                        color: '#ffffff'
-                    }}
-                }}
-            }}
-        }}
-    }});
-    """
+        # Insert killmail with victim's corporation
+        killmail_data = {
+            'killmail_id': kill['killmail_id'],
+            'kill_hash': kill['zkb']['hash'],
+            'datetime': kill_date,
+            'system_id': system_db_id,
+            'pilot_id': pilot_db_id,
+            'ship_id': ship_db_id,
+            'value': kill['zkb']['totalValue'],
+            'kill_type': is_kill,
+            'victim_corporation_id': victim_corp_db_id
+        }
 
-def generate_html_sections(daily_data, shiptype_data, pilot_data, additional_stats):
-    # Add a "Back to Index" link at the bottom of the report page
-    return f"""
-        <!-- Chart 1: Daily Statistics -->
-        <h2>Daily Statistics</h2>
-        <div class="chart-container">
-            <canvas id="dailyChart"></canvas>
-        </div>
-        
-        <!-- Chart 2: Kills vs Losses Value -->
-        <h2>Kills vs Losses Value</h2>
-        <div class="chart-container">
-            <canvas id="valueChart"></canvas>
-        </div>
-        
-        <!-- KPI: Top 20 Ship Types -->
-        <h2>Top 20 Ship Types</h2>
-        <div class="kpi-container">
-            {generate_shiptype_html(shiptype_data)}
-        </div>
-        
-        <!-- Chart 3: Top Corporation Pilots -->
-        <h2>Top Corporation Pilots</h2>
-        <div class="chart-container pilot-chart-container">
-            <canvas id="pilotChart"></canvas>
-        </div>
-        
-        <!-- Additional Statistics -->
-        <h2>Additional Statistics</h2>
-        <div class="stats-summary">
-            {generate_additional_stats_html(additional_stats, additional_stats_peak)}
-        </div>
-        
-        <!-- Chart 4: Kill Distribution by Hour -->
-        <h2>Kill Distribution by Hour</h2>
-        <div class="chart-container">
-            <canvas id="hourlyChart"></canvas>
-        </div>
-        
-        <!-- Back to Index Link -->
-        <p style="text-align: center; margin-top: 2rem;">
-            <a href="index.html" style="color: var(--accent); text-decoration: none;">Back to Index</a>
-        </p>
-    """
+        result = db.insert_killmail(killmail_data)
+        if not result:
+            logging.info(f"Killmail {kill['killmail_id']} already exists, skipping attackers processing")
+            return False
 
+<<<<<<< HEAD
 def update_index():
     """Generate or update the html/index.html file with links to all reports (since January 2025)"""
     report_files = glob.glob(os.path.join(OUTPUT_DIR, "2025*.html"))
@@ -866,89 +551,182 @@ def update_index():
     with open(index_path, "w", encoding="utf-8") as f:
         f.write(index_html)
     logging.info(f"Index updated: {index_path}")
+=======
+        # Process attackers for this killmail
+        attackers = kill_detail.get('attackers', [])
+        for attacker in attackers:
+            attacker_character_id = attacker.get('character_id')
+            if attacker_character_id:
+                attacker_name = get_entity_info(attacker_character_id, 'characters', headers)
+                attacker_pilot_id = db.get_or_create_pilot(attacker_name)
+            else:
+                attacker_name = "Unknown"
+                attacker_pilot_id = None
 
-def generate_report(start_date, end_date, corporation):
-    with DatabaseConnection() as db:
-        # Retrieve data for the report month
-        daily_data = get_daily_stats(db, start_date, end_date)
-        shiptype_data = get_ship_types(db, start_date, end_date)
-        pilot_data = get_top_corp_pilots(db, start_date, end_date, corporation)
-        additional_stats = get_additional_stats(db, start_date, end_date, corporation)
-        peak_hour = get_peak_hour(db, start_date, end_date)
-        kills_by_hour = get_kills_distribution_by_hour(db, start_date, end_date)
+            attacker_corp_raw = attacker.get('corporation_id')
+            if attacker_corp_raw:
+                attacker_corp_name = get_entity_info(attacker_corp_raw, 'corporations', headers)
+            else:
+                attacker_corp_name = "Unknown"
+            attacker_corp_db_id = db.get_or_create_corporation(attacker_corp_name)
 
-        # Prepare chart data
-        days = [row['day'].strftime('%Y-%m-%d') for row in daily_data]
-        kills_value = [float(row['value_destroyed']) for row in daily_data]
-        losses_value = [float(row['value_lost']) for row in daily_data]
-        kill_count = [int(row['kill_count']) for row in daily_data]
+            final_blow = attacker.get('final_blow', False)
+            damage_done = attacker.get('damage_done', 0)
+>>>>>>> ac18a195f47b3ed671f444474e7f50f0ee49d5ff
 
-        # Data for Top Corporation Pilots
-        pilot_names = [row['pilot_name'] for row in pilot_data]
-        pilot_ships = [int(row['nb_kills']) for row in pilot_data]
-        pilot_isk = [float(row['isk_destroyed']) for row in pilot_data]
+            db.insert_killmail_attacker(
+                killmail_id=kill['killmail_id'],
+                pilot_id=attacker_pilot_id,
+                pilot_name=attacker_name,
+                attacker_corporation_id=attacker_corp_db_id,
+                final_blow=final_blow,
+                damage_done=damage_done
+            )
+            time.sleep(0.5)  # Small pause to respect API limits
 
-        # Data for Kill Distribution by Hour
-        hour_data = {int(row['hour']): int(row['kill_count']) for row in kills_by_hour}
-        hours = list(range(24))
-        kills_per_hour = [hour_data.get(h, 0) for h in hours]
+        logging.info(f"Successfully processed killmail {kill['killmail_id']}")
+        return True
 
-        # Set global variable for additional stats peak hour
-        global additional_stats_peak
-        additional_stats_peak = peak_hour
+    except Exception as e:
+        logging.error(f"Error processing kill {kill.get('killmail_id')}: {str(e)}")
+        return False
 
-        # Report filename in format "YYYYMM.html"
-        report_filename = f"{start_date[:4]}{start_date[5:7]}.html"
-        output_path = os.path.join(OUTPUT_DIR, report_filename)
+def get_oldest_kill_date(db: DatabaseConnection) -> Optional[datetime]:
+    try:
+        db.cur.execute("""
+            SELECT kill_datetime
+            FROM killmails
+            ORDER BY kill_datetime ASC
+            LIMIT 1
+        """)
+        result = db.cur.fetchone()
+        if result:
+            logging.info(f"Oldest kill in database: {result[0]}")
+            return result[0]
+        return None
+    except Exception as e:
+        logging.error(f"Error getting oldest killmail date: {e}")
+        raise
 
-        # Build the HTML content for the report, including a link back to index.html
-        html_content = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Killmail Report {start_date} to {end_date}</title>
-    {get_css_styles()}
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-    <div class="container">
-        {generate_html_sections(daily_data, shiptype_data, pilot_data, additional_stats)}
-    </div>
-    <script>
-        {generate_javascript(days, kills_value, losses_value, kill_count, pilot_names, pilot_ships, pilot_isk, hours, kills_per_hour)}
-    </script>
-</body>
-</html>
-"""
-        with open(output_path, 'w', encoding='utf-8') as f:
-            f.write(html_content)
-        logging.info(f"Report generated successfully: {output_path}")
+def get_newest_kill_date(db: DatabaseConnection) -> Optional[datetime]:
+    try:
+        db.cur.execute("""
+            SELECT kill_datetime
+            FROM killmails
+            ORDER BY kill_datetime DESC
+            LIMIT 1
+        """)
+        result = db.cur.fetchone()
+        if result:
+            logging.info(f"Newest kill in database: {result[0]}")
+            return result[0]
+        return None
+    except Exception as e:
+        logging.error(f"Error getting newest killmail date: {e}")
+        raise
 
-        # Update the index page with all reports
-        update_index()
-        return output_path
+def process_killmails_batch(db: DatabaseConnection, headers: dict, corporation_id: str):
+    logging.info("Starting batch processing of killmails")
+
+    current_page = 1
+    total_processed = 0
+    max_pages = 10  # Toujours traiter 10 pages maximum
+
+    # Délai entre les requêtes
+    base_delay = 2
+
+    while current_page <= max_pages:
+        logging.info(f"Processing page {current_page}")
+
+        # Délai progressif
+        current_delay = base_delay + (current_page % 3)
+        time.sleep(current_delay)
+
+        kills = get_all_kills_for_page(corporation_id, current_page, headers)
+
+        if not kills or kills is None:
+            logging.info("No more kills available")
+            break
+
+        kills_processed_this_page = 0
+
+        for kill in kills:
+            try:
+                if not isinstance(kill, dict):
+                    logging.warning(f"Invalid kill data format: {kill}")
+                    continue
+
+                if 'error' in kill:
+                    logging.warning(f"Error in kill data: {kill['error']}")
+                    continue
+
+                killmail_id = kill.get('killmail_id')
+                kill_hash = kill.get('zkb', {}).get('hash')
+
+                if not killmail_id or not kill_hash:
+                    logging.warning("Missing killmail_id or hash")
+                    continue
+
+                # Vérifier si le kill existe déjà en base
+                if db.kill_exists(killmail_id, kill_hash):
+                    logging.info(f"Kill {killmail_id} already exists in database, skipping")
+                    continue
+
+                # Récupérer les détails du kill
+                kill_detail = get_url(
+                    f"https://esi.evetech.net/latest/killmails/{killmail_id}/{kill_hash}/?datasource=tranquility",
+                    headers
+                )
+
+                if not kill_detail:
+                    logging.warning(f"Could not get details for kill {killmail_id}")
+                    continue
+
+                if process_single_kill(kill, kill_detail, corporation_id, db, headers):
+                    total_processed += 1
+                    kills_processed_this_page += 1
+
+                time.sleep(1)  # Respect API rate limits
+
+            except Exception as e:
+                logging.error(f"Error processing kill: {str(e)}")
+                logging.error(f"Kill data: {json.dumps(kill, indent=2)}")
+                continue
+
+        logging.info(f"Processed {kills_processed_this_page} new kills on page {current_page}")
+
+        current_page += 1
+        time.sleep(base_delay)
+
+    logging.info(f"Batch processing complete. Total new kills processed: {total_processed}")
+    return total_processed
 
 def main():
-    parser = argparse.ArgumentParser(description="Monthly killmail report generation")
-    parser.add_argument("--year", type=int, default=2025, help="Year of the report (default: 2025)")
-    parser.add_argument("--month", type=int, default=1, help="Month of the report (default: 1 - January)")
-    parser.add_argument("--corporation", type=str, default="Goat to Go", help="Name of the corporation (default: 'Goat to Go')")
-    args = parser.parse_args()
+    logging.info("Starting killmail processing script")
 
-    if not 1 <= args.month <= 12:
-        parser.error("Month must be between 1 and 12")
+    headers = {
+        'User-Agent': 'EVE Corp Killmail Tracker - telynor@gmail.com',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
 
-    start_date = f"{args.year}-{args.month:02d}-01"
-    _, last_day = calendar.monthrange(args.year, args.month)
-    end_date = f"{args.year}-{args.month:02d}-{last_day:02d}"
+    corporation_id = os.getenv('CORPORATION_ID', "98730717")
 
     try:
-        report_path = generate_report(start_date, end_date, args.corporation)
-        print(f"Report generated successfully: {report_path}")
+        with DatabaseConnection() as db:
+            logging.info("Successfully connected to database")
+            process_killmails_batch(db, headers, corporation_id)
+            logging.info("Killmail processing completed successfully")
+
     except Exception as e:
-        logging.error(f"Error generating report: {e}")
+        logging.error(f"Error in main execution: {e}")
         raise
 
 if __name__ == "__main__":
-    main()
+    try:
+        logging.info("=== Script Starting ===")
+        main()
+        logging.info("=== Script Completed Successfully ===")
+    except Exception as e:
+        logging.error(f"=== Script Failed: {str(e)} ===")
+        raise

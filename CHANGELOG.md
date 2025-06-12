@@ -1,8 +1,31 @@
 # CHANGELOG
 
-# EVE Killmail Tracker - Version 1.2.1
+# EVE Killmail Tracker - Version 1.3.0
 
 ## Changelog
+
+CHANGELOG
+
+## [1.3.0] - 2025-03-22
+
+### Changed
+- Completely revised killmail processing strategy to always fetch the 10 most recent pages from zkillboard
+- Removed date-based filtering that limited processing to only newer kills than those in the database
+
+### Removed
+- Eliminated the logic to stop processing after finding consecutive existing kills
+- Removed code that compared kill dates with the newest kill date in database
+
+### Fixed
+- Improved reliability of data collection by ensuring all recent kills are always checked
+- Fixed potential missed kills when pages contained a mix of new and existing killmails
+
+### Maintained
+- API rate limiting with progressive delays between requests
+- Individual kill existence verification to prevent duplicates
+- Detailed logging of processing statistics
+
+  
 
 ## [1.2.1] - 2025-02-21
 ### Changed
