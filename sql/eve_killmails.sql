@@ -97,6 +97,15 @@ CREATE TABLE killmail_attackers (
     damage_done DECIMAL(20,2)
 );
 
+CREATE TABLE killmail_tracker (
+    killmail_id BIGINT PRIMARY KEY,
+    kill_hash VARCHAR NOT NULL,
+    kill_datetime TIMESTAMP NOT NULL,
+    is_processed BOOLEAN DEFAULT FALSE,
+    processed_at TIMESTAMP,
+    error_message TEXT
+);
+
 -- Create user with environment variables
 CREATE USER ${DB_USER} WITH PASSWORD '${DB_PASSWORD}';
 GRANT ALL PRIVILEGES ON DATABASE ${DB_NAME} TO ${DB_USER};

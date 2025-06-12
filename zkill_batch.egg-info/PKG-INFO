@@ -1,0 +1,9 @@
+Metadata-Version: 2.2
+Name: zkill_batch
+Version: 0.1
+Summary: EVE Online Killmail Processing System
+Requires-Python: >=3.8
+Requires-Dist: psycopg2-binary
+Requires-Dist: python-dotenv
+Provides-Extra: test
+Requires-Dist: pytest; extra == "test"
